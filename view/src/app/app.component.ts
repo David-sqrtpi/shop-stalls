@@ -11,8 +11,22 @@ import {FormControl, Validators} from '@angular/forms';
 export class AppComponent {
   title = 'Shop Stalls';
 
+  name = new FormControl();
+  last = new FormControl();
+  password = new FormControl();
+  age = new FormControl();
+
   email = new FormControl('', [Validators.required, Validators.email]);
   hide = true;
+  
+  register(text:string){
+    alert(text);
+  }
+
+  error(field:any){
+    if(!field)
+    return "Este campo es obligatorio";
+  }
 
   getErrorMessage() {
     if (this.email.hasError('required')) {

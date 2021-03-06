@@ -6,7 +6,7 @@
 
   <div class="register_form">
     <h2>Registro de Usuario</h2>
-    <form method="post">
+    <form method="post" (ngSubmit)="onSubmit(asd.value)" #asd="ngForm">
       <mat-form-field appearance="outline" hideRequiredMarker>
         <mat-label>Nombre</mat-label>
         <input matInput required [formControl]="name">
@@ -37,7 +37,7 @@
         <input matInput type="number" required [formControl]="age">
         <mat-error>{{error(age.value)}}</mat-error>
       </mat-form-field>
-      <button mat-raised-button type="submit" (click)="register('text')">Registrar</button>
+      <button mat-raised-button type="submit">Registrar</button>
     </form>
   </div>
 </div>

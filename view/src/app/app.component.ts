@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 
 import {FormControl, Validators} from '@angular/forms';
 
+import { HttpClient} from '@angular/common/http';
+
+import {HttpUserServiceService} from '../app/services/http-user-service.service'
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -19,8 +22,11 @@ export class AppComponent {
   email = new FormControl('', [Validators.required, Validators.email]);
   hide = true;
   
-  register(text:string){
-    alert(text);
+  httpUserServiceService:HttpUserServiceService;
+  httpClient:HttpClient;
+
+  onSubmit(user){
+    console.log(user);
   }
 
   error(field:any){

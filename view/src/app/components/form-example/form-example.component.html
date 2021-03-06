@@ -1,0 +1,5 @@
+<label for="Field:">Field:</label>
+<input type="text" [formControl]="field">
+<p *ngIf="field.hasError('required')">Este campo es requerido</p>
+<br>
+<button (click)="getField()" [disabled]="field.invalid">Click me!</button>

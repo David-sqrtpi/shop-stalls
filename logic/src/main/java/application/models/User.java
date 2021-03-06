@@ -7,9 +7,10 @@ import javax.persistence.Id;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@AllArgsConstructor @Getter @Setter
+@AllArgsConstructor @Getter @Setter @NoArgsConstructor
 @Entity // This tells Hibernate to make a table out of this class
 public class User {
     @Id

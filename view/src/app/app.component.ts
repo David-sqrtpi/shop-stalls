@@ -14,10 +14,10 @@ import {HttpUserServiceService} from '../app/services/http-user-service.service'
 export class AppComponent {
   title = 'Shop Stalls';
 
-  name = new FormControl();
-  last = new FormControl();
-  password = new FormControl();
-  age = new FormControl();
+  name = new FormControl('', [Validators.required]);
+  last = new FormControl('', [Validators.required]);
+  password = new FormControl('', [Validators.required]);
+  age = new FormControl('', [Validators.required]);
 
   email = new FormControl('', [Validators.required, Validators.email]);
   hide = true;

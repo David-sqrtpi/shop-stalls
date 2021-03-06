@@ -7,15 +7,21 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 //Material components
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
+
+//My Components
+import { FormExampleComponent } from './components/form-example/form-example.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FormExampleComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,

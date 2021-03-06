@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="title">
+    <h1>Shop Stalls</h1>
+    <p>Administra fácilmente tu negocio con Shop Stalls &#174;</p>
+  </div>
+
+  <div class="register_form">
+    <h2>Registro de Usuario</h2>
+    <form method="post">
+      <mat-form-field appearance="outline" hideRequiredMarker>
+        <mat-label>Nombre</mat-label>
+        <input matInput required [formControl]="name">
+        <mat-error *ngIf="name.invalid">{{getErrorMessage(name)}}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" hideRequiredMarker>
+        <mat-label>Apellido</mat-label>
+        <input matInput required [formControl]="last">
+        <mat-error *ngIf="last.invalid">{{getErrorMessage(last)}}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" hideRequiredMarker>
+        <mat-label>Correo electrónico</mat-label>
+        <input matInput [formControl]="email" required>
+        <mat-error *ngIf="email.invalid">{{getErrorMessage(email)}}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" hideRequiredMarker>
+        <mat-label>Contraseña</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" required [formControl]="password">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error *ngIf="password.invalid">{{getErrorMessage(password)}}</mat-error>
+        <mat-hint>Mínimo 8 caracteres</mat-hint>
+      </mat-form-field>
+      <mat-form-field appearance="outline" hideRequiredMarker>
+        <mat-label>Edad</mat-label>
+        <input matInput type="number" required [formControl]="age">
+        <mat-error *ngIf="age.invalid">{{getErrorMessage(age)}}</mat-error>
+      </mat-form-field>
+      <button mat-raised-button type="submit" [disabled]="name.invalid || last.invalid ||email.invalid || password.invalid || age.invalid">Registrar</button>
+    </form>
+  </div>
+</div>

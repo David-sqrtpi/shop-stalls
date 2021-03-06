@@ -37,7 +37,7 @@
         <input matInput type="number" required [formControl]="age">
         <mat-error *ngIf="age.invalid">{{getErrorMessage(age)}}</mat-error>
       </mat-form-field>
-      <button mat-raised-button type="submit" [disabled]="name.invalid || last.invalid ||email.invalid || password.invalid || age.invalid">Registrar</button>
+      <button mat-raised-button type="submit" (click)="signUpUser()" [disabled]="name.invalid || last.invalid ||email.invalid || password.invalid || age.invalid">Registrar</button>
     </form>
   </div>
 </div>

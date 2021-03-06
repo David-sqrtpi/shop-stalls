@@ -10,6 +10,8 @@ create table company (
     phone varchar (20) not null
 );
 
+insert into company values (1, "foo", "www.foo.com", "foo", "1234567890");
+
 create table user (
 	id int not null primary key,
     name varchar (20) not null,
@@ -85,4 +87,5 @@ create table invoice_detail (
     foreign key (invoice_id) references invoice (id),
     foreign key (product_id) references invoice (id),
     foreign key (service_id) references invoice (id)
-);    
+);
+

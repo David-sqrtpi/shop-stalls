@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-
 import {FormControl, Validators} from '@angular/forms';
-
 import { HttpClient} from '@angular/common/http';
 
 import {HttpUserServiceService} from '../../services/http-user-service.service';
+
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -12,12 +11,12 @@ import {HttpUserServiceService} from '../../services/http-user-service.service';
 })
 export class SignUpComponent implements OnInit {
 
-  constructor() { }
+  constructor(private httpUserServiceService:HttpUserServiceService, private httpClient:HttpClient) { }
 
   ngOnInit(): void {
   }
   
-  name = new FormControl('', [Validators.required]);
+  name = new FormControl('hola', [Validators.required]);
   last = new FormControl('', [Validators.required]);
   password = new FormControl('', [Validators.required, Validators.minLength(8)]);
   age = new FormControl('', [Validators.required]);
@@ -26,9 +25,6 @@ export class SignUpComponent implements OnInit {
   hide = true;
 
   formDisabled = true;
-  
-  private httpUserServiceService:HttpUserServiceService;
-  private httpClient:HttpClient;
 
   getErrorMessage(field:FormControl) {
     if (field.hasError('required')) {
@@ -38,6 +34,22 @@ export class SignUpComponent implements OnInit {
     } else if (field.hasError('minlength')) {
       return 'Mínimo 8 caracteres';
     }
+  }
+
+  signUpUser() {
+    
+    let user:object = {
+      name: this.name.value,
+      last: this.last.value,
+      email: this.email.value,
+      password: this.password.value,
+      age: this.age.value
+    }
+
+    console.log(user);
+    
+    this.httpUserServiceService.addUser(user).subscribe();
+    
   }
   
 }

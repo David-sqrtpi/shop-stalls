@@ -14,10 +14,10 @@ public class UserController {
     private UserRepository userRepository;
 
     @PostMapping("create")
-    public String create (@RequestParam String name, @RequestParam String email, @RequestParam String password,
-                          @RequestParam int age, @RequestParam int id_company){
+    public String create (@RequestBody User user){
 
-        User user = new User(0, name, email, password, age, id_company);
+        user.setId_company(1);
+
         userRepository.save(user);
 
         return "Saved";

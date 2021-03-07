@@ -14,13 +14,17 @@
 	
 	```mysql> grant all on shop_stalls.* to 'springuser'@'%';```
 
-4. Ingresar al directorio ```Shop Stalls\view``` desde la consola de comandos y ejecutar el comando:
+4. Instalar el CLI de Angular
+
+```npm install -g @angular/cli```
+
+5. Ingresar al directorio ```Shop Stalls\view``` desde la consola de comandos y ejecutar el comando:
 	
 	```ng serve```
 
-5. Ingresar al directorio ```Shop Stalls\logic\build\libs``` desde la consola de comandos y ejecutar el comando:
+6. Ingresar al directorio ```Shop Stalls\logic\build\libs``` desde la consola de comandos y ejecutar el comando:
 
 	```java -jar shop-stalls-1.0.jar```
 
-6. Abrir el navegador en la URL http://localhost:4200/ y crear usuarios.
-7. Para ver los usuarios ingresar a la URL http://localhost:8080/user/get-all.
+7. Abrir el navegador en la URL http://localhost:4200/ y crear usuarios.
+8. Para ver los usuarios ingresar a la URL http://localhost:8080/user/get-all.

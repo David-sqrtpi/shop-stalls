@@ -13,8 +13,8 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @PostMapping("create")
-    public String create (@RequestBody User user){
+    @PostMapping("add")
+    public String add (@RequestBody User user){
 
         user.setId_company(1);
 
@@ -24,7 +24,7 @@ public class UserController {
 
     }
 
-    @GetMapping("get-all")
+    @GetMapping("all")
     public Iterable<User> getAll() {
 
         return userRepository.findAll();

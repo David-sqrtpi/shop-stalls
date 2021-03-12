@@ -1,0 +1,17 @@
+.logo {
+    display: inline-block;
+    margin:15px;
+    font-size: 30px;
+    color:black;
+    font-weight:bold;
+}
+
+.buttons {
+    display: inline-block;
+    position: absolute;
+    right: 0;
+}
+
+.button-nav {
+    margin: 15px;
+}

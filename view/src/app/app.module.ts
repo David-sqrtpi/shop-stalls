@@ -16,13 +16,17 @@ import { MatButtonModule } from '@angular/material/button';
 //My Components
 import { FormExampleComponent } from './components/form-example/form-example.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { HolaComponent } from './components/hola/hola.component';
+import { HomeComponent } from './components/home/home.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     FormExampleComponent,
-    SignUpComponent
+    SignUpComponent,
+    HolaComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

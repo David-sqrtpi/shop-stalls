@@ -43,7 +43,8 @@ export class SignUpComponent implements OnInit {
       last: this.last.value,
       email: this.email.value,
       password: this.password.value,
-      age: this.age.value
+      age: this.age.value,
+      id_company: 1
     }
 
     console.log(user);

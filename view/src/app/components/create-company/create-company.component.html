@@ -1,23 +1,26 @@
 <form method="post">
+    
+    <app-text-form></app-text-form>
+    
     <mat-form-field appearance="outline" hideRequiredMarker>
         <mat-label>Nombre</mat-label>
         <input matInput required [formControl]="name">
-        <mat-error *ngIf="name.invalid">{{getErrorMessage(name)}}</mat-error>
+        <mat-error *ngIf="name.invalid">{{getErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline" hideRequiredMarker>
         <mat-label>Página web</mat-label>
         <input matInput required [formControl]="web">
-        <mat-error *ngIf="web.invalid">{{getErrorMessage(web)}}</mat-error>
+        <mat-error *ngIf="web.invalid">{{getErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline" hideRequiredMarker>
         <mat-label>Dirección</mat-label>
         <input matInput [formControl]="address" required>
-        <mat-error *ngIf="address.invalid">{{getErrorMessage(address)}}</mat-error>
+        <mat-error *ngIf="address.invalid">{{getErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline" hideRequiredMarker>
         <mat-label>Telefono</mat-label>
         <input matInput type="tel" required [formControl]="phone">
-        <mat-error *ngIf="phone.invalid">{{getErrorMessage(phone)}}</mat-error>
+        <mat-error *ngIf="phone.invalid">{{getErrorMessage()}}</mat-error>
     </mat-form-field>
     <button mat-raised-button type="submit" (click)="createCompany()"
         [disabled]="name.invalid || web.invalid ||address.invalid || phone.invalid">Crear</button>

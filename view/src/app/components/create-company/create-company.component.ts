@@ -14,16 +14,16 @@ export class CreateCompanyComponent implements OnInit {
   address = new FormControl("", [Validators.required]);
   phone = new FormControl("", [Validators.required]);
 
+  test:string;
+
   constructor() { }
 
   createCompany() {
 
   }
 
-  getErrorMessage(field:FormControl) {
-    if (field.hasError('required')) {
-      return 'Este campo es obligatorio';
-    }
+  getErrorMessage() {
+    return 'Este campo es obligatorio';
   }
 
   ngOnInit(): void {

@@ -11,13 +11,14 @@ import javax.persistence.Id;
 
 @Entity
 @NoArgsConstructor @Getter @Setter
-public class Product {
+public class Company {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private String id;
+    private int id;
     private String name;
-    private int quantity;
-    private int price;
+    private String web;
+    private String address;
+    private String phone;
 
 }

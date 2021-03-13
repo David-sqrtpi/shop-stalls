@@ -13,7 +13,7 @@ public class GetAllUsers {
     @Autowired
     private RepositoryUserService repositoryUserService;
 
-    @GetMapping("")
+    @GetMapping
     public Iterable<User> getAll() {
 
         return repositoryUserService.findAll();

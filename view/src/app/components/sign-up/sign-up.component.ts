@@ -16,12 +16,12 @@ export class SignUpComponent implements OnInit {
   ngOnInit(): void {
   }
   
-  name = new FormControl('hola', [Validators.required]);
+  name = new FormControl('', [Validators.required]);
   last = new FormControl('', [Validators.required]);
   password = new FormControl('', [Validators.required, Validators.minLength(8)]);
   age = new FormControl('', [Validators.required]);
-
   email = new FormControl('', [Validators.required, Validators.email]);
+  
   hide = true;
 
   formDisabled = true;

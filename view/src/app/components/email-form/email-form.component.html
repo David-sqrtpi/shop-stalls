@@ -1,0 +1,5 @@
+<mat-form-field appearance="outline" hideRequiredMarker>
+    <mat-label>Correo electrónico</mat-label>
+    <input matInput [formControl]="email" required>
+    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+</mat-form-field>

@@ -1,0 +1,6 @@
+<form method="post">
+    <app-email-form [email]="email"></app-email-form>
+    <app-password-form [password]="password"></app-password-form>
+    <button mat-raised-button type="submit" (click)="logIn()" [disabled]="email.invalid || password.invalid">Iniciar
+        Sesión</button>
+</form>

@@ -13,7 +13,7 @@ public class AddProduct {
     @Autowired
     private RepositoryProductService RepositoryProductService;
 
-    @PostMapping()
+    @PostMapping
     public String add (@RequestBody Product product){
 
         RepositoryProductService.save(product);

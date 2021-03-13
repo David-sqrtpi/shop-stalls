@@ -16,7 +16,7 @@ public class GetAllProducts {
 
     private RepositoryProductService getAll;
 
-    @GetMapping("")
+    @GetMapping
     public Iterable<Product> getAll() {
         return getAll.findAll();
     }

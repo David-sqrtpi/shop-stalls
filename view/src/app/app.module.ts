@@ -18,6 +18,10 @@ import { FormExampleComponent } from './components/form-example/form-example.com
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { HolaComponent } from './components/hola/hola.component';
 import { HomeComponent } from './components/home/home.component';
+import { LogInComponent } from './components/log-in/log-in.component';
+import { CreateCompanyComponent } from './components/create-company/create-company.component';
+import { EmailFormComponent } from './components/email-form/email-form.component';
+import { PasswordFormComponent } from './components/password-form/password-form.component';
 
 
 @NgModule({
@@ -26,7 +30,11 @@ import { HomeComponent } from './components/home/home.component';
     FormExampleComponent,
     SignUpComponent,
     HolaComponent,
-    HomeComponent
+    HomeComponent,
+    LogInComponent,
+    CreateCompanyComponent,
+    EmailFormComponent,
+    PasswordFormComponent
   ],
   imports: [
     BrowserModule,

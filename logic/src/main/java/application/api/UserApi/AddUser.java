@@ -13,7 +13,7 @@ public class AddUser {
     @Autowired
     private RepositoryUserService RepositoryUserService;
 
-    @PostMapping("")
+    @PostMapping
     public String add (@RequestBody User user){
 
         RepositoryUserService.save(user);

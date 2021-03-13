@@ -9,22 +9,22 @@
       <mat-form-field appearance="outline" hideRequiredMarker>
         <mat-label>Nombre</mat-label>
         <input matInput required [formControl]="name">
-        <mat-error *ngIf="name.invalid">{{getErrorMessage(name)}}</mat-error>
+        <mat-error *ngIf="name.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline" hideRequiredMarker>
         <mat-label>Apellido</mat-label>
         <input matInput required [formControl]="last">
-        <mat-error *ngIf="last.invalid">{{getErrorMessage(last)}}</mat-error>
+        <mat-error *ngIf="last.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
       <app-email-form [email]="email"></app-email-form>
       <app-password-form [password]="password"></app-password-form>
       <mat-form-field appearance="outline" hideRequiredMarker>
         <mat-label>Edad</mat-label>
         <input matInput type="number" required [formControl]="age">
-        <mat-error *ngIf="age.invalid">{{getErrorMessage(age)}}</mat-error>
+        <mat-error *ngIf="age.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
       <button mat-raised-button type="submit" (click)="signUpUser()"
-        [disabled]="name.invalid || last.invalid ||email.invalid || password.invalid || age.invalid">Registrar</button>
+        [disabled]="name.invalid || last.invalid ||password.invalid ||email.invalid || age.invalid">Registrar</button>
     </form>
   </div>
 </div>

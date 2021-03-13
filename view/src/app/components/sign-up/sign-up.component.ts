@@ -16,24 +16,14 @@ export class SignUpComponent implements OnInit {
   ngOnInit(): void {
   }
   
-  name = new FormControl('', [Validators.required]);
-  last = new FormControl('', [Validators.required]);
-  password = new FormControl('', [Validators.required, Validators.minLength(8)]);
-  age = new FormControl('', [Validators.required]);
-  email = new FormControl('', [Validators.required, Validators.email]);
-  
-  hide = true;
+  name = new FormControl('',);
+  last = new FormControl('',);
+  age = new FormControl('',);
+  password = new FormControl('', [Validators.minLength(8)]);
+  email = new FormControl('', [Validators.email]);
 
-  formDisabled = true;
-
-  getErrorMessage(field:FormControl) {
-    if (field.hasError('required')) {
-      return 'Este campo es obligatorio';
-    } else if (field.hasError('email')) {
-      return 'Ingresa un correo electrónico válido'; 
-    } else if (field.hasError('minlength')) {
-      return 'Mínimo 8 caracteres';
-    }
+  getErrorMessage() {
+    return 'Este campo es obligatorio';
   }
 
   signUpUser() {
@@ -43,8 +33,7 @@ export class SignUpComponent implements OnInit {
       last: this.last.value,
       email: this.email.value,
       password: this.password.value,
-      age: this.age.value,
-      id_company: 1
+      age: this.age.value
     }
 
     console.log(user);

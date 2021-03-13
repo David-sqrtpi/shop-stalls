@@ -10,15 +10,17 @@ import { FormControl, Validators } from "@angular/forms";
 })
 export class PasswordFormComponent implements OnInit {
 
-  password = new FormControl("", [Validators.minLength(8)]);
+  password = new FormControl();
 
   hide:boolean = true;
-
-  errorMessage:string = "Minimo 8 caracteres";
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  getErrorMessage() {
+    return this.password.hasError('required')? 'Este campo es obligatorio':'Mínimo 8 caracteres'
   }
 
 }

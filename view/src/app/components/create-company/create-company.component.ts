@@ -9,12 +9,10 @@ import {FormControl, Validators} from '@angular/forms';
 })
 export class CreateCompanyComponent implements OnInit {
 
-  name = new FormControl("", [Validators.required]);
-  web = new FormControl("", [Validators.required]);
-  address = new FormControl("", [Validators.required]);
-  phone = new FormControl("", [Validators.required]);
-
-  test:string;
+  name = new FormControl("");
+  web = new FormControl("");
+  address = new FormControl("");
+  phone = new FormControl("");
 
   constructor() { }
 

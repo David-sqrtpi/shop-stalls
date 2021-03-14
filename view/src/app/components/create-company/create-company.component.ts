@@ -1,6 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 import {FormControl, Validators} from '@angular/forms';
+import { HttpService } from 'src/app/services/http.service';
 
 @Component({
   selector: 'app-create-company',
@@ -14,9 +16,19 @@ export class CreateCompanyComponent implements OnInit {
   address = new FormControl("");
   phone = new FormControl("");
 
-  constructor() { }
+  constructor(private httpService:HttpService, private httpClient:HttpClient) { }
 
   createCompany() {
+    let body = {
+      id: 3,
+      name: this.name.value,
+      web: this.web.value,
+      address: this.address.value,
+      phone: this.phone.value
+    }
+    this.httpService.add(body, "company/add").subscribe(
+      //result => console.log("Hola")
+    );
 
   }
 

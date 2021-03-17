@@ -1,0 +1,9 @@
+<form action="post">
+    <input type="number" [formControl] = id>
+    <input type="text" [formControl] = name>
+    <input type="number" [formControl] = price>
+    <input type="number" [formControl] = quantity>
+    <button type="submit" (click) = "createProduct ()"> enviar  </button>
+    
+</form>
+{{id.value}}

@@ -1,24 +1,22 @@
-package application.api.ProductApi;
+package application.api;
+
 
 import application.models.Product;
-import application.services.RepositoryProductService;
+import application.models.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("product/add")
-@CrossOrigin("*")
-public class AddProduct {
-
+@CrossOrigin
+@RequestMapping ("product")
+public class ProductApi {
     @Autowired
-    private RepositoryProductService RepositoryProductService;
-
-    @PostMapping
-    public String add (@RequestBody Product product){
-
-        RepositoryProductService.save(product);
-
-        return "Saved";
+    ProductRepository productRepository ;
+    @PostMapping ("add")
+    public Product add(@RequestBody Product product){
+        System.out.println(product.getId());
+        productRepository.save(product) ;
+        return  product ;
 
     }
 }

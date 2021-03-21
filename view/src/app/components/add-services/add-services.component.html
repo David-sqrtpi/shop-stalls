@@ -1,0 +1,9 @@
+<form action="post">
+
+    <input type ="number"  [formControl] = id>
+    <input type ="text"  [formControl] = name_service>
+    <input type ="number"  [formControl] = price>
+    <input type ="text"  [formControl] =  Characteristics>
+      <button type="submit" (click)="createService()">enviar</button>
+</form>
+{{id.value}}

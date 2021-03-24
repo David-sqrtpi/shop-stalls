@@ -1,7 +1,7 @@
 package application.api.UserApi;
 
 import application.models.User;
-import application.api.Repository.RepositoryUserService;
+import application.Repository.RepositoryUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

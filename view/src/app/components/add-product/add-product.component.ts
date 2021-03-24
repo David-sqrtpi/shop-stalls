@@ -33,7 +33,6 @@ export class AddProductComponent implements OnInit {
     
    this.httpClient.post('http://localhost:8080/product/add',this.product).subscribe (
      product => console.log(product)
-     
    )
 
 

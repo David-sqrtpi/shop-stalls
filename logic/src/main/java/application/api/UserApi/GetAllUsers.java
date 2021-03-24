@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("user/all")
-@CrossOrigin("*")
 public class GetAllUsers {
 
     @Autowired

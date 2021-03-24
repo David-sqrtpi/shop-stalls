@@ -1,7 +1,7 @@
 package application.api.UserApi;
 
 import application.models.User;
-import application.Repository.RepositoryUserService;
+import application.Repository.RepositoryUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 public class AddUser {
 
     @Autowired
-    private RepositoryUserService RepositoryUserService;
+    private RepositoryUser RepositoryUserService;
 
     @PostMapping
     public String add (@RequestBody User user){

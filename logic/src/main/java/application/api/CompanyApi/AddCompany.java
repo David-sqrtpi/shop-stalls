@@ -1,7 +1,7 @@
 package application.api.CompanyApi;
 
 import application.models.Company;
-import application.Repository.RepositoryCompanyService;
+import application.Repository.RepositoryCompany;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 public class AddCompany {
 
     @Autowired
-    private RepositoryCompanyService repositoryCompanyService;
+    private RepositoryCompany repositoryCompanyService;
 
     @PostMapping
     public String add(@RequestBody Company company) {

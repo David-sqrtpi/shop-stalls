@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import { HttpClient} from '@angular/common/http';
 
-
 @Component({
   selector: 'app-add-services',
   templateUrl: './add-services.component.html',

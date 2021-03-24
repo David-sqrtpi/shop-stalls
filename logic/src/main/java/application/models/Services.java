@@ -19,7 +19,6 @@ public class Services {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
-    private int worker_id;
     private String name_service;
     private String price;
     private String Characteristics;

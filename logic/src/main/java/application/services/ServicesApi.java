@@ -1,8 +1,7 @@
-package application.api;
+package application.services;
 
 import application.models.Services;
-import application.models.ServicesRepository;
-import org.hibernate.service.Service;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

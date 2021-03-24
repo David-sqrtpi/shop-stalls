@@ -24,7 +24,7 @@ import { EmailFormComponent } from './components/email-form/email-form.component
 import { PasswordFormComponent } from './components/password-form/password-form.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import { AddProductComponent } from "./components/add-product/add-product.component";
-
+import { AddServicesComponent } from "./components/add-services/add-services.component";
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +37,8 @@ import { AddProductComponent } from "./components/add-product/add-product.compon
     EmailFormComponent,
     PasswordFormComponent,
     CreateUserComponent,
-    AddProductComponent
+    AddProductComponent,
+    AddServicesComponent
   ],
   imports: [
     BrowserModule,

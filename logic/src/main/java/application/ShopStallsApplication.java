@@ -13,3 +13,4 @@ public class ShopStallsApplication {
     }
 
 }
+//TODO add a x-www-urlformencoded header and then delete the @RequestBody annotation

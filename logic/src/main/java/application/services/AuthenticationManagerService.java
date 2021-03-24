@@ -5,14 +5,15 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import application.models.AuthRequest;
+import org.springframework.stereotype.Service;
 
 
-
+@Service
 public class AuthenticationManagerService {
     @Autowired
-    private static  AuthenticationManager authenticationManager;
+    private AuthenticationManager authenticationManager;
 
-    public static boolean authentication ( AuthRequest authRequest){
+    public boolean authentication ( AuthRequest authRequest){
 
         try {
             authenticationManager.authenticate(

@@ -5,9 +5,6 @@ import application.models.AuthRequest;
 import application.services.AuthenticationManagerService;
 import application.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,7 +18,7 @@ public class AuthApi {
     private JwtUtil jwtUtil;
 
     @Autowired
-    private AuthenticationManager authenticationManager;
+    private AuthenticationManagerService authenticationManagerService;
 
     @PostMapping("/authenticate")
     public String generateToken(@RequestBody AuthRequest authRequest) {
@@ -39,8 +36,7 @@ public class AuthApi {
         }
 
                 */
-        AuthenticationManagerService.authentication(authRequest);
-
+        authenticationManagerService.authentication(authRequest);
 
         String token = jwtUtil.generateToken(authRequest.getUsername());
 

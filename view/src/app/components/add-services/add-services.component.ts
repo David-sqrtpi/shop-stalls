@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import { HttpClient} from '@angular/common/http';
-import { TOUCH_BUFFER_MS } from '@angular/cdk/a11y';
-import { ThisReceiver } from '@angular/compiler';
+
+
 @Component({
   selector: 'app-add-services',
   templateUrl: './add-services.component.html',
@@ -26,7 +26,7 @@ export class AddServicesComponent implements OnInit {
     createService() {
       this.services = {
         id:this.id.value,
-        worker_id:1,
+  
         name_service:this.name_service.value,
         price:this.price.value,
         Characteristics:this.Characteristics.value,

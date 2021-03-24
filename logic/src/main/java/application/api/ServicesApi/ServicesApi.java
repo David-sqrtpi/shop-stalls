@@ -1,4 +1,4 @@
-package application.services;
+package application.api.ServicesApi;
 
 import application.models.Services;
 import application.Repository.ServicesRepository;

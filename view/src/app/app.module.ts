@@ -25,6 +25,10 @@ import { PasswordFormComponent } from './components/password-form/password-form.
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import { AddProductComponent } from "./components/add-product/add-product.component";
 import { AddServicesComponent } from "./components/add-services/add-services.component";
+
+//routes
+import { Routing } from './app.routing';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +53,8 @@ import { AddServicesComponent } from "./components/add-services/add-services.com
     MatInputModule,
     MatIconModule,
     MatButtonModule,
-    HttpClientModule
+    HttpClientModule,
+    Routing
   ],
   providers: [],
   bootstrap: [AppComponent]

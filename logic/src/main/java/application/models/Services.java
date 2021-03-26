@@ -21,6 +21,6 @@ public class Services {
     private int id;
     private String name_service;
     private String price;
-    private String Characteristics;
+    private String characteristics;
 
 }

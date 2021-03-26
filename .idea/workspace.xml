@@ -21,6 +21,8 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -38,6 +40,7 @@
       <workItem from="1616552246926" duration="3000" />
       <workItem from="1616552276602" duration="7000" />
       <workItem from="1616716429809" duration="29000" />
+      <workItem from="1616718498416" duration="460000" />
     </task>
     <servers />
   </component>

@@ -15,7 +15,7 @@ export class JWTserviceService {
     return this.httpClient.post(this.url, data, {responseType:'text' as 'json'});
   }
 
-  public getToken(){
-    return this.storage.get('token');
+  public getToken():string{
+    return this.storage.get('token').toString();
   }
 }

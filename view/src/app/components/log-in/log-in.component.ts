@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 
 import {FormControl, Validators} from '@angular/forms';
 import { JWTserviceService } from 'src/app/services/jwtservice.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-log-in',
@@ -16,14 +17,14 @@ export class LogInComponent implements OnInit {
 
   private data:object;
   private token:string
-  constructor(private Jwt:JWTserviceService) { }
+  constructor(private Jwt:JWTserviceService, private storage:LocalStorageService) { }
 
   ngOnInit(): void {
   }
 
   public logIn() {
     this.Jwt.generateToken(this.extractInfo()).subscribe(
-      token => console.log(token)
+      token => this.storage.set('token', token.toString())
     );
   }
 
@@ -33,6 +34,9 @@ export class LogInComponent implements OnInit {
     //this.httpClient.get("localhost:8080/", {headers, responseType:'text' as 'json'});
   }
 
+  public getToken(){
+    console.log(this.storage.get('token'));
+  }
   extractInfo(){
     return {
       password: this.password.value,

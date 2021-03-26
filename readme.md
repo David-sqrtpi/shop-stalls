@@ -6,13 +6,13 @@
 
 ### Instrucciones
 
-1. Iniciar el motor de MySLQ.
-2. Crear la base de datos con el script de la ruta ``` Shop Stalls\database\script.sql ``` desde MySQL Workbench o MySQL Command Line Client.
+1. Iniciar el motor de MySQL.
 3. Crear un usuario y darle todos los privilegios desde MySQL Workbench o MySQL Command Line Client:
 
-	``` create user 'springuser'@'%' identified by 'ThePassword';
-	
-	grant all on shop_stalls.* to 'springuser'@'%'; ```
+	```
+	create user 'springuser'@'%' identified by 'ThePassword';
+	grant all on shop_stalls.* to 'springuser'@'%';
+	```
 
 4. Instalar el CLI de Angular
 

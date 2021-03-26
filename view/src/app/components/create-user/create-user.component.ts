@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { FormControl, Validators } from "@angular/forms";
+import { HttpUserServiceService } from 'src/app/services/http-user-service.service';
 
 @Component({
   selector: 'app-create-user',
@@ -15,24 +16,30 @@ export class CreateUserComponent implements OnInit {
   email = new FormControl('', [Validators.email]);
   password = new FormControl('', [Validators.minLength(8)]);
 
-  constructor() { }
+  constructor(private httpUser:HttpUserServiceService) { }
 
   ngOnInit(): void {
   }
 
   createUser() {
-    let user: object = {
+    this.httpUser.addUser(this.buildUser()).subscribe(
+      response => console.log(response) 
+    )
+  }
+
+  buildUser(){
+    return {
       name: this.name.value,
       last: this.last.value,
       email: this.email.value,
       age: this.age.value,
-      id_company: 1
+      id_company: 1,
+      password:this.password.value
     }
-    console.log(user);
   }
 
   getErrorMessage() {
-    return 'duck';
+    return 'Campo requerido';
   }
 
 }

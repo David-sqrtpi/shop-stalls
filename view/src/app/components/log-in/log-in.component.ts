@@ -1,4 +1,3 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 import {FormControl, Validators} from '@angular/forms';
@@ -28,15 +27,6 @@ export class LogInComponent implements OnInit {
     );
   }
 
-  public get(token){
-    let authToken = 'Bearer ' + token;
-    const headers = new HttpHeaders().set("Authorization", authToken);
-    //this.httpClient.get("localhost:8080/", {headers, responseType:'text' as 'json'});
-  }
-
-  public getToken(){
-    console.log(this.storage.get('token'));
-  }
   extractInfo(){
     return {
       password: this.password.value,

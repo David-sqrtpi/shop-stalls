@@ -20,7 +20,7 @@ export class PasswordFormComponent implements OnInit {
   }
 
   getErrorMessage() {
-    return this.password.hasError('required')? 'Este campo es obligatorio':'Mínimo 8 caracteres'
+    return this.password.hasError('required')? 'Campo requerido':'Mínimo 8 caracteres'
   }
 
 }

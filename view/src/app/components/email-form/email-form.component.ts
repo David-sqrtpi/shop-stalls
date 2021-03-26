@@ -19,7 +19,7 @@ export class EmailFormComponent implements OnInit {
 
   getErrorMessage() {
     if (this.email.hasError('required')) {
-      return 'Este campo es obligatorio';
+      return 'Campo requerido';
     } else if (this.email.hasError('email')) {
       return 'Ingresa un correo electrónico válido'; 
     }

@@ -1,9 +1,25 @@
-<form action="post">
-
-    <input type ="number"  [formControl] = id>
-    <input type ="text"  [formControl] = name_service>
-    <input type ="number"  [formControl] = price>
-    <input type ="text"  [formControl] =  Characteristics>
-      <button type="submit" (click)="createService()">enviar</button>
-</form>
-{{id.value}}
+<div class="container">
+  <div class="title">
+    <h1>Shop Stalls</h1>
+    <p>Administra fácilmente tu negocio con Shop Stalls &#174;</p>
+  </div>
+  <div class="register_form">
+    <h2>Registro de Producto</h2>
+    <form method="post">
+      <mat-form-field appearance="outline" hideRequiredMarker>
+        <mat-label>NombredelServicio</mat-label>
+        <input matInput required [formControl]="name_service">
+      </mat-form-field>
+      <mat-form-field appearance="outline" hideRequiredMarker>
+        <mat-label>Precio</mat-label>
+        <input matInput required [formControl]="price">
+      </mat-form-field>
+      <mat-form-field appearance="outline" hideRequiredMarker>
+          <mat-label>Caracterizticas</mat-label>
+          <input matInput required [formControl]="Characteristics">
+        </mat-form-field>
+      <button mat-raised-button type="submit" (click)="createService ()"
+        [disabled]="name_service.invalid || price.invalid ||Characteristics.invalid">Registrar</button>
+    </form>
+  </div>
+</div>

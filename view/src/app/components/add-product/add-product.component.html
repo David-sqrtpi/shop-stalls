@@ -1,15 +1,25 @@
-<form action="post">
-    id
-    <input type="number" [formControl] = id>
-    <br>
-    name
-    <input type="text" [formControl] = name>
-    <br>
-    price
-    <input type="number" [formControl] = price>
-    <br>
-    quantity
-    <input type="number" [formControl] = quantity>
-    <br>
-    <button type="submit" (click) = "createProduct ()"> enviar  </button>
-</form>
+<div class="container">
+    <div class="title">
+      <h1>Shop Stalls</h1>
+      <p>Administra fácilmente tu negocio con Shop Stalls &#174;</p>
+    </div>
+    <div class="register_form">
+      <h2>Registro de Producto</h2>
+      <form method="post">
+        <mat-form-field appearance="outline" hideRequiredMarker>
+          <mat-label>Nombredelproducto</mat-label>
+          <input matInput required [formControl]="name">
+        </mat-form-field>
+        <mat-form-field appearance="outline" hideRequiredMarker>
+          <mat-label>Precio</mat-label>
+          <input matInput required [formControl]="price">
+        </mat-form-field>
+        <mat-form-field appearance="outline" hideRequiredMarker>
+            <mat-label>Cantidad</mat-label>
+            <input matInput required [formControl]="quantity">
+          </mat-form-field>
+        <button mat-raised-button type="submit" (click)="createProduct()"
+          [disabled]="name.invalid || price.invalid ||quantity.invalid">Registrar</button>
+      </form>
+    </div>
+  </div>

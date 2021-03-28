@@ -22,6 +22,8 @@ export class AddProductComponent implements OnInit {
  
   
   createProduct(){
+    console.log(this.buidObject());
+    
    this.product.addProduct(this.buidObject()).subscribe(
      response => console.log(response)
    )
@@ -33,6 +35,7 @@ export class AddProductComponent implements OnInit {
       name:this.name.value,
       price:this.price.value,
       quantity:this.quantity.value
+
     }
   }
 

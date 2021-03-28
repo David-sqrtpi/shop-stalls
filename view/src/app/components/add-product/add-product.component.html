@@ -7,16 +7,16 @@
       <h2>Registro de Producto</h2>
       <form method="post">
         <mat-form-field appearance="outline" hideRequiredMarker>
-          <mat-label>Nombredelproducto</mat-label>
+          <mat-label>Nombre</mat-label>
           <input matInput required [formControl]="name">
         </mat-form-field>
         <mat-form-field appearance="outline" hideRequiredMarker>
           <mat-label>Precio</mat-label>
-          <input matInput required [formControl]="price">
+          <input matInput required [formControl]="price" type="number">
         </mat-form-field>
         <mat-form-field appearance="outline" hideRequiredMarker>
             <mat-label>Cantidad</mat-label>
-            <input matInput required [formControl]="quantity">
+            <input matInput required [formControl]="quantity" type="number">
           </mat-form-field>
         <button mat-raised-button type="submit" (click)="createProduct()"
           [disabled]="name.invalid || price.invalid ||quantity.invalid">Registrar</button>

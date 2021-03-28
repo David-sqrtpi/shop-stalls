@@ -23,7 +23,7 @@ export class CreateUserComponent implements OnInit {
 
   createUser() {
     this.httpUser.addUser(this.buildUser()).subscribe(
-      response => console.log(response) 
+      response => console.log(response)
     )
   }
 

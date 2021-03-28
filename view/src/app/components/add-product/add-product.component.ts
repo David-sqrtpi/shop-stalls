@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import { HttpClient} from '@angular/common/http';
+import { ProdutService } from 'src/app/services/produt.service';
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
@@ -14,27 +15,25 @@ export class AddProductComponent implements OnInit {
   price= new FormControl 
   quantity= new FormControl 
  
-  product:object;
-  constructor(private httpClient: HttpClient) { }
+  constructor(private product:ProdutService) { }
 
   ngOnInit(): void {
   }
  
   
   createProduct(){
-    this.product = {
-      id:this.id.value,
+   this.product.addProduct(this.buidObject()).subscribe(
+     response => console.log(response)
+   )
+  }
+
+  buidObject(){
+    return {
       product_type_id:1,
       name:this.name.value,
       price:this.price.value,
       quantity:this.quantity.value
     }
-    console.log(this.product);
-    
-   this.httpClient.post('http://localhost:8080/product/add',this.product).subscribe (
-     product => console.log(product)
-   )
-
-
   }
+
 }

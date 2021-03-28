@@ -14,6 +14,10 @@ export class ProdutService {
   addProduct(product:object){
     const headers = this.header.generateHeader();
     return this.http.post(this.url+'add', product, {headers, responseType:'text' as 'json'})
+    
   }
-
+  modifyProduct(product:object){
+    const headers = this.header.generateHeader();
+    return this.http.put(this.url+'modify', product, {headers, responseType:'text' as 'json'})
+  }
 }

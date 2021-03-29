@@ -11,11 +11,11 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 })
 export class LogInComponent implements OnInit {
 
+  private waiting:boolean = false;
+
   username = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('', [Validators.required, Validators.minLength(8)]);
 
-  private data:object;
-  private token:string
   constructor(private Jwt:JWTserviceService, private storage:LocalStorageService) { }
 
   ngOnInit(): void {

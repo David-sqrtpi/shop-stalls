@@ -5,19 +5,19 @@ import { AuthHeadGeneratorService } from './auth-head-generator.service';
 @Injectable({
   providedIn: 'root'
 })
-export class ProdutService {
+export class ServicesService {
 
-  private url:string = 'http://localhost:8080/product/';
+  private url:string = 'http://localhost:8080/Services/';
 
   constructor(private http:HttpClient, private header:AuthHeadGeneratorService) { }
 
-  addProduct(product:object){
+  addServices(services:object){
     const headers = this.header.generateHeader();
-    return this.http.post(this.url+'add', product, {headers, responseType:'text' as 'json'})
-    
+    return this.http.post(this.url+'add', services, {headers, responseType:'text' as 'json'})
   }
-  modifyProduct(product:object){
+  modifyServices(services:object){
     const headers = this.header.generateHeader();
-    return this.http.put(this.url+'modify', product, {headers, responseType:'text' as 'json'})
+    return this.http.put(this.url+'modify', services, {headers, responseType:'text' as 'json'})
   }
+  
 }

@@ -4,10 +4,10 @@
     <p>Administra fácilmente tu negocio con Shop Stalls &#174;</p>
   </div>
   <div class="register_form">
-    <h2>Registro de Producto</h2>
+    <h2>Registro de Servicios</h2>
     <form method="post">
       <mat-form-field appearance="outline" hideRequiredMarker>
-        <mat-label>NombredelServicio</mat-label>
+        <mat-label>Nombre</mat-label>
         <input matInput required [formControl]="name_service">
       </mat-form-field>
       <mat-form-field appearance="outline" hideRequiredMarker>
@@ -16,10 +16,10 @@
       </mat-form-field>
       <mat-form-field appearance="outline" hideRequiredMarker>
           <mat-label>Caracterizticas</mat-label>
-          <input matInput required [formControl]="Characteristics">
+          <input matInput required [formControl]="characteristics">
         </mat-form-field>
       <button mat-raised-button type="submit" (click)="createService ()"
-        [disabled]="name_service.invalid || price.invalid ||Characteristics.invalid">Registrar</button>
+        [disabled]="name_service.invalid || price.invalid ||characteristics.invalid">Registrar</button>
     </form>
   </div>
 </div>

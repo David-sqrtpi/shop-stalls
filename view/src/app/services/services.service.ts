@@ -7,7 +7,7 @@ import { AuthHeadGeneratorService } from './auth-head-generator.service';
 })
 export class ServicesService {
 
-  private url:string = 'http://localhost:8080/Services/';
+  private url:string = 'http://localhost:8080/services/';
 
   constructor(private http:HttpClient, private header:AuthHeadGeneratorService) { }
 

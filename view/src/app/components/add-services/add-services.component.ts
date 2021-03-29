@@ -10,13 +10,9 @@ import { ServicesService } from 'src/app/services/services.service';
 })
 export class AddServicesComponent implements OnInit {
 
-  id=new FormControl 
   name_service=new FormControl 
   price=new FormControl 
-  Characteristics=new FormControl 
-  httpClient: any;
-
- 
+  characteristics=new FormControl 
   
   constructor(private services:ServicesService) { }
 
@@ -36,10 +32,10 @@ export class AddServicesComponent implements OnInit {
    
     buidObject(){
       return {
-        id:this.id.value,
+        
         name_service:this.name_service.value,
         price:this.price.value,
-        Characteristics:this.Characteristics.value,
+        characteristics:this.characteristics.value,
   
       }
     }

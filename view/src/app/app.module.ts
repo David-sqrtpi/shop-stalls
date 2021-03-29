@@ -28,6 +28,7 @@ import { AddServicesComponent } from "./components/add-services/add-services.com
 
 //routes
 import { Routing } from './app.routing';
+import { ModifyProductComponent } from './components/modify-product/modify-product.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { Routing } from './app.routing';
     PasswordFormComponent,
     CreateUserComponent,
     AddProductComponent,
-    AddServicesComponent
+    AddServicesComponent,
+    ModifyProductComponent
   ],
   imports: [
     BrowserModule,

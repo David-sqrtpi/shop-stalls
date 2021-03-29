@@ -5,6 +5,7 @@ import { AddServicesComponent } from "./components/add-services/add-services.com
 import { CreateUserComponent } from "./components/create-user/create-user.component";
 import { HolaComponent } from "./components/hola/hola.component";
 import { LogInComponent } from "./components/log-in/log-in.component";
+import { ModifyProductComponent } from "./components/modify-product/modify-product.component";
 import { SignUpComponent } from "./components/sign-up/sign-up.component";
 
 import { AuthGuard } from "./guards/auth.guard";
@@ -18,7 +19,8 @@ const appRoutes = [
     {path:'add-product', component: AddProductComponent, canActivate:[AuthGuard]},
     {path:'user/create', component: CreateUserComponent, canActivate:[AuthGuard]},
     {path:'add-product', component: AddProductComponent, canActivate:[AuthGuard]},
-    {path:'add-services', component: AddServicesComponent, canActivate:[AuthGuard]}
+    {path:'add-services', component: AddServicesComponent, canActivate:[AuthGuard]},
+    {path:'modify-product', component: ModifyProductComponent, canActivate:[AuthGuard]}
 ]
 
 export const Routing = RouterModule.forRoot(appRoutes);

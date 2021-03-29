@@ -9,7 +9,7 @@ import { ProdutService } from 'src/app/services/produt.service';
 })
 export class AddProductComponent implements OnInit {
 
-  id= new FormControl 
+  
   name= new FormControl 
   price= new FormControl 
   quantity= new FormControl 

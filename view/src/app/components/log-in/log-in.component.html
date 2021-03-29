@@ -6,4 +6,11 @@
     <app-password-form [password]="password"></app-password-form>
     <button mat-raised-button type="submit" (click)="logIn()" [disabled]="username.invalid || password.invalid">Iniciar
         Sesión</button>
+
+    <img src="https://editorialdahbar.com/wp-content/plugins/bbpowerpack/assets/images/spinner.gif" alt="spinner"
+        class="spinner" *ngIf="waiting">
+
+    <div *ngIf="result">
+        {{result}}
+    </div>
 </form>

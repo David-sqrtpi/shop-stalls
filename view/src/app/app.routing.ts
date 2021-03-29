@@ -7,6 +7,7 @@ import { LogInComponent } from "./components/log-in/log-in.component";
 import { ModifyProductComponent } from "./components/modify-product/modify-product.component";
 import { NotFoundComponent } from "./components/not-found/not-found.component";
 import { SignUpComponent } from "./components/sign-up/sign-up.component";
+import { WelcomeComponent } from "./components/welcome/welcome.component";
 
 import { AuthGuard } from "./guards/auth.guard";
 import { NegateUserLoggedGuard } from "./guards/negate-user-logged.guard";
@@ -21,7 +22,8 @@ const appRoutes = [
     {path:'add-product', component: AddProductComponent, canActivate:[AuthGuard]},
     {path:'add-services', component: AddServicesComponent, canActivate:[AuthGuard]},
     {path:'modify-product', component: ModifyProductComponent, canActivate:[AuthGuard]},
-    {path:'**', component: NotFoundComponent}
+    {path:'welcome', component: WelcomeComponent, canActivate:[AuthGuard]},
+    {path:'**', component: NotFoundComponent},
 ]
 
 export const Routing = RouterModule.forRoot(appRoutes);

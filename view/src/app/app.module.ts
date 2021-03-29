@@ -30,6 +30,7 @@ import { AddServicesComponent } from "./components/add-services/add-services.com
 import { Routing } from './app.routing';
 import { ModifyProductComponent } from './components/modify-product/modify-product.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { WelcomeComponent } from './components/welcome/welcome.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     AddProductComponent,
     AddServicesComponent,
     ModifyProductComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,

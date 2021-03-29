@@ -22,12 +22,12 @@ export class LogInComponent implements OnInit {
   }
 
   public logIn() {
-    this.Jwt.generateToken(this.extractInfo()).subscribe(
+    this.Jwt.generateToken(this.buildObject()).subscribe(
       token => this.storage.set('token', token.toString())
     );
   }
 
-  extractInfo(){
+  buildObject(){
     return {
       password: this.password.value,
       username: this.username.value

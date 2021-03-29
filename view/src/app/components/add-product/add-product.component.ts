@@ -20,7 +20,6 @@ export class AddProductComponent implements OnInit {
   ngOnInit(): void {
   }
  
-  
   createProduct(){
    this.product.addProduct(this.buidObject()).subscribe(
      response => console.log(response)

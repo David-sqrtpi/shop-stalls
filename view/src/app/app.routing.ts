@@ -11,7 +11,7 @@ import { AuthGuard } from "./guards/auth.guard";
 import { NegateUserLoggedGuard } from "./guards/negate-user-logged.guard";
 
 const appRoutes = [
-    {path:'login', component: LogInComponent},
+    {path:'login', component: LogInComponent, canActivate:[NegateUserLoggedGuard]},
     {path:'', component: HolaComponent},
     {path:'sign-up', component: SignUpComponent, canActivate:[NegateUserLoggedGuard]},
     {path:'create-user', component: CreateUserComponent, canActivate:[AuthGuard]},

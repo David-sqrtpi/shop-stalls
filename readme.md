@@ -10,6 +10,7 @@
 3. Crear un usuario y darle todos los privilegios desde MySQL Workbench o MySQL Command Line Client:
 
 	```
+	create database shop_stalls;
 	create user 'springuser'@'%' identified by 'ThePassword';
 	grant all on shop_stalls.* to 'springuser'@'%';
 	```

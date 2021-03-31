@@ -11,35 +11,36 @@ import {HttpUserServiceService} from '../../services/http-user-service.service';
 })
 export class SignUpComponent implements OnInit {
 
-  constructor(private httpUserServiceService:HttpUserServiceService, private httpClient:HttpClient) { }
+  constructor(private httpUser:HttpUserServiceService) { }
 
   ngOnInit(): void {
   }
   
-  name = new FormControl('',);
-  last = new FormControl('',);
-  age = new FormControl('',);
+  name = new FormControl('');
+  last = new FormControl('');
+  age = new FormControl('');
   password = new FormControl('', [Validators.minLength(8)]);
   email = new FormControl('', [Validators.email]);
+
+  signUp() {    
+    this.httpUser.signUp(this.buildObject()).subscribe(
+      response => console.log(response)
+    ); 
+  }
+
+  private buildObject():object{
+    return {
+      name: this.name.value,
+      last: this.last.value,
+      email: this.email.value,
+      password: this.password.value,
+      age: this.age.value,
+      id_company: 1,
+    }
+  }
 
   getErrorMessage() {
     return 'Este campo es obligatorio';
   }
 
-  signUpUser() {
-    
-    let user:object = {
-      name: this.name.value,
-      last: this.last.value,
-      email: this.email.value,
-      password: this.password.value,
-      age: this.age.value
-    }
-
-    console.log(user);
-    
-    this.httpUserServiceService.addUser(user).subscribe();
-    
-  }
-  
 }

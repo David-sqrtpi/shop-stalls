@@ -18,5 +18,9 @@ export class HttpUserServiceService {
     const headers = this.header.generateHeader();
     return this.http.post(this.url+'add', user, {headers, responseType:'text' as 'json'})
   }
+
+  signUp(user:object){
+    return this.http.post(this.url+'add', user, {responseType:'text' as 'json'})
+  }
   
 }

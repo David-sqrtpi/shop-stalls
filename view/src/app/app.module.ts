@@ -29,6 +29,8 @@ import { AddServicesComponent } from "./components/add-services/add-services.com
 //routes
 import { Routing } from './app.routing';
 import { ModifyProductComponent } from './components/modify-product/modify-product.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { WelcomeComponent } from './components/welcome/welcome.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import { ModifyProductComponent } from './components/modify-product/modify-produ
     CreateUserComponent,
     AddProductComponent,
     AddServicesComponent,
-    ModifyProductComponent
+    ModifyProductComponent,
+    NotFoundComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,

@@ -7,7 +7,7 @@ import { LocalStorageService } from './local-storage.service';
 })
 export class JWTserviceService {
 
-  private url:string = "http://localhost:8080/authenticate";
+  private url:string = "http://localhost:8080/login";
 
   constructor(private httpClient:HttpClient) { }
 

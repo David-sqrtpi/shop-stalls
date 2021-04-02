@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("services")
+@CrossOrigin
 public class ModifyService {
     @Autowired
     ServicesRepository servicesRepository;

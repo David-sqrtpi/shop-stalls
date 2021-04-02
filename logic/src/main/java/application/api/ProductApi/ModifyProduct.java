@@ -4,8 +4,10 @@ import application.models.Product;
 import application.Repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 @RestController
 @RequestMapping ("product")
+@CrossOrigin
 public class ModifyProduct {
     @Autowired
     ProductRepository productRepository ;

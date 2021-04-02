@@ -14,15 +14,5 @@ public class ShopStallsApplication {
         SpringApplication.run(ShopStallsApplication.class, args);
     }
 
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("*");
-            }
-        };
-    }
-
 }
 //TODO add a x-www-urlformencoded header

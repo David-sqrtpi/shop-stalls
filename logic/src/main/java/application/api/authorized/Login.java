@@ -1,4 +1,4 @@
-package application.api;
+package application.api.authorized;
 
 import application.models.AuthRequest;
 import application.services.AuthenticationService;
@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class AuthApi {
+@CrossOrigin
+public class Login {
 
     @Autowired
     private JwtUtil jwtUtil;
@@ -18,7 +19,7 @@ public class AuthApi {
     @Autowired
     private AuthenticationService authenticationService;
 
-    @PostMapping("/authenticate")
+    @PostMapping("/login")
     public String generateToken(@RequestBody AuthRequest authRequest) {
 
         authenticationService.authentication(authRequest);

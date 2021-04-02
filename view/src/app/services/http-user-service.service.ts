@@ -18,7 +18,7 @@ export class HttpUserServiceService {
   }
 
   signUp(user:object){
-    return this.http.post(this.url+'sign-up', user, {responseType:'text' as 'json'})
+    return this.http.post('http://localhost:8080/sign-up', user, {responseType:'text' as 'json'})
   }
 
   getUser(email:string) {

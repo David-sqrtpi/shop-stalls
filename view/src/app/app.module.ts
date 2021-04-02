@@ -31,6 +31,7 @@ import { Routing } from './app.routing';
 import { ModifyProductComponent } from './components/modify-product/modify-product.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { ModifyServicesComponent } from './components/modify-services/modify-services.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
     AddServicesComponent,
     ModifyProductComponent,
     NotFoundComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    ModifyServicesComponent
   ],
   imports: [
     BrowserModule,

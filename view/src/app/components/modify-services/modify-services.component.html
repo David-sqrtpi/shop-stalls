@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="title">
+      <h1>Shop Stalls</h1>
+      <p>Administra fácilmente tu negocio con Shop Stalls &#174;</p>
+    </div>
+    <div class="register_form">
+      <h2>Modificacion de Servicios</h2>
+      <mat-form-field appearance="outline" hideRequiredMarker>
+        <mat-label>Id</mat-label>
+        <input matInput required [formControl]="id" type="number">
+      </mat-form-field>
+      <form method="post">
+        <mat-form-field appearance="outline" hideRequiredMarker>
+          <mat-label>Nombre</mat-label>
+          <input matInput required [formControl]="name_service">
+        </mat-form-field>
+        <mat-form-field appearance="outline" hideRequiredMarker>
+          <mat-label>Precio</mat-label>
+          <input matInput required [formControl]="price">
+        </mat-form-field>
+        <mat-form-field appearance="outline" hideRequiredMarker>
+            <mat-label>Caracterizticas</mat-label>
+            <input matInput required [formControl]="characteristics">
+          </mat-form-field>
+        <button mat-raised-button type="submit" (click)="modifyService ()"
+          [disabled]="name_service.invalid || price.invalid ||characteristics.invalid">Registrar</button>
+      </form>
+    </div>
+  </div>

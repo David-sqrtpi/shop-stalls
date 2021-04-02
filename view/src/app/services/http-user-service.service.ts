@@ -23,7 +23,7 @@ export class HttpUserServiceService {
 
   getUser(email:string) {
     const headers = this.header.generateHeader();
-    return this.http.get(this.url+'get/'+email, {headers});
+    return this.http.get(this.url+email, {headers});
   }
   
 }

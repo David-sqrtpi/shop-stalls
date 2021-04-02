@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 
 import { HttpClient, HttpHeaders} from '@angular/common/http';
-import { LocalStorageService } from './local-storage.service';
-import { JWTserviceService } from './jwtservice.service';
 import { AuthHeadGeneratorService } from './auth-head-generator.service';
 
 @Injectable({
@@ -20,7 +18,12 @@ export class HttpUserServiceService {
   }
 
   signUp(user:object){
-    return this.http.post(this.url+'add', user, {responseType:'text' as 'json'})
+    return this.http.post(this.url+'sign-up', user, {responseType:'text' as 'json'})
+  }
+
+  getUser(email:string) {
+    const headers = this.header.generateHeader();
+    return this.http.get(this.url+'get/'+email, {headers});
   }
   
 }

@@ -22,6 +22,8 @@ export class CreateUserComponent implements OnInit {
   }
 
   createUser() {
+    console.log(this.buildUser());
+    
     this.httpUser.addUser(this.buildUser()).subscribe(
       response => console.log(response)
     )
@@ -33,7 +35,7 @@ export class CreateUserComponent implements OnInit {
       last: this.last.value,
       email: this.email.value,
       age: this.age.value,
-      id_company: 1,
+      id_company: 0,
       password:this.password.value
     }
   }

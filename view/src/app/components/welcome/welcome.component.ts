@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpUserServiceService } from 'src/app/services/http-user-service.service';
 
 @Component({
   selector: 'app-welcome',
@@ -7,12 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WelcomeComponent implements OnInit {
 
-  userToken = null;
+  name = null;
 
-  constructor() { }
+  constructor(private http:HttpUserServiceService) { }
 
   ngOnInit(): void {
-    this.userToken = localStorage.getItem("token");
+    this.http.getUser(localStorage.getItem("email")).subscribe(
+      result => {
+        this.name = result["name"];
+      }
+    );
   }
 
 }

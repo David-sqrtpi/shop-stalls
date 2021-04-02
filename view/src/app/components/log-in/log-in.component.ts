@@ -19,7 +19,7 @@ export class LogInComponent implements OnInit {
   username = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('', [Validators.required, Validators.minLength(8)]);
 
-  constructor(private Jwt:JWTserviceService, private storage:LocalStorageService, private router:Router) { }
+  constructor(private Jwt:JWTserviceService, private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -28,8 +28,9 @@ export class LogInComponent implements OnInit {
     this.waiting = true;
     this.Jwt.generateToken(this.buildObject()).subscribe(
       token => {
-        this.storage.set('token', token.toString())
-        this.router.navigate(["/welcome"])
+        localStorage.setItem('token', token.toString());
+        localStorage.setItem('email', this.username.value);
+        this.router.navigate(["/welcome"]);
       },
       err => {
         console.log(err)

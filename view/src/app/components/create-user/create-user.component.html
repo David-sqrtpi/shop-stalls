@@ -27,4 +27,9 @@
         [disabled]="name.invalid || last.invalid ||password.invalid ||email.invalid || age.invalid">Registrar</button>
     </form>
   </div>
+  <img src="https://editorialdahbar.com/wp-content/plugins/bbpowerpack/assets/images/spinner.gif" alt="spinner"
+        class="spinner" *ngIf="waiting">
+  <p *ngIf="response" class="message">
+    {{response}}
+  </p>
 </div>

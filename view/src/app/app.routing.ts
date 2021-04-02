@@ -16,7 +16,6 @@ const appRoutes = [
     {path:'login', component: LogInComponent, canActivate:[NegateUserLoggedGuard]},
     {path:'', component: HomeComponent},
     {path:'sign-up', component: SignUpComponent, canActivate:[NegateUserLoggedGuard]},
-    {path:'create-user', component: CreateUserComponent, canActivate:[AuthGuard]},
     {path:'add-product', component: AddProductComponent, canActivate:[AuthGuard]},
     {path:'user/create', component: CreateUserComponent, canActivate:[AuthGuard]},
     {path:'add-product', component: AddProductComponent, canActivate:[AuthGuard]},

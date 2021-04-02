@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { FormControl, Validators } from "@angular/forms";
+import { Router } from '@angular/router';
 import { HttpUserServiceService } from 'src/app/services/http-user-service.service';
 
 @Component({
@@ -16,16 +17,31 @@ export class CreateUserComponent implements OnInit {
   email = new FormControl('', [Validators.email]);
   password = new FormControl('', [Validators.minLength(8)]);
 
-  constructor(private httpUser:HttpUserServiceService) { }
+  waiting:boolean = false;
+  response:string = null;
+
+  constructor(private httpUser:HttpUserServiceService, private router:Router) { }
 
   ngOnInit(): void {
   }
 
   createUser() {
-    console.log(this.buildUser());
+    
+    this.waiting = true;
+    this.response = null;
     
     this.httpUser.addUser(this.buildUser()).subscribe(
-      response => console.log(response)
+      response => {
+        this.waiting = false;
+        console.log(response);
+        alert("Usuario creado");
+        window.location.reload();
+      },
+      err => {
+        console.log(err);
+        this.response = this.email.value+" ya está en uso";
+        this.waiting = false;
+      }
     )
   }
 

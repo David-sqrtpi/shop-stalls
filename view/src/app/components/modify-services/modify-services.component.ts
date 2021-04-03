@@ -33,7 +33,7 @@ export class ModifyServicesComponent implements OnInit {
    
     buidObject(){
       return {
-        id : new FormControl,
+        id : this.id.value,
         name_service:this.name_service.value,
         price:this.price.value,
         characteristics:this.characteristics.value,

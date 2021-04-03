@@ -12,6 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import {MatSelectModule} from '@angular/material/select';
 
 //My Components
 import { FormExampleComponent } from './components/form-example/form-example.component';
@@ -60,7 +61,8 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
     MatIconModule,
     MatButtonModule,
     HttpClientModule,
-    Routing
+    Routing,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

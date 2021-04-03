@@ -12,13 +12,18 @@ import { HttpUserServiceService } from 'src/app/services/http-user-service.servi
 export class CreateUserComponent implements OnInit {
 
   name = new FormControl('');
-  last = new FormControl('');
-  age = new FormControl('');
   email = new FormControl('', [Validators.email]);
   password = new FormControl('', [Validators.minLength(8)]);
+  role = new FormControl();
 
   waiting:boolean = false;
   response:string = null;
+
+
+  roles = [
+    {value: 1, name:"Vendedor"},
+    {value: 2, name:"Contador"}
+  ]
 
   constructor(private httpUser:HttpUserServiceService, private router:Router) { }
 
@@ -48,11 +53,14 @@ export class CreateUserComponent implements OnInit {
   buildUser(){
     return {
       name: this.name.value,
-      last: this.last.value,
       email: this.email.value,
-      age: this.age.value,
       id_company: 0,
-      password:this.password.value
+      password:this.password.value,
+      roles:[
+        {
+          id:this.role.value
+        }
+      ]
     }
   }
 

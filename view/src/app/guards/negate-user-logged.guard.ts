@@ -13,7 +13,7 @@ export class NegateUserLoggedGuard implements CanActivate {
       return true;
     }
     else{
-      this.router.navigate(['']);
+      this.router.navigate(['/welcome']);
       return false;
     }
   }

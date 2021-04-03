@@ -16,7 +16,7 @@ import { UserListComponent } from "./user-list/user-list.component";
 
 const appRoutes = [
     {path:'login', component: LogInComponent, canActivate:[NegateUserLoggedGuard]},
-    {path:'', component: HomeComponent},
+    {path:'', component: HomeComponent, canActivate:[NegateUserLoggedGuard]},
     {path:'sign-up', component: SignUpComponent, canActivate:[NegateUserLoggedGuard]},
     {path:'add-product', component: AddProductComponent, canActivate:[AuthGuard]},
     {path:'user/create', component: CreateUserComponent, canActivate:[AuthGuard]},

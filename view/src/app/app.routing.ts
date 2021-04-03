@@ -5,6 +5,7 @@ import { CreateUserComponent } from "./components/create-user/create-user.compon
 import { HomeComponent } from "./components/home/home.component";
 import { LogInComponent } from "./components/log-in/log-in.component";
 import { ModifyProductComponent } from "./components/modify-product/modify-product.component";
+import { ModifyServicesComponent } from "./components/modify-services/modify-services.component";
 import { NotFoundComponent } from "./components/not-found/not-found.component";
 import { SignUpComponent } from "./components/sign-up/sign-up.component";
 import { WelcomeComponent } from "./components/welcome/welcome.component";
@@ -21,6 +22,7 @@ const appRoutes = [
     {path:'add-product', component: AddProductComponent, canActivate:[AuthGuard]},
     {path:'add-services', component: AddServicesComponent, canActivate:[AuthGuard]},
     {path:'modify-product', component: ModifyProductComponent, canActivate:[AuthGuard]},
+    {path:'modify-services', component: ModifyServicesComponent, canActivate:[AuthGuard]},
     {path:'welcome', component: WelcomeComponent, canActivate:[AuthGuard]},
     {path:'**', component: NotFoundComponent},
 ]

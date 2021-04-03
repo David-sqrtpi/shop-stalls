@@ -12,6 +12,7 @@ import { WelcomeComponent } from "./components/welcome/welcome.component";
 
 import { AuthGuard } from "./guards/auth.guard";
 import { NegateUserLoggedGuard } from "./guards/negate-user-logged.guard";
+import { UserListComponent } from "./user-list/user-list.component";
 
 const appRoutes = [
     {path:'login', component: LogInComponent, canActivate:[NegateUserLoggedGuard]},
@@ -24,6 +25,7 @@ const appRoutes = [
     {path:'modify-product', component: ModifyProductComponent, canActivate:[AuthGuard]},
     {path:'modify-services', component: ModifyServicesComponent, canActivate:[AuthGuard]},
     {path:'welcome', component: WelcomeComponent, canActivate:[AuthGuard]},
+    {path:'user/list', component: UserListComponent, canActivate:[AuthGuard]},
     {path:'**', component: NotFoundComponent},
 ]
 

@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { JWTserviceService } from 'src/app/services/jwtservice.service';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-log-in',

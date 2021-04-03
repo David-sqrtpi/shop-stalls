@@ -13,11 +13,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
+import {MatTableModule} from '@angular/material/table';
 
 //My Components
-import { FormExampleComponent } from './components/form-example/form-example.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
-import { HolaComponent } from './components/hola/hola.component';
 import { HomeComponent } from './components/home/home.component';
 import { LogInComponent } from './components/log-in/log-in.component';
 import { CreateCompanyComponent } from './components/create-company/create-company.component';
@@ -33,13 +32,12 @@ import { ModifyProductComponent } from './components/modify-product/modify-produ
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { ModifyServicesComponent } from './components/modify-services/modify-services.component';
+import { UserListComponent } from './user-list/user-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FormExampleComponent,
     SignUpComponent,
-    HolaComponent,
     HomeComponent,
     LogInComponent,
     CreateCompanyComponent,
@@ -51,7 +49,8 @@ import { ModifyServicesComponent } from './components/modify-services/modify-ser
     ModifyProductComponent,
     NotFoundComponent,
     WelcomeComponent,
-    ModifyServicesComponent
+    ModifyServicesComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +63,8 @@ import { ModifyServicesComponent } from './components/modify-services/modify-ser
     MatButtonModule,
     HttpClientModule,
     Routing,
-    MatSelectModule
+    MatSelectModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -15,14 +15,12 @@
 	grant all on shop_stalls.* to 'springuser'@'%';
 	```
 
-3. Instalar el CLI de Angular
 
-	``` npm install -g @angular/cli ```
 
-4. Ingresar al directorio ``` Shop Stalls\view ``` desde la consola de comandos y ejecutar el comando:
-	
-	``` ng serve ```
+3. Crear los roles de los usuarios:
 
-6. Ingresar al directorio ``` Shop Stalls\logic\build\libs ``` desde la consola de comandos y ejecutar el comando:
-
-	``` java -jar shop-stalls-1.0.jar ```
+	```
+	insert into role values (0, "administrador");
+	insert into role values (1, "vendedor");
+	insert into role values (2, "contador");
+	```

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpUserServiceService } from '../services/http-user-service.service';
+import { HttpUserServiceService } from '../../services/http-user-service.service';
 
 @Component({
   selector: 'app-user-list',

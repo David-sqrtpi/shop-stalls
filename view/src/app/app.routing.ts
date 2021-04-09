@@ -12,7 +12,7 @@ import { WelcomeComponent } from "./components/welcome/welcome.component";
 
 import { AuthGuard } from "./guards/auth.guard";
 import { NegateUserLoggedGuard } from "./guards/negate-user-logged.guard";
-import { UserListComponent } from "./user-list/user-list.component";
+import { UserListComponent } from "./components/user-list/user-list.component";
 
 const appRoutes = [
     {path:'login', component: LogInComponent, canActivate:[NegateUserLoggedGuard]},

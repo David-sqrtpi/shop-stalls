@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -14,6 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
 import {MatTableModule} from '@angular/material/table';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 //My Components
 import { SignUpComponent } from './components/sign-up/sign-up.component';
@@ -32,7 +32,8 @@ import { ModifyProductComponent } from './components/modify-product/modify-produ
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { ModifyServicesComponent } from './components/modify-services/modify-services.component';
-import { UserListComponent } from './user-list/user-list.component';
+import { UserListComponent } from './components/user-list/user-list.component';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { UserListComponent } from './user-list/user-list.component';
     NotFoundComponent,
     WelcomeComponent,
     ModifyServicesComponent,
-    UserListComponent
+    UserListComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +66,8 @@ import { UserListComponent } from './user-list/user-list.component';
     HttpClientModule,
     Routing,
     MatSelectModule,
-    MatTableModule
+    MatTableModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

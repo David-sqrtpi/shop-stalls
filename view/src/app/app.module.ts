@@ -14,6 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
 import {MatTableModule} from '@angular/material/table';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 //My Components
 import { SignUpComponent } from './components/sign-up/sign-up.component';
@@ -67,7 +68,8 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
     Routing,
     MatSelectModule,
     MatTableModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

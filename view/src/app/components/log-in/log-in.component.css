@@ -1,6 +1,4 @@
-.spinner {
-    width: 40px;
-    position: relative;
-    top: 100px;
-    right: 500px;
+.loginForm {
+    margin-top: 20px;
+    margin-left: 20px;
 }

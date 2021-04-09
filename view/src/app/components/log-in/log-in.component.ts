@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import {FormControl, Validators} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { JWTserviceService } from 'src/app/services/jwtservice.service';
 
@@ -13,10 +13,14 @@ export class LogInComponent implements OnInit {
 
   waiting:boolean = false;
 
+  hide:boolean = true;
+
   result = null;
-  
-  username = new FormControl('', [Validators.required, Validators.email]);
-  password = new FormControl('', [Validators.required, Validators.minLength(8)]);
+
+  loginForm = new FormGroup({
+    username:new FormControl('', [Validators.email]),
+    password:new FormControl('', [Validators.minLength(8)])
+  })
 
   constructor(private Jwt:JWTserviceService, private router:Router) { }
 
@@ -25,10 +29,10 @@ export class LogInComponent implements OnInit {
 
   public logIn() {
     this.waiting = true;
-    this.Jwt.generateToken(this.buildObject()).subscribe(
+    this.Jwt.generateToken(this.loginForm.value).subscribe(
       token => {
         localStorage.setItem('token', token.toString());
-        localStorage.setItem('email', this.username.value);
+        localStorage.setItem('email', this.loginForm.value["username"]);
         this.router.navigate(["/welcome"]);
       },
       err => {
@@ -40,12 +44,5 @@ export class LogInComponent implements OnInit {
         this.waiting = false;
       }
     );
-  }
-
-  buildObject(){
-    return {
-      password: this.password.value,
-      username: this.username.value
-    }    
   }
 }

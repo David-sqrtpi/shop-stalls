@@ -1,16 +1,31 @@
 <div>
     <h1>Inicio de Sesión</h1>
 </div>
-<form method="post">
-    <app-email-form [email]="username"></app-email-form>
-    <app-password-form [password]="password"></app-password-form>
-    <button mat-raised-button type="submit" (click)="logIn()" [disabled]="username.invalid || password.invalid">Iniciar
-        Sesión</button>
 
-    <img src="https://editorialdahbar.com/wp-content/plugins/bbpowerpack/assets/images/spinner.gif" alt="spinner"
-        class="spinner" *ngIf="waiting">
-
-    <div *ngIf="result">
-        {{result}}
-    </div>
+<form [formGroup]='loginForm' (ngSubmit)='logIn()' class="loginForm">
+    <p>
+        <mat-form-field appearance="outline" hideRequiredMarker>
+            <mat-label>Correo electrónico</mat-label>
+            <input matInput formControlName="username" required>
+            <mat-error *ngIf="loginForm.invalid"></mat-error>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline" hideRequiredMarker>
+            <mat-label>Contraseña</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" required formControlName="password">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error *ngIf="loginForm.invalid">Mal</mat-error>
+        </mat-form-field>
+    </p>
+    <button mat-raised-button type="submit" [disabled]="loginForm.invalid">Iniciar Sesión</button>
 </form>
+
+<mat-spinner *ngIf='waiting' diameter='50'></mat-spinner>
+
+<div *ngIf="result">
+    {{result}}
+</div>

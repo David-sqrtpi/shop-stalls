@@ -28,6 +28,8 @@ export class LogInComponent implements OnInit {
   }
 
   public logIn() {
+    console.log(this.loginForm.value['username']);
+    
     this.waiting = true;
     this.Jwt.generateToken(this.loginForm.value).subscribe(
       token => {
@@ -44,5 +46,13 @@ export class LogInComponent implements OnInit {
         this.waiting = false;
       }
     );
+  }
+
+  get username() {
+    return this.loginForm.get('username');
+  }
+
+  get password() {
+    return this.loginForm.get('password');
   }
 }

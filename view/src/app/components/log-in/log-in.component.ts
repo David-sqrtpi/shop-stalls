@@ -18,8 +18,8 @@ export class LogInComponent implements OnInit {
   result = null;
 
   loginForm = new FormGroup({
-    username:new FormControl('', [Validators.email]),
-    password:new FormControl('', [Validators.minLength(8)])
+    username:new FormControl('', [Validators.email, Validators.required]),
+    password:new FormControl('', [Validators.minLength(8), Validators.required, Validators.pattern(/^[^ñ]+$/)])
   })
 
   constructor(private Jwt:JWTserviceService, private router:Router) { }

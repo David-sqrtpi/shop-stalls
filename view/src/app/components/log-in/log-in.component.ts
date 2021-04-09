@@ -13,13 +13,17 @@ export class LogInComponent implements OnInit {
 
   waiting:boolean = false;
 
-  hide:boolean = true;
+  hidePass:boolean = true;
 
   result = null;
 
   loginForm = new FormGroup({
-    username:new FormControl('', [Validators.email, Validators.required]),
-    password:new FormControl('', [Validators.minLength(8), Validators.required, Validators.pattern(/^[^ñ]+$/)])
+    username:new FormControl('',[
+      Validators.email, Validators.required
+    ]),
+    password:new FormControl('', [
+      Validators.minLength(8), Validators.required, Validators.pattern(/^[^ñ^Ñ]+$/)
+    ])
   })
 
   constructor(private Jwt:JWTserviceService, private router:Router) { }
@@ -27,23 +31,19 @@ export class LogInComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public logIn() {
-    console.log(this.loginForm.value['username']);
-    
+  public logIn() {  
     this.waiting = true;
     this.Jwt.generateToken(this.loginForm.value).subscribe(
       token => {
+        this.waiting = false;
         localStorage.setItem('token', token.toString());
-        localStorage.setItem('email', this.loginForm.value["username"]);
+        localStorage.setItem('email', this.username.value);
         this.router.navigate(["/welcome"]);
       },
       err => {
         console.log(err)
         this.waiting = false;
-        this.result = JSON.parse(err.error).message;
-      },
-      () => {
-        this.waiting = false;
+        this.result = err;
       }
     );
   }

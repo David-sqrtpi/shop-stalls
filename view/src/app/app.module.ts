@@ -17,7 +17,6 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 //My Components
-import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { HomeComponent } from './components/home/home.component';
 import { LogInComponent } from './components/log-in/log-in.component';
 import { CreateCompanyComponent } from './components/create-company/create-company.component';
@@ -39,7 +38,6 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 @NgModule({
   declarations: [
     AppComponent,
-    SignUpComponent,
     HomeComponent,
     LogInComponent,
     CreateCompanyComponent,

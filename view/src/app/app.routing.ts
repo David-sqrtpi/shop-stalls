@@ -7,7 +7,6 @@ import { LogInComponent } from "./components/log-in/log-in.component";
 import { ModifyProductComponent } from "./components/modify-product/modify-product.component";
 import { ModifyServicesComponent } from "./components/modify-services/modify-services.component";
 import { NotFoundComponent } from "./components/not-found/not-found.component";
-import { SignUpComponent } from "./components/sign-up/sign-up.component";
 import { WelcomeComponent } from "./components/welcome/welcome.component";
 
 import { AuthGuard } from "./guards/auth.guard";
@@ -17,7 +16,6 @@ import { UserListComponent } from "./components/user-list/user-list.component";
 const appRoutes = [
     {path:'login', component: LogInComponent, canActivate:[NegateUserLoggedGuard]},
     {path:'', component: HomeComponent, canActivate:[NegateUserLoggedGuard]},
-    {path:'sign-up', component: SignUpComponent, canActivate:[NegateUserLoggedGuard]},
     {path:'add-product', component: AddProductComponent, canActivate:[AuthGuard]},
     {path:'user/create', component: CreateUserComponent, canActivate:[AuthGuard]},
     {path:'add-product', component: AddProductComponent, canActivate:[AuthGuard]},

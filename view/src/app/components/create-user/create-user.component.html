@@ -1,38 +1,51 @@
-<div class="container">
-  <div class="title">
-    <h1>Shop Stalls</h1>
-    <p>Administra fácilmente tu negocio con Shop Stalls &#174;</p>
-  </div>
-  <div class="register_form">
-    <h2>Crear Usuario</h2>
-    <form method="post">
-      <mat-form-field appearance="outline" hideRequiredMarker>
-        <mat-label>Usuario</mat-label>
-        <input matInput required [formControl]="name">
-        <mat-error *ngIf="name.invalid">{{getErrorMessage()}}</mat-error>
-      </mat-form-field>
-
-      <app-password-form [password]="password"></app-password-form>
-      
-      <app-email-form [email]="email"></app-email-form>
-
-      <mat-form-field appearance="fill" hideRequiredMarker>
-        <mat-label>Rol</mat-label>
-        <mat-select [formControl]="role" required>
-          <mat-option *ngFor="let role of roles" [value]="role.value">
-            {{role.name}}
-          </mat-option>
-        </mat-select>
-        <mat-error *ngIf="role.invalid">{{getErrorMessage()}}</mat-error>
-      </mat-form-field>
-
-      <button mat-raised-button type="submit" (click)="createUser()"
-        [disabled]="name.invalid ||password.invalid ||email.invalid || role.invalid">Registrar</button>
-    </form>
-  </div>
-  <img src="https://editorialdahbar.com/wp-content/plugins/bbpowerpack/assets/images/spinner.gif" alt="spinner"
-        class="spinner" *ngIf="waiting">
-  <p *ngIf="response" class="message">
-    {{response}}
-  </p>
+<div>
+  <h2>Registro de usuario</h2>
 </div>
+
+<form [formGroup]="userForm" class="user-form" (ngSubmit)='createUser()'>
+  <p>
+    <mat-form-field appearance="outline" hideRequiredMarker>
+      <mat-label>Usuario</mat-label>
+      <input matInput required formControlName="name">
+      <mat-error *ngIf="name.invalid && name.errors.required">Campo requerido</mat-error>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field appearance="outline" hideRequiredMarker>
+      <mat-label>Contraseña</mat-label>
+      <input matInput [type]="hidePass ? 'password' : 'text'" required formControlName="password">
+      <button mat-icon-button matSuffix (click)="hidePass = !hidePass" [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hidePass">
+        <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      <mat-error *ngIf="password.invalid && password.errors.required">Campo Requerido</mat-error>
+      <mat-error *ngIf="password.invalid && password.errors.minlength && !password.errors.pattern">Mínimo 8 caracteres</mat-error>
+      <mat-error *ngIf="password.invalid && password.errors.pattern">Contiene ñ</mat-error>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field appearance="outline" hideRequiredMarker>
+      <mat-label>Correo electrónico</mat-label>
+      <input matInput formControlName='email' required>
+      <mat-error *ngIf="email.invalid && email.errors.required">Campo Requerido</mat-error>
+      <mat-error *ngIf="email.invalid && email.errors.email">Correo electrónico no válido</mat-error>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field appearance="fill" hideRequiredMarker>
+      <mat-label>Rol</mat-label>
+      <mat-select formControlName="role" required>
+        <mat-option value="1">Vendedor</mat-option>
+        <mat-option value="2">Contador</mat-option>
+      </mat-select>
+      <mat-error *ngIf="role.invalid && role.errors.required">Campo requerido</mat-error>
+    </mat-form-field>
+  </p>
+  <button mat-raised-button type="submit" [disabled]='userForm.invalid'>Iniciar Sesión</button>
+</form>
+
+<mat-spinner diameter="50" *ngIf="waiting"></mat-spinner>
+{{response}}

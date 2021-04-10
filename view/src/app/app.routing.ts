@@ -16,14 +16,13 @@ import { UserListComponent } from "./components/user-list/user-list.component";
 const appRoutes = [
     {path:'login', component: LogInComponent, canActivate:[NegateUserLoggedGuard]},
     {path:'', component: HomeComponent, canActivate:[NegateUserLoggedGuard]},
-    {path:'add-product', component: AddProductComponent, canActivate:[AuthGuard]},
-    {path:'user/create', component: CreateUserComponent, canActivate:[AuthGuard]},
-    {path:'add-product', component: AddProductComponent, canActivate:[AuthGuard]},
-    {path:'add-services', component: AddServicesComponent, canActivate:[AuthGuard]},
-    {path:'modify-product', component: ModifyProductComponent, canActivate:[AuthGuard]},
-    {path:'modify-services', component: ModifyServicesComponent, canActivate:[AuthGuard]},
+    {path:'products/create', component: AddProductComponent, canActivate:[AuthGuard]},
+    {path:'users/create', component: CreateUserComponent, canActivate:[AuthGuard]},
+    {path:'services/create', component: AddServicesComponent, canActivate:[AuthGuard]},
+    {path:'products/modify', component: ModifyProductComponent, canActivate:[AuthGuard]},
+    {path:'services/modify', component: ModifyServicesComponent, canActivate:[AuthGuard]},
     {path:'welcome', component: WelcomeComponent, canActivate:[AuthGuard]},
-    {path:'user/list', component: UserListComponent, canActivate:[AuthGuard]},
+    {path:'users', component: UserListComponent, canActivate:[AuthGuard]},
     {path:'**', component: NotFoundComponent},
 ]
 

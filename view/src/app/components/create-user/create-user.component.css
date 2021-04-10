@@ -1,40 +1,4 @@
-mat-form-field {
-    display: block;
-    width: 240px;
-}
-
-h1 {
-    font-size: 40px;
-    color: chocolate;
-}
-
-p {
-    font-size: 15px;
-}
-
-.title {
-    display: inline-block;
-    position: absolute;
-    top: 30px;
-    left: 30px;
-}
-
-.register_form {
-    position: absolute;
-    display: inline-block;
-    left: 50%;
-    top: 100px;
-}
-
-.spinner {
-    width: 40px;
-    position: absolute;
-    top: 300px;
-    left: 100px;
-}
-
-.message {
-    position: absolute;
-    top: 300px;
-    left: 100px;
+.user-form {
+    margin-top: 20px;
+    margin-left: 20px;
 }

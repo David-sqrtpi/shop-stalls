@@ -15,6 +15,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatTableModule} from '@angular/material/table';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 //My Components
 import { HomeComponent } from './components/home/home.component';
@@ -67,7 +68,8 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
     MatSelectModule,
     MatTableModule,
     MatToolbarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

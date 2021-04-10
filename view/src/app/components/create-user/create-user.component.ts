@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { FormControl, Validators } from "@angular/forms";
-import { Router } from '@angular/router';
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpUserServiceService } from 'src/app/services/http-user-service.service';
 
 @Component({
@@ -11,61 +11,62 @@ import { HttpUserServiceService } from 'src/app/services/http-user-service.servi
 })
 export class CreateUserComponent implements OnInit {
 
-  name = new FormControl('');
-  email = new FormControl('', [Validators.email]);
-  password = new FormControl('', [Validators.minLength(8)]);
-  role = new FormControl();
+  userForm = new FormGroup({
+    name: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.email, Validators.required]),
+    password: new FormControl('', [Validators.minLength(8), Validators.pattern(/^[^ñ^Ñ]+$/)]),
+    role: new FormControl('', Validators.required)
+  })
 
-  waiting:boolean = false;
-  response:string = null;
+  hidePass:boolean = true;
+  waiting: boolean = false;
+  response: string = null;
 
-
-  roles = [
-    {value: 1, name:"Vendedor"},
-    {value: 2, name:"Contador"}
-  ]
-
-  constructor(private httpUser:HttpUserServiceService, private router:Router) { }
+  constructor(private httpUser: HttpUserServiceService, private snackBar:MatSnackBar) { }
 
   ngOnInit(): void {
   }
 
   createUser() {
-    
+
     this.waiting = true;
     this.response = null;
-    
-    this.httpUser.addUser(this.buildUser()).subscribe(
+
+    this.httpUser.addUser(this.userForm.value).subscribe(
       response => {
         this.waiting = false;
         console.log(response);
-        alert("Usuario creado");
-        window.location.reload();
+        this.openSnackBar('Usuario Creado', "");
+        this.userForm.reset();
       },
       err => {
         console.log(err);
-        this.response = this.email.value+" ya está en uso";
+        this.response = this.email.value + " ya está en uso";
         this.waiting = false;
       }
     )
   }
 
-  buildUser(){
-    return {
-      name: this.name.value,
-      email: this.email.value,
-      id_company: 0,
-      password:this.password.value,
-      roles:[
-        {
-          id:this.role.value
-        }
-      ]
-    }
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 3000,
+    });
+  }
+  
+  get name() {
+    return this.userForm.get('name');
   }
 
-  getErrorMessage() {
-    return 'Campo requerido';
+  get email() {
+    return this.userForm.get('email');
+  }
+
+  get password() {
+    return this.userForm.get('password');
+  }
+
+  get role() {
+    return this.userForm.get('role');
   }
 
 }

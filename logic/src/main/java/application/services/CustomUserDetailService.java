@@ -1,6 +1,6 @@
 package application.services;
 
-import application.Repository.RepositoryUser;
+import application.Repository.UserRepository;
 import application.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class CustomUserDetailService implements UserDetailsService {
 
     @Autowired
-    private RepositoryUser repositoryUserService;
+    private UserRepository repositoryUserService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping ("product")
 @CrossOrigin
-public class ProductApi {
+public class AddProduct {
     @Autowired
     ProductRepository productRepository ;
 
@@ -17,6 +17,5 @@ public class ProductApi {
         System.out.println(product.getId());
         productRepository.save(product) ;
         return  product ;
-
     }
 }

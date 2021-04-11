@@ -1,9 +1,8 @@
 package application.Repository;
 
-import application.models.Services;
+import application.models.Service;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-
-public interface ServicesRepository extends CrudRepository<Services, Integer> {
+public interface ServiceRepository extends CrudRepository<Service, Integer> {
 }

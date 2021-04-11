@@ -1,21 +1,23 @@
 package application.api.CompanyApi;
 
 import application.models.Company;
-import application.Repository.RepositoryCompany;
+import application.Repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("company/add")
+@RequestMapping("company")
 @CrossOrigin
-public class AddCompany {
+public class ModifyCompany {
 
     @Autowired
-    private RepositoryCompany repositoryCompanyService;
+    private CompanyRepository repositoryCompanyService;
 
-    @PostMapping
-    public String add(@RequestBody Company company) {
+    @PutMapping("/{id}")
+    public String add(@RequestBody Company company,
+                      @PathVariable int id) {
 
+        company.setId(id);
         repositoryCompanyService.save(company);
 
         return "Saved";

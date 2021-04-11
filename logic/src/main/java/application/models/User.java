@@ -2,6 +2,7 @@ package application.models;
 
 import javax.persistence.*;
 
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,6 +21,7 @@ public class User {
     private String name;
 
     @Column(unique=true, nullable = false)
+    @NotNull
     private String email;
 
     @Column(nullable = false)
@@ -27,7 +29,8 @@ public class User {
 
     private int age;
 
-    private int id_company;
+    @ManyToOne
+    private Company company;
 
     @ManyToMany
     private List<Role> roles;

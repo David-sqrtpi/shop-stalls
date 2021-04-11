@@ -1,6 +1,6 @@
 package application.api.UserApi;
 
-import application.Repository.RepositoryUser;
+import application.Repository.UserRepository;
 import application.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class GetUser {
 
     @Autowired
-    private RepositoryUser repositoryUserService;
+    private UserRepository repositoryUserService;
 
     @GetMapping("user/{email}")
     public User get(@PathVariable String email) {

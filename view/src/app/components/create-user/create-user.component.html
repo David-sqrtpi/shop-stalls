@@ -34,17 +34,19 @@
     </mat-form-field>
   </p>
 
-  <p>
+  <p formArrayName='roles'>
     <mat-form-field appearance="fill" hideRequiredMarker>
       <mat-label>Rol</mat-label>
-      <mat-select formControlName="role" required>
-        <mat-option value="1">Vendedor</mat-option>
-        <mat-option value="2">Contador</mat-option>
+      <mat-select required>
+        <mat-option value="1" (click)="addRole(1)">Vendedor</mat-option>
+        <mat-option value="2" (click)="addRole(2)">Contador</mat-option>
       </mat-select>
-      <mat-error *ngIf="role.invalid && role.errors.required">Campo requerido</mat-error>
+      <mat-error>Campo requerido</mat-error>
     </mat-form-field>
   </p>
-  <button mat-raised-button type="submit" [disabled]='userForm.invalid'>Iniciar Sesión</button>
+  <div>{{userForm.value | json}}</div>
+  <button mat-raised-button type="submit" [disabled]='userForm.invalid'>Crear</button>
+  
 </form>
 
 <mat-spinner diameter="50" *ngIf="waiting"></mat-spinner>

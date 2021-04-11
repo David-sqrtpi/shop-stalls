@@ -10,6 +10,8 @@ export class UserListComponent implements OnInit {
 
   users:any;
 
+  company:number = +localStorage.getItem('id_company');
+
   displayedColumns: string[] = ['name', 'age', 'email', 'id_company'];
 
   constructor(private http:HttpUserServiceService) { }

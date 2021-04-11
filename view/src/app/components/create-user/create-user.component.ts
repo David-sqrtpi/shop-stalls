@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { FormControl, FormGroup, Validators, FormArray, FormBuilder } from "@angular/forms";
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpUserServiceService } from 'src/app/services/http-user-service.service';
 
@@ -11,18 +11,22 @@ import { HttpUserServiceService } from 'src/app/services/http-user-service.servi
 })
 export class CreateUserComponent implements OnInit {
 
-  userForm = new FormGroup({
-    name: new FormControl('', Validators.required),
-    email: new FormControl('', [Validators.email, Validators.required]),
-    password: new FormControl('', [Validators.minLength(8), Validators.pattern(/^[^ñ^Ñ]+$/)]),
-    role: new FormControl('', Validators.required)
+  userForm = this.fb.group({
+    name: ['', Validators.required],
+    email: ['', [Validators.email, Validators.required]],
+    password: ['', [Validators.minLength(8), Validators.pattern(/^[^ñ^Ñ]+$/)]],
+    roles: this.fb.array([
+      this.fb.group({
+        id:['']
+      })
+    ])
   })
 
   hidePass:boolean = true;
   waiting: boolean = false;
   response: string = null;
 
-  constructor(private httpUser: HttpUserServiceService, private snackBar:MatSnackBar) { }
+  constructor(private httpUser: HttpUserServiceService, private snackBar:MatSnackBar, private fb: FormBuilder) { }
 
   ngOnInit(): void {
   }
@@ -32,12 +36,14 @@ export class CreateUserComponent implements OnInit {
     this.waiting = true;
     this.response = null;
 
+    console.log(this.userForm.value);
+    
+
     this.httpUser.addUser(this.userForm.value).subscribe(
       response => {
         this.waiting = false;
         console.log(response);
         this.openSnackBar('Usuario Creado', "");
-        this.userForm.reset();
       },
       err => {
         console.log(err);
@@ -65,8 +71,13 @@ export class CreateUserComponent implements OnInit {
     return this.userForm.get('password');
   }
 
-  get role() {
-    return this.userForm.get('role');
+  get roles() {
+    return this.userForm.get('roles') as FormArray;
+  }
+
+  addRole(value) {
+    this.roles.clear();
+    this.roles.push(this.fb.group({id:[value]}));
   }
 
 }

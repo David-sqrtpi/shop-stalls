@@ -35,6 +35,7 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { ModifyServicesComponent } from './components/modify-services/modify-services.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { UserDetailComponent } from './components/user-detail/user-detail.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
     WelcomeComponent,
     ModifyServicesComponent,
     UserListComponent,
-    NavBarComponent
+    NavBarComponent,
+    UserDetailComponent
   ],
   imports: [
     BrowserModule,

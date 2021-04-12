@@ -2,12 +2,12 @@ package application.models;
 
 import javax.persistence.*;
 
-import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
@@ -18,10 +18,10 @@ public class User {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
 
+    @Column(nullable = false)
     private String name;
 
-    @Column(unique=true, nullable = false)
-    @NotNull
+    @Column(unique=true, nullable=false)
     private String email;
 
     @Column(nullable = false)
@@ -33,6 +33,11 @@ public class User {
     private Company company;
 
     @ManyToMany
-    private List<Role> roles;
+    @Column(nullable = false)
+    private List<Role> roles = new ArrayList<>();
+
+    public void addRole(Role role){
+        this.roles.add(role);
+    }
 
 }

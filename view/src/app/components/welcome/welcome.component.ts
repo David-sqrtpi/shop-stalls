@@ -16,7 +16,7 @@ export class WelcomeComponent implements OnInit {
     this.http.getUser(localStorage.getItem("email")).subscribe(
       result => {
         this.name = result["name"];
-        localStorage.setItem('id_company', result['id_company']);
+        localStorage.setItem('company', result['id_company']);
       }
     );
   }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpUserServiceService } from '../../services/http-user-service.service';
+import { HttpCompanyService } from 'src/app/services/http-company.service';
 
 @Component({
   selector: 'app-user-list',
@@ -10,14 +10,12 @@ export class UserListComponent implements OnInit {
 
   users:any;
 
-  company:number = +localStorage.getItem('id_company');
-
   displayedColumns: string[] = ['name', 'age', 'email', 'id_company'];
 
-  constructor(private http:HttpUserServiceService) { }
+  constructor(private http:HttpCompanyService) { }
 
   ngOnInit(): void {
-    this.http.getUsers().subscribe(
+    this.http.getUsersFromCompany(+localStorage.getItem('company')).subscribe(
       result => {
         console.log(result);
         this.users=result;

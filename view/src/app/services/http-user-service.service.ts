@@ -8,14 +8,14 @@ import { AuthHeadGeneratorService } from './auth-head-generator.service';
 })
 export class HttpUserServiceService {
 
-  private url:string = 'http://localhost:8080/user/';
+  private url:string = 'http://localhost:8080/users/';
 
   private headers = this.header.generateHeader();
 
   constructor(private http:HttpClient, private header:AuthHeadGeneratorService) { }
 
   addUser(user:object) {
-    return this.http.post(this.url+'add', user, {headers:this.headers, responseType:'text' as 'json'})
+    return this.http.post(this.url, user, {headers:this.headers, responseType:'text' as 'json'})
   }
 
   getUser(email:string) {
@@ -23,7 +23,7 @@ export class HttpUserServiceService {
   }
 
   getUsers(){
-    return this.http.get(this.url+"all", {headers:this.headers});
+    return this.http.get(this.url, {headers:this.headers});
   }
   
 }

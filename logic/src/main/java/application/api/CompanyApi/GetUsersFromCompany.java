@@ -1,4 +1,4 @@
-package application.api.UserApi;
+package application.api.CompanyApi;
 import application.Repository.CompanyRepository;
 import application.Repository.UserRepository;
 import application.models.User;

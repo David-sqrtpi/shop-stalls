@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
-@Entity // This tells Hibernate to make a table out of this class
+@Entity
 public class User {
 
     @Id

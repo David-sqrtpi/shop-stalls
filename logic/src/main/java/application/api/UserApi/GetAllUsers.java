@@ -5,18 +5,20 @@ import application.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("user/all")
+@RequestMapping("users")
 @CrossOrigin
 public class GetAllUsers {
 
     @Autowired
-    private UserRepository repositoryUserService;
+    private UserRepository userRepository;
 
     @GetMapping
     public Iterable<User> getAll() {
-
-        return repositoryUserService.findAll();
+        System.out.println("all");
+        return userRepository.findAll();
 
     }
 

@@ -1,5 +1,5 @@
 package application.api.UserApi;
-
+import application.Repository.CompanyRepository;
 import application.Repository.UserRepository;
 import application.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,17 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/users")
+@RequestMapping("companies/{company}/users")
 public class GetUsersFromCompany {
+    @Autowired
+    private UserRepository userRepository;
 
+    @Autowired
+    private CompanyRepository companyRepository;
+
+    @GetMapping
+    public List<User> get(@PathVariable int company){
+        System.out.println("company");
+        return userRepository.findByCompanyId(company);
+    }
 }

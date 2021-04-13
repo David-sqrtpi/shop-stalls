@@ -23,7 +23,7 @@ public class GetAllUsers {
     @GetMapping
     public List<UserDTO> getAll() {
         System.out.println("all");
-        return userConverter.toUsersDTO(userRepository.findAll());
+        return userConverter.toUserDTOS(userRepository.findAll());
     }
 
 }

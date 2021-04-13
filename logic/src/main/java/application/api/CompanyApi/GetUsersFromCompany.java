@@ -1,7 +1,9 @@
 package application.api.CompanyApi;
+import application.DTO.UserDTO;
 import application.Repository.CompanyRepository;
 import application.Repository.UserRepository;
 import application.models.User;
+import application.services.UserConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,11 +17,11 @@ public class GetUsersFromCompany {
     private UserRepository userRepository;
 
     @Autowired
-    private CompanyRepository companyRepository;
+    private UserConverter userConverter;
 
     @GetMapping
-    public List<User> get(@PathVariable int company){
+    public List<UserDTO> get(@PathVariable int company){
         System.out.println("company");
-        return userRepository.findByCompanyId(company);
+        return userConverter.toUserDTOS(userRepository.findByCompanyId(company));
     }
 }

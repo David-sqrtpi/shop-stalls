@@ -10,21 +10,28 @@ export class WelcomeComponent implements OnInit {
 
   name = null;
 
-  constructor(private http:HttpUserServiceService) { }
+  constructor(private http: HttpUserServiceService) { }
 
   ngOnInit(): void {
-    this.http.getUser(localStorage.getItem("email")).subscribe(
-      result => {
-        console.log(result);
-        this.name = result["name"];
-        localStorage.setItem('company', result['company']['id']);
-      }
-    );
+    if (localStorage.getItem('userId')) {
+      this.name = localStorage.getItem('name');
+    }
+    else {
+      this.http.getUserByEmail(localStorage.getItem("email")).subscribe(
+        result => {
+          console.log(result);
+          this.name = result["name"];
+          localStorage.setItem('userId', result['id']);
+          localStorage.setItem('name', result['name']);
+          localStorage.setItem('company', result['companyId']);
+          localStorage.removeItem('email');
+        }
+      );
+    }
   }
 
   logOut(): void {
-    localStorage.removeItem("token");
-    localStorage.removeItem("email");
+    localStorage.clear();
   }
 
 }

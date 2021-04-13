@@ -48,7 +48,7 @@ export class CreateUserComponent implements OnInit {
       },
       err => {
         console.log(err);
-        this.response = this.email.value + " ya está en uso";
+        this.response = err;
         this.waiting = false;
       }
     )

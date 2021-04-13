@@ -24,7 +24,7 @@ const appRoutes = [
     {path:'services/modify', component: ModifyServicesComponent, canActivate:[AuthGuard]},
     {path:'welcome', component: WelcomeComponent, canActivate:[AuthGuard]},
     {path:'users', component: UserListComponent, canActivate:[AuthGuard]},
-    {path:'users/:email', component: UserDetailComponent, canActivate:[AuthGuard]},
+    {path:'users/:id', component: UserDetailComponent, canActivate:[AuthGuard]},
     {path:'**', component: NotFoundComponent},
 ]
 

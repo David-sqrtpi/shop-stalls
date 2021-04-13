@@ -43,10 +43,12 @@ public class UserConverter {
 
         UserDTO user = new UserDTO();
 
+        user.setId(userEntity.getId());
         user.setAge(userEntity.getAge());
         user.setName(userEntity.getName());
         user.setEmail(userEntity.getEmail());
         user.setCompanyName(userEntity.getCompany().getName());
+        user.setCompanyId(userEntity.getCompany().getId());
         for(Role role:userEntity.getRoles()){
             user.getRoleNames().add(role.getName());
         }
@@ -56,7 +58,7 @@ public class UserConverter {
     }
 
     //Converts every User Entity into a userDTO using method above
-    public List<UserDTO> toUsersDTO(List<User> userEntities) {
+    public List<UserDTO> toUserDTOS(List<User> userEntities) {
 
         List<UserDTO> userDTOS= new ArrayList<>();
 

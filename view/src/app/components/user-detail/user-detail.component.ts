@@ -9,7 +9,7 @@ import { HttpUserServiceService } from 'src/app/services/http-user-service.servi
 })
 export class UserDetailComponent implements OnInit {
 
-  private email:string = this.route.snapshot.params['email'];  
+  private id:number = this.route.snapshot.params['id'];  
 
   constructor(private http:HttpUserServiceService, private route:ActivatedRoute) { }
 
@@ -18,7 +18,7 @@ export class UserDetailComponent implements OnInit {
   }
 
   getUser() {
-    this.http.getUser(this.email).subscribe(
+    this.http.getUserById(this.id).subscribe(
       res=>{
         console.log(res);
       },

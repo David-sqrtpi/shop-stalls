@@ -17,6 +17,7 @@ export class UserListComponent implements OnInit {
   ngOnInit(): void {
     this.http.getUsersFromCompany(+localStorage.getItem('company')).subscribe(
       result => {
+        console.log(+localStorage.getItem('company'));
         console.log(result);
         this.users=result;
       }

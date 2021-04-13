@@ -5,13 +5,11 @@ import application.Repository.UserRepository;
 import application.models.User;
 import application.services.UserConverter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
+@RequestMapping("/users")
 public class GetUser {
     @Autowired
     private UserRepository repositoryUserService;
@@ -19,8 +17,13 @@ public class GetUser {
     @Autowired
     private UserConverter userConverter;
 
-    @GetMapping("users/{email}")
-    public UserDTO get(@PathVariable String email) {
+    @GetMapping("/{id}")
+    public UserDTO getById(@PathVariable int id) {
+        return userConverter.toUserDTO(repositoryUserService.findById(id));
+    }
+
+    @GetMapping("/email/{email}")
+    public UserDTO getByEmail(@PathVariable String email) {
         return userConverter.toUserDTO(repositoryUserService.findByEmail(email));
     }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
+import { HttpUserServiceService } from 'src/app/services/http-user-service.service';
 import { JWTserviceService } from 'src/app/services/jwtservice.service';
 
 @Component({
@@ -26,7 +27,7 @@ export class LogInComponent implements OnInit {
     ])
   })
 
-  constructor(private Jwt:JWTserviceService, private router:Router) { }
+  constructor(private Jwt:JWTserviceService, private router:Router, private http:HttpUserServiceService) { }
 
   ngOnInit(): void {
   }

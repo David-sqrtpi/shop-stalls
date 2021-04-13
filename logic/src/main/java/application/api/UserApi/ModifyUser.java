@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("user/modify")
+@RequestMapping("users")
 @CrossOrigin
 public class ModifyUser {
 
@@ -14,7 +14,6 @@ public class ModifyUser {
     private UserRepository RepositoryUserService;
 
     @PutMapping
-
     public String add (@RequestBody User user){
 
         RepositoryUserService.save(user);

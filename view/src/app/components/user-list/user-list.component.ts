@@ -10,7 +10,7 @@ export class UserListComponent implements OnInit {
 
   users:any;
 
-  displayedColumns: string[] = ['name', 'age', 'email', 'id_company'];
+  displayedColumns: string[] = ['name', 'email', 'roles'];
 
   constructor(private http:HttpCompanyService) { }
 

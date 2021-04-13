@@ -15,7 +15,7 @@ public class GetUser {
     @Autowired
     private UserRepository repositoryUserService;
 
-    @GetMapping("user/{email}")
+    @GetMapping("users/{email}")
     public User get(@PathVariable String email) {
 
         return repositoryUserService.findByEmail(email);

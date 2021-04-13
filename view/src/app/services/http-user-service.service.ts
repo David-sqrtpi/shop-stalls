@@ -6,6 +6,7 @@ import { AuthHeadGeneratorService } from './auth-head-generator.service';
 @Injectable({
   providedIn: 'root'
 })
+
 export class HttpUserServiceService {
 
   private url:string = 'http://localhost:8080/users/';

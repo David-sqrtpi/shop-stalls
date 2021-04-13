@@ -15,6 +15,7 @@ export class CreateUserComponent implements OnInit {
     name: ['', Validators.required],
     email: ['', [Validators.email, Validators.required]],
     password: ['', [Validators.minLength(8), Validators.pattern(/^[^ñ^Ñ]+$/)]],
+    company:[+localStorage.getItem('company')],
     roles: this.fb.array([
       this.fb.group({
         id:['']

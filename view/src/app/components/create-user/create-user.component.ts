@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import { FormControl, FormGroup, Validators, FormArray, FormBuilder } from "@angular/forms";
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpUserServiceService } from 'src/app/services/http-user-service.service';
@@ -15,10 +14,10 @@ export class CreateUserComponent implements OnInit {
     name: ['', Validators.required],
     email: ['', [Validators.email, Validators.required]],
     password: ['', [Validators.minLength(8), Validators.pattern(/^[^ñ^Ñ]+$/)]],
-    company:[+localStorage.getItem('company')],
+    companyId:[+localStorage.getItem('company')],
     roles: this.fb.array([
-      this.fb.group({
-        id:['']
+      this.fb.control({
+        //id:['']//
       })
     ])
   })
@@ -78,7 +77,7 @@ export class CreateUserComponent implements OnInit {
 
   addRole(value) {
     this.roles.clear();
-    this.roles.push(this.fb.group({id:[value]}));
+    this.roles.push(this.fb.control(value));
   }
 
 }

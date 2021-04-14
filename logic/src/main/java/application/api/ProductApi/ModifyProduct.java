@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping ("product")
+@RequestMapping ("products")
 @CrossOrigin
 public class ModifyProduct {
     @Autowired
     ProductRepository productRepository ;
 
-    @PutMapping ("modify")
+    @PutMapping
     public Product add(@RequestBody Product product){
         System.out.println(product.getId());
         productRepository.save(product) ;

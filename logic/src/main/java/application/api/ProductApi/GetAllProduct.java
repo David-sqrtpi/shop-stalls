@@ -15,7 +15,7 @@ public class GetAllProduct {
     @Autowired
     private ProductConverter productConverter;
     @Autowired
-    private ProductRepository productRepository;
+    private ProductRepository ProductRepository;
 
     @GetMapping
     public List<ProductDTO> getAll() {

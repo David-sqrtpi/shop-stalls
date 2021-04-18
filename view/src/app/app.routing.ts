@@ -13,6 +13,8 @@ import { AuthGuard } from "./guards/auth.guard";
 import { NegateUserLoggedGuard } from "./guards/negate-user-logged.guard";
 import { UserListComponent } from "./components/user-list/user-list.component";
 import { UserDetailComponent } from "./components/user-detail/user-detail.component";
+import { ProductListComponent } from "./product-list/product-list.component";
+import { ProductDetailComponent } from "./product-detail/product-detail.component";
 
 const appRoutes = [
     {path:'login', component: LogInComponent, canActivate:[NegateUserLoggedGuard]},
@@ -24,6 +26,8 @@ const appRoutes = [
     {path:'services/modify', component: ModifyServicesComponent, canActivate:[AuthGuard]},
     {path:'welcome', component: WelcomeComponent, canActivate:[AuthGuard]},
     {path:'users', component: UserListComponent, canActivate:[AuthGuard]},
+    {path:'products', component: ProductListComponent, canActivate:[AuthGuard]},
+    {path:'products/:id', component: ProductDetailComponent, canActivate:[AuthGuard]},
     {path:'users/:id', component: UserDetailComponent, canActivate:[AuthGuard]},
     {path:'**', component: NotFoundComponent},
 ]

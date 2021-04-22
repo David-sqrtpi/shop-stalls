@@ -12,8 +12,8 @@ public class ModifyProduct {
     @Autowired
     ProductRepository productRepository ;
 
-    @PutMapping
-    public Product add(@RequestBody Product product){
+    @PutMapping(/{id})
+    public Product add(@RequestBody Product product, @PathVariable int id){
         System.out.println(product.getId());
         productRepository.save(product) ;
         return  product ;

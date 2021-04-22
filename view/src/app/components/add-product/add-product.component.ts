@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import { HttpClient} from '@angular/common/http';
-import { ProdutService } from 'src/app/services/produt.service';
+import { HttpProdutService } from 'src/app/services/produt.service';
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
@@ -14,7 +14,7 @@ export class AddProductComponent implements OnInit {
   price= new FormControl 
   quantity= new FormControl 
  
-  constructor(private product:ProdutService) { }
+  constructor(private product:HttpProdutService) { }
 
   ngOnInit(): void {
   }

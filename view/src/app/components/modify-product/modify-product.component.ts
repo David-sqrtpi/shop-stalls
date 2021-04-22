@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import { HttpClient} from '@angular/common/http';
-import { ProdutService } from 'src/app/services/produt.service';
+import { HttpProdutService } from 'src/app/services/produt.service';
 
 @Component({
   selector: 'app-modify-product',
@@ -17,7 +17,7 @@ export class ModifyProductComponent implements OnInit {
   quantity = new FormControl
 
 
-  constructor(private product: ProdutService) { }
+  constructor(private product: HttpProdutService) { }
 
   ngOnInit(): void {
 
@@ -26,9 +26,9 @@ export class ModifyProductComponent implements OnInit {
   modifyProduct() {
     console.log(this.buidObject());
 
-    this.product.modifyProduct(this.buidObject()).subscribe(
-      response => console.log(response)
-    )
+    //this.product.modifyProduct(this.buidObject()).subscribe(
+      //response => console.log(response)
+    //)
 
   }
 

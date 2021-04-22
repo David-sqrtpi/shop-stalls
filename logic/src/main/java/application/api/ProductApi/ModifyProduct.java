@@ -12,7 +12,7 @@ public class ModifyProduct {
     @Autowired
     ProductRepository productRepository ;
 
-    @PutMapping(/{id})
+    @PutMapping("/{id}")
     public Product add(@RequestBody Product product, @PathVariable int id){
         System.out.println(product.getId());
         productRepository.save(product) ;

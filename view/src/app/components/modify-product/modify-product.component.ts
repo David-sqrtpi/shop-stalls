@@ -26,9 +26,9 @@ export class ModifyProductComponent implements OnInit {
   modifyProduct() {
     console.log(this.buidObject());
 
-    //this.product.modifyProduct(this.buidObject()).subscribe(
-      //response => console.log(response)
-    //)
+    this.product.modifyProduct(this.buidObject()).subscribe(
+      response => console.log(response)
+    )
 
   }
 

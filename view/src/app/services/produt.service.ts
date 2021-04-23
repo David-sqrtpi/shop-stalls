@@ -15,16 +15,20 @@ export class HttpProdutService {
     return this.http.post(URI_API, product, {headers:this.headers, responseType:'text' as 'json'})
   }
 
-  getProductByname(email:string) {
-    return this.http.get(URI_API+'email/'+email, {headers:this.headers});
+  getAllProducts() {
+    return this.http.get(URI_API, {headers:this.headers});
   }
-
+  
   getProductById(id:number) {
     return this.http.get(URI_API+id, {headers:this.headers});
   }
 
   getProduct(){
     return this.http.get(URI_API, {headers:this.headers});
+  }
+
+  modifyProduct(body:object){
+    return this.http.put(URI_API+"1", body, {headers:this.headers});
   }
 
 }

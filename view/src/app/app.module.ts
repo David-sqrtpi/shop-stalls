@@ -36,8 +36,8 @@ import { ModifyServicesComponent } from './components/modify-services/modify-ser
 import { UserListComponent } from './components/user-list/user-list.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { UserDetailComponent } from './components/user-detail/user-detail.component';
-import { ProductListComponent } from './product-list/product-list.component';
-import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { ProductListComponent } from './components/product-list/product-list.component';
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 
 @NgModule({
   declarations: [

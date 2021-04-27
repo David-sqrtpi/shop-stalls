@@ -1,23 +1,34 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthHeadGeneratorService } from './auth-head-generator.service';
-
+const URI_API:string = 'http://localhost:8080/services/';
 @Injectable({
   providedIn: 'root'
 })
-export class ServicesService {
+export class HttpServicesService {
 
-  private url:string = 'http://localhost:8080/services/';
+  private headers = this.header.generateHeader();
 
   constructor(private http:HttpClient, private header:AuthHeadGeneratorService) { }
 
-  addServices(services:object){
-    const headers = this.header.generateHeader();
-    return this.http.post(this.url+'add', services, {headers, responseType:'text' as 'json'})
+  addServices(service:object) {
+    return this.http.post(URI_API, service, {headers:this.headers, responseType:'text' as 'json'})
   }
-  modifyServices(services:object){
-    const headers = this.header.generateHeader();
-    return this.http.put(this.url+'modify', services, {headers, responseType:'text' as 'json'})
+
+  getAllServices() {
+    return this.http.get(URI_API, {headers:this.headers});
+  }
+  
+  getServicesById(id:number) {
+    return this.http.get(URI_API+id, {headers:this.headers});
+  }
+
+  getServices(){
+    return this.http.get(URI_API, {headers:this.headers});
+  }
+
+  modifyProduct(body:object){
+    return this.http.put(URI_API+"1", body, {headers:this.headers});
   }
   
 }

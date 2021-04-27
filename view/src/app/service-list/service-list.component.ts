@@ -1,0 +1,32 @@
+import { Component, OnInit } from '@angular/core';
+import { HttpServicesService } from '../services/services.service';
+
+
+@Component({
+  selector: 'app-service-list',
+  templateUrl: './service-list.component.html',
+  styleUrls: ['./service-list.component.css']
+})
+export class ServiceListComponent implements OnInit {
+  products:any;
+
+  displayedColumns: string[] = ['name', 'price', 'characteristics'];
+
+  constructor (private http:HttpServicesService) {
+
+  }
+
+  ngOnInit(): void {
+    this.http.getAllServices().subscribe(
+      res=>{
+        console.log(res);
+        this.products = res;
+      }
+    );
+  }
+
+  onClick(row:any){
+    console.log(row);
+  }
+
+}

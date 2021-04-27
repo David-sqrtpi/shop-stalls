@@ -1,6 +1,6 @@
 package application.util;
 
-import application.DTO.ServiceDTO;
+import application.DTO.UserDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,7 @@ public interface DtoConverter<E, D> {
         return entities;
     }
 
-    default List<ServiceDTO> fromEntity(List<E> entities) {
+    default List<UserDTO> fromEntity(List<E> entities) {
         if (entities == null) {
             return null;
         }

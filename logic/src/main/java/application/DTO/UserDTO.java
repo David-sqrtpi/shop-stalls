@@ -17,7 +17,7 @@ public class UserDTO {
     private String password;
     private int age;
     private int companyId;
-    private List<Integer> roleIds = new ArrayList<>();
     private String companyName;
+    private List<Integer> roleIds = new ArrayList<>();
     private List<String> roleNames = new ArrayList<>();
 }

@@ -8,57 +8,39 @@ import application.models.Company;
 import application.models.Product;
 import application.models.Role;
 import application.models.User;
+import application.util.DtoConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ProductConverter {
+public class ProductConverter implements DtoConverter<Product, ProductDTO> {
 
-
-    public Product toProductEntity(ProductDTO product){
-
-
-
-        Product productEntity = new Product();
-
-
-        productEntity.setPrice(product.getPrice());
-        productEntity.setQuantity(product.getQuantity());
-        productEntity.setName(product.getName());
-
-
-        return productEntity;
-    }
-
-    public ProductDTO toProductDTO(Product productEntity) {
-
-        ProductDTO product = new ProductDTO();
-
-        product.setId(productEntity.getId());
-        product.setPrice(productEntity.getPrice());
-        product.setName(productEntity.getName());
-        product.setQuantity(productEntity.getQuantity());
-
+    @Override
+    public Product fromDto(ProductDTO dto) {
+        Product product = new Product();
+        product.setPrice(dto.getPrice());
+        product.setQuantity(dto.getQuantity());
+        product.setName(dto.getName());
+        product.setId(dto.getId());
 
         return product;
     }
 
-    //Converts every User Entity into a userDTO using method above
-    public List<ProductDTO> toProductDTOS(List<Product> productEntities) {
+    @Override
+    public ProductDTO fromEntity(Product entity) {
+        ProductDTO productDto = new ProductDTO();
 
-        List<ProductDTO> productDTOS= new ArrayList<>();
+        productDto.setId(entity.getId());
+        productDto.setPrice(entity.getPrice());
+        productDto.setName(entity.getName());
+        productDto.setQuantity(entity.getQuantity());
 
-        for(Product productEntity:productEntities) {
-            productDTOS.add(toProductDTO(productEntity));
-        }
-
-        return productDTOS;
+        return productDto;
     }
 
 }
-//TODO Optimize the code above
 
 
 

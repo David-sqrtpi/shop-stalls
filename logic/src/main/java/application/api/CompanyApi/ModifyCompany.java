@@ -6,21 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("company")
+@RequestMapping("companies")
 @CrossOrigin
 public class ModifyCompany {
 
     @Autowired
-    private CompanyRepository repositoryCompanyService;
+    private CompanyRepository companyRepository;
 
-    @PutMapping("/{id}")
-    public String add(@RequestBody Company company,
-                      @PathVariable int id) {
-
-        company.setId(id);
-        repositoryCompanyService.save(company);
-
-        return "Saved";
+    @PutMapping
+    public void modify(@RequestBody Company company) {
+        companyRepository.save(company);
     }
 
 }

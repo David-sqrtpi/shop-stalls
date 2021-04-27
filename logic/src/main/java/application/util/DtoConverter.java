@@ -1,6 +1,6 @@
 package application.util;
 
-import application.DTO.UserDTO;
+import application.DTO.ProductDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,14 +21,6 @@ public interface DtoConverter<E, D> {
         return entities;
     }
 
-    default List<UserDTO> fromEntity(List<E> entities) {
-        if (entities == null) {
-            return null;
-        }
-        List<D> dtos = new ArrayList<>();
-        for (E entity : entities) {
-            dtos.add(fromEntity(entity));
-        }
-        return dtos;
-    }
+
+
 }

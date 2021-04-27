@@ -19,7 +19,7 @@ public class GetUsersFromCompany {
     private UserConverter userConverter;
 
     @GetMapping
-    public List<UserDTO> getUsers(@PathVariable long id){
+    public List<UserDTO> getUsers(@PathVariable int id){
         System.out.println("id");
         return userConverter.fromEntity(userRepository.findByCompanyId(id));
     }

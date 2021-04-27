@@ -17,7 +17,7 @@ public class GetUser {
     private UserConverter userConverter;
 
     @GetMapping("/{id}")
-    public UserDTO getById(@PathVariable long id) {
+    public UserDTO getById(@PathVariable int id) {
         return userConverter.fromEntity(repositoryUserService.findById(id));
     }
 

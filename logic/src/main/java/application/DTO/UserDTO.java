@@ -18,6 +18,6 @@ public class UserDTO {
     private int age;
     private long companyId;
     private String companyName;
-    private List<Integer> roleIds = new ArrayList<>();
+    private List<Long> roleIds = new ArrayList<>();
     private List<String> roleNames = new ArrayList<>();
 }

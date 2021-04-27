@@ -53,7 +53,7 @@ public class UserConverter implements DtoConverter<User, UserDTO> {
 
         for (Role role : entity.getRoles()) {
             userDto.getRoleNames().add(role.getName());
-            userDto.getRoleIds().add((int) role.getId());
+            userDto.getRoleIds().add(role.getId());
         }
 
         return userDto;

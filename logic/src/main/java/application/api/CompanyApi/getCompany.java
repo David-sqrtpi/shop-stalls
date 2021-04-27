@@ -14,7 +14,7 @@ public class getCompany {
     private CompanyRepository companyRepository;
 
     @GetMapping("/{id}")
-    public Company get(@PathVariable int id){
+    public Company get(@PathVariable long id){
         return companyRepository.findById(id);
     }
 

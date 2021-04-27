@@ -19,8 +19,7 @@ public class GetAllProduct {
 
     @GetMapping
     public List<ProductDTO> getAll() {
-        System.out.println("all");
-        return productConverter.toProductDTOS(ProductRepository.findAll());
+        return productConverter.fromEntity(ProductRepository.findAll());
     }
 
 }

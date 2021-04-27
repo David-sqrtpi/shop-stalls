@@ -2,7 +2,6 @@ package application.api.UserApi;
 
 import application.DTO.UserDTO;
 import application.Repository.UserRepository;
-import application.models.User;
 import application.services.UserConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

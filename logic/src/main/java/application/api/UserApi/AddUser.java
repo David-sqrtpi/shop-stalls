@@ -18,9 +18,7 @@ public class AddUser {
     private UserConverter userConverter;
 
     @PostMapping
-    public void add (@RequestBody UserDTO userDTO){
-
+    public void add(@RequestBody UserDTO userDTO) {
         RepositoryUserService.save(userConverter.fromDto(userDTO));
-
     }
 }

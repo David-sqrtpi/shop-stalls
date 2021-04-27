@@ -18,9 +18,7 @@ public class ModifyUser {
     private UserRepository userRepository;
 
     @PutMapping("users")
-    public void modify (@RequestBody UserDTO userDto){
-
+    public void modify(@RequestBody UserDTO userDto) {
         userRepository.save(userConverter.fromDto(userDto));
-
     }
 }

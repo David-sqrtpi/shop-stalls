@@ -1,11 +1,13 @@
 package application.api.UserApi;
 
 import application.DTO.UserDTO;
-import application.models.User;
 import application.Repository.UserRepository;
 import application.services.UserConverter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -22,7 +24,6 @@ public class GetAllUsers {
 
     @GetMapping
     public List<UserDTO> getAll() {
-        System.out.println("all");
         return userConverter.fromEntity(userRepository.findAll());
     }
 

@@ -13,9 +13,7 @@ public class AddProduct {
     ProductRepository productRepository ;
 
     @PostMapping
-    public Product add(@RequestBody Product product){
-        System.out.println(product.getId());
+    public void add(@RequestBody Product product){
         productRepository.save(product) ;
-        return  product ;
     }
 }

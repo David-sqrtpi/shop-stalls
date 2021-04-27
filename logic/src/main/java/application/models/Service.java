@@ -14,11 +14,11 @@ import javax.persistence.Id;
 @Getter
 @Setter
 @NoArgsConstructor
-@Entity // This tells Hibernate to make a table out of this class
+@Entity
 public class Service {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     private String name_service;
     private String price;
     private String characteristics;

@@ -1,8 +1,8 @@
 package application.services;
 
+import application.DTO.UserDTO;
 import application.Repository.CompanyRepository;
 import application.Repository.RoleRepository;
-import application.DTO.UserDTO;
 import application.models.Company;
 import application.models.Role;
 import application.models.User;
@@ -51,9 +51,9 @@ public class UserConverter implements DtoConverter<User, UserDTO> {
         userDto.setCompanyId(entity.getCompany().getId());
         userDto.setCompanyName(entity.getCompany().getName());
 
-        for(Role role:entity.getRoles()){
+        for (Role role : entity.getRoles()) {
             userDto.getRoleNames().add(role.getName());
-            userDto.getRoleIds().add(role.getId());
+            userDto.getRoleIds().add((int) role.getId());
         }
 
         return userDto;

@@ -13,9 +13,9 @@ public class getCompany {
     @Autowired
     private CompanyRepository companyRepository;
 
-    @GetMapping("/{companyId}")
-    public Company test(@PathVariable int companyId){
-        return companyRepository.findById(companyId);
+    @GetMapping("/{id}")
+    public Company get(@PathVariable int id){
+        return companyRepository.findById(id);
     }
 
 }

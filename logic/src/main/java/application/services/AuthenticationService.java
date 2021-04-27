@@ -14,7 +14,7 @@ public class AuthenticationService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    public void authentication (AuthRequest authRequest){
+    public void authentication(AuthRequest authRequest) {
 
         try {
             authenticationManager.authenticate(

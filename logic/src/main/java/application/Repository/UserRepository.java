@@ -1,14 +1,12 @@
 package application.Repository;
 
-import application.models.Company;
 import application.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
-    User findById(int id);
+    User findById(long id);
     User findByEmail(String username);
     List<User> findByCompanyId(int company);
 }

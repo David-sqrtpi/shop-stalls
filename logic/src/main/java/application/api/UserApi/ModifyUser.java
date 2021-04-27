@@ -1,24 +1,26 @@
 package application.api.UserApi;
 
-import application.models.User;
+import application.DTO.UserDTO;
 import application.Repository.UserRepository;
+import application.services.UserConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("users")
+@RequestMapping
 @CrossOrigin
 public class ModifyUser {
 
     @Autowired
-    private UserRepository RepositoryUserService;
+    private UserConverter userConverter;
 
-    @PutMapping
-    public String add (@RequestBody User user){
+    @Autowired
+    private UserRepository userRepository;
 
-        RepositoryUserService.save(user);
+    @PutMapping("users")
+    public void modify (@RequestBody UserDTO userDto){
 
-        return "Saved";
+        userRepository.save(userConverter.fromDto(userDto));
 
     }
 }

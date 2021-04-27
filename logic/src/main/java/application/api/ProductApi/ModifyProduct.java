@@ -1,7 +1,7 @@
 package application.api.ProductApi;
 
-import application.models.Product;
 import application.Repository.ProductRepository;
+import application.models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,11 +12,8 @@ public class ModifyProduct {
     @Autowired
     ProductRepository productRepository ;
 
-    @PutMapping("/{id}")
-    public Product add(@RequestBody Product product, @PathVariable int id){
-        System.out.println(product.getId());
-        productRepository.save(product) ;
-        return  product ;
-
+    @PutMapping
+    public void modify(@RequestBody Product product){
+        productRepository.save(product);
     }
 }

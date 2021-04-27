@@ -10,13 +10,10 @@ import org.springframework.web.bind.annotation.*;
 public class ModifyService {
     @Autowired
     ServiceRepository servicesRepository;
-    @PutMapping ("modify")
 
-    public Service add (@RequestBody Service services){
-        System.out.println(services.getId());
+    @PutMapping
+    public void modify (@RequestBody Service services){
         servicesRepository.save(services);
-        return  services;
-
     }
 
 }

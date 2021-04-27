@@ -19,11 +19,11 @@ public class GetUser {
 
     @GetMapping("/{id}")
     public UserDTO getById(@PathVariable int id) {
-        return userConverter.toUserDTO(repositoryUserService.findById(id));
+        return userConverter.fromEntity(repositoryUserService.findById(id));
     }
 
     @GetMapping("/email/{email}")
     public UserDTO getByEmail(@PathVariable String email) {
-        return userConverter.toUserDTO(repositoryUserService.findByEmail(email));
+        return userConverter.fromEntity(repositoryUserService.findByEmail(email));
     }
 }

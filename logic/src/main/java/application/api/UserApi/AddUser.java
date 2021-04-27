@@ -18,10 +18,9 @@ public class AddUser {
     private UserConverter userConverter;
 
     @PostMapping
-    public String add (@RequestBody UserDTO user){
+    public void add (@RequestBody UserDTO userDTO){
 
-        RepositoryUserService.save(userConverter.toUserEntity(user));
+        RepositoryUserService.save(userConverter.fromDto(userDTO));
 
-        return "Saved";
     }
 }

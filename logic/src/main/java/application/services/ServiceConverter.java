@@ -1,26 +1,29 @@
 package application.services;
 
-import application.DTO.ProductDTO;
+
 import application.DTO.ServiceDTO;
-import application.models.Product;
 import application.util.DtoConverter;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ServiceConverter implements DtoConverter<Service, ServiceDTO> {
+public class ServiceConverter implements DtoConverter<application.models.Service, ServiceDTO> {
 
 
     @Override
 
-    public Service fromDto(ServiceDTO dto) {
-        Service service = new Service();
-
+    public application.models.Service fromDto(ServiceDTO dto) {
+        application.models.Service service = new application.models.Service();
         service.setPrice(dto.getPrice());
-        service.setcharacteristics(dto.getcharacteristics());
-        service.setName(dto.getName());
+        service.setCharacteristics(dto.getCharacteristics());
+        service.setName_service(dto.getName());
         service.setId(dto.getId());
 
         return service;
+    }
+
+    @Override
+    public ServiceDTO fromEntity(application.models.Service entity) {
+        return null;
     }
 
     @Override
@@ -30,7 +33,7 @@ public class ServiceConverter implements DtoConverter<Service, ServiceDTO> {
         serviceDto.setId(entity.getId());
         serviceDto.setPrice(entity.getPrice());
         serviceDto.setName(entity.getName());
-        serviceDto.setcharacteristics(entity.getcharacteristics());
+        serviceDto.setCharacteristics(entity.getCharacteristics());
 
         return serviceDto;
     }

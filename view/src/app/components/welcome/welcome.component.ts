@@ -15,6 +15,8 @@ export class WelcomeComponent implements OnInit {
   ngOnInit(): void {
     if (localStorage.getItem('userId')) {
       this.name = localStorage.getItem('name');
+      
+      
     }
     else {
       this.http.getUserByEmail(localStorage.getItem("email")).subscribe(

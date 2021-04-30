@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { AuthHeadGeneratorService } from './auth-head-generator.service';
 
-const URI_API:string =  environment.url_backend + "companies";
+const URI_API:string =  environment.url_backend + "companies/";
 
 @Injectable({
   providedIn: 'root'

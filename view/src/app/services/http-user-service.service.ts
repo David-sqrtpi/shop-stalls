@@ -21,7 +21,7 @@ export class HttpUserServiceService {
   }
 
   getUserByEmail(email:string) {
-    return this.http.get(URI_API+'email/'+email, {headers:this.headers});
+    return this.http.get(URI_API+'/email/'+email, {headers:this.headers});
   }
 
   getUserById(id:number) {

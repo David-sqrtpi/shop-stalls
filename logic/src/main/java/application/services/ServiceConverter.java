@@ -15,7 +15,7 @@ public class ServiceConverter implements DtoConverter<application.models.Service
         application.models.Service service = new application.models.Service();
         service.setPrice(dto.getPrice());
         service.setCharacteristics(dto.getCharacteristics());
-        service.setName_service(dto.getName());
+        service.setName(dto.getName());
         service.setId(dto.getId());
 
         return service;
@@ -23,11 +23,6 @@ public class ServiceConverter implements DtoConverter<application.models.Service
 
     @Override
     public ServiceDTO fromEntity(application.models.Service entity) {
-        return null;
-    }
-
-    @Override
-    public ServiceDTO fromEntity(Service entity) {
         ServiceDTO serviceDto = new ServiceDTO();
 
         serviceDto.setId(entity.getId());

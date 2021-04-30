@@ -1,10 +1,8 @@
 package application.api.ServicesApi;
 
 
-import application.DTO.ProductDTO;
 import application.DTO.ServiceDTO;
-import application.models.Service;
-import application.services.ProductConverter;
+import application.services.ServiceConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,13 +16,13 @@ import java.util.List;
 @CrossOrigin
 public class GetAllService {
     @Autowired
-    private ProductConverter serviceConverter;
+    private ServiceConverter serviceConverter;
     @Autowired
-    private application.Repository.ProductRepository ServiceRepository;
+    private application.Repository.ServiceRepository serviceRepository;
 
     @GetMapping
     public List<ServiceDTO> getAll() {
-        return serviceConverter.fromEntity(ServiceRepository.findAll());
+        return serviceConverter.fromEntity(serviceRepository.findAll());
     }
 
     

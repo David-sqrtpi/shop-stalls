@@ -2,6 +2,7 @@ package application.api.UserApi;
 
 import application.DTO.UserDTO;
 import application.Repository.UserRepository;
+import application.models.User;
 import application.services.UserConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,7 @@ public class AddUser {
 
     @PostMapping
     public void add(@RequestBody UserDTO userDTO) {
-        RepositoryUserService.save(userConverter.fromDto(userDTO));
+        User user = userConverter.fromDto(userDTO);
+        RepositoryUserService.save(user);
     }
 }

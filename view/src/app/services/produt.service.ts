@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { AuthHeadGeneratorService } from './auth-head-generator.service';
 
-const URI_API:string =  environment.url_backend + "products";
+const URI_API:string =  environment.url_backend + "products/";
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +31,7 @@ export class HttpProdutService {
   }
 
   modifyProduct(body:object){
-    return this.http.put(URI_API+"1", body, {headers:this.headers});
+    return this.http.put(URI_API, body, {headers:this.headers});
   }
 
 }

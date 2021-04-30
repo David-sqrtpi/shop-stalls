@@ -38,7 +38,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { UserDetailComponent } from './components/user-detail/user-detail.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
-import { ServiceListComponent } from './component/service-list/service-list.component';
+import { ServiceListComponent } from './components/service-list/service-list.component';
 
 @NgModule({
   declarations: [

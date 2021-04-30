@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
-import { HttpClient} from '@angular/common/http';
-import { ServicesService } from 'src/app/services/services.service';
+import { HttpServicesService } from 'src/app/services/http.service';
 
 @Component({
   selector: 'app-add-services',
@@ -15,7 +14,7 @@ export class ModifyServicesComponent implements OnInit {
   price=new FormControl 
   characteristics=new FormControl 
   
-  constructor(private services:ServicesService) { }
+  constructor(private services:HttpServicesService  ) { }
 
   ngOnInit(): void {
   

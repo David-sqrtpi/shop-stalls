@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
-import {FormControl, Validators} from '@angular/forms';
-import { HttpService } from 'src/app/services/http.service';
-
+import { FormControl, Validators } from '@angular/forms';
+import { HttpCompanyService } from 'src/app/services/http-company.service';
 @Component({
   selector: 'app-create-company',
   templateUrl: './create-company.component.html',
@@ -16,7 +15,7 @@ export class CreateCompanyComponent implements OnInit {
   address = new FormControl("");
   phone = new FormControl("");
 
-  constructor(private httpService:HttpService, private httpClient:HttpClient) { }
+  constructor(private httpService:HttpCompanyService, private httpClient:HttpClient) { }
 
   createCompany() {
     let body = {
@@ -26,10 +25,6 @@ export class CreateCompanyComponent implements OnInit {
       address: this.address.value,
       phone: this.phone.value
     }
-    this.httpService.add(body, "company/add").subscribe(
-      //result => console.log("Hola")
-    );
-
   }
 
   getErrorMessage() {

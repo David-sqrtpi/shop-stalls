@@ -1,23 +1,24 @@
 package application.api.ServicesApi;
 
 import application.DTO.ProductDTO;
-import application.Repository.ProductRepository;
-import application.services.ProductConverter;
+import application.DTO.ServiceDTO;
+import application.Repository.ServiceRepository;
+import application.services.ServiceConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/products")
+@RequestMapping("/services")
 public class GetService {
     @Autowired
-    private ProductRepository repositoryServiceService;
+    private ServiceRepository serviceRepository;
 
     @Autowired
-    private ProductConverter serviceConverter;
+    private ServiceConverter serviceConverter;
 
     @GetMapping("/{id}")
-    public ProductDTO get(@PathVariable long id) {
-        return serviceConverter.fromEntity(repositoryServiceService.findById(id));
+    public ServiceDTO get(@PathVariable long id) {
+        return serviceConverter.fromEntity(serviceRepository.findById(id));
     }
 }

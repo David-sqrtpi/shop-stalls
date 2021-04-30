@@ -8,7 +8,8 @@ import { HttpServicesService } from '../../services/http.service';
   styleUrls: ['./service-list.component.css']
 })
 export class ServiceListComponent implements OnInit {
-  products:any;
+
+  services:any;
 
   displayedColumns: string[] = ['name', 'price', 'characteristics'];
 
@@ -20,7 +21,7 @@ export class ServiceListComponent implements OnInit {
     this.http.getAllServices().subscribe(
       res=>{
         console.log(res);
-        this.products = res;
+        this.services = res;
       }
     );
   }

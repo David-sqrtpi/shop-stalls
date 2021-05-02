@@ -17,7 +17,7 @@ export class HttpUserServiceService {
   constructor(private http:HttpClient, private header:AuthHeadGeneratorService) { }
 
   addUser(user:object) {
-    return this.http.post(URI_API, user, {headers:this.headers, responseType:'text' as 'json'})
+    return this.http.post(URI_API, user, {headers:this.headers})
   }
 
   getUserByEmail(email:string) {

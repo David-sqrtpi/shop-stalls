@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpInvoiceService } from 'src/app/services/http-invoice.service';
 
 @Component({
   selector: 'app-invoice-detail',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InvoiceDetailComponent implements OnInit {
 
-  constructor() { }
+  constructor(private http:HttpInvoiceService) { }
 
   ngOnInit(): void {
+  }
+
+  addProduct() {
+    this.http.add().subscribe(
+      res=>{
+        console.log("Product added");
+      },
+      err=>{
+        console.log(err);
+      }
+    )
   }
 
 }

@@ -16,6 +16,8 @@ import { UserDetailComponent } from "./components/user-detail/user-detail.compon
 import { ProductListComponent } from "./components/product-list/product-list.component";
 import { ProductDetailComponent } from "./components/product-detail/product-detail.component";
 import { ServiceListComponent } from "./components/service-list/service-list.component";
+import { InvoiceComponent } from "./components/invoice/invoice.component";
+import { InvoiceDetailComponent } from "./components/invoice-detail/invoice-detail.component";
 
 
 const appRoutes = [
@@ -30,6 +32,8 @@ const appRoutes = [
     {path:'users', component: UserListComponent, canActivate:[AuthGuard]},
     {path:'products', component: ProductListComponent, canActivate:[AuthGuard]},
     {path:'services', component: ServiceListComponent, canActivate:[AuthGuard]},
+    {path:'invoices', component: InvoiceComponent, canActivate:[AuthGuard]},
+    {path:'invoices/:id', component: InvoiceDetailComponent, canActivate:[AuthGuard]},
     {path:'products/:id', component: ProductDetailComponent, canActivate:[AuthGuard]},
     {path:'users/:id', component: UserDetailComponent, canActivate:[AuthGuard]},
     {path:'**', component: NotFoundComponent},

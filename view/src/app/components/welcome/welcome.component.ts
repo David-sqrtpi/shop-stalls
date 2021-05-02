@@ -32,8 +32,4 @@ export class WelcomeComponent implements OnInit {
     }
   }
 
-  logOut(): void {
-    localStorage.clear();
-  }
-
 }

@@ -39,6 +39,8 @@ import { UserDetailComponent } from './components/user-detail/user-detail.compon
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { ServiceListComponent } from './components/service-list/service-list.component';
+import { InvoiceComponent } from './components/invoice/invoice.component';
+import { InvoiceDetailComponent } from './components/invoice-detail/invoice-detail.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +64,8 @@ import { ServiceListComponent } from './components/service-list/service-list.com
     ProductListComponent,
     ProductDetailComponent,
     ServiceListComponent,
+    InvoiceComponent,
+    InvoiceDetailComponent,
   
   ],
   imports: [

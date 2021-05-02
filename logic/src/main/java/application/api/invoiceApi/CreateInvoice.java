@@ -15,7 +15,7 @@ public class CreateInvoice {
     @Autowired
     private InvoiceRepository invoiceRepository;
 
-    @PostMapping("invoices")
+    @PostMapping("/invoices")
     public void create() {
         invoiceRepository.save(new Invoice());
     }

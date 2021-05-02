@@ -15,6 +15,6 @@ public class AddProductToInvoice {
     @PutMapping("invoices/{invoice}")
     public void addProduct(@PathVariable long invoice,
                            @RequestParam long product) {
-        productItemService.create(cart, product);
+        productItemService.create(invoice, product);
     }
 }

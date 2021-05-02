@@ -2,8 +2,7 @@ package application.api.ProductApi;
 
 import application.DTO.ProductDTO;
 import application.Repository.ProductRepository;
-import application.models.Product;
-import application.services.ProductConverter;
+import application.util.ProductConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

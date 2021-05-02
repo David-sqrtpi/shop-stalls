@@ -1,4 +1,4 @@
-package application.services;
+package application.util;
 
 import application.DTO.ProductDTO;
 import application.models.Product;

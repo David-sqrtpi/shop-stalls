@@ -2,7 +2,7 @@ package application.api.ServicesApi;
 
 
 import application.DTO.ServiceDTO;
-import application.services.ServiceConverter;
+import application.util.ServiceConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,9 +1,8 @@
 package application.api.ServicesApi;
 
-import application.DTO.ProductDTO;
 import application.DTO.ServiceDTO;
 import application.Repository.ServiceRepository;
-import application.services.ServiceConverter;
+import application.util.ServiceConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

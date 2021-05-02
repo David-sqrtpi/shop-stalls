@@ -12,8 +12,8 @@ public class AddProductToInvoice {
     @Autowired
     private ProductItemService productItemService;
 
-    @PutMapping("invoices/{id}")
-    public void addProduct(@PathVariable long cart,
+    @PutMapping("invoices/{invoice}")
+    public void addProduct(@PathVariable long invoice,
                            @RequestParam long product) {
         productItemService.create(cart, product);
     }

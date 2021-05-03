@@ -5,7 +5,6 @@ import application.models.Invoice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin
@@ -16,7 +15,7 @@ public class CreateInvoice {
     private InvoiceRepository invoiceRepository;
 
     @PostMapping("/invoices")
-    public void create() {
-        invoiceRepository.save(new Invoice());
+    public Invoice create() {
+        return invoiceRepository.save(new Invoice());
     }
 }

@@ -19,7 +19,7 @@ export class HttpInvoiceService {
   }
 
   add() {
-    return this.http.put(`${URI_API}/10?product=3`, null, {headers:this.headers});
+    return this.http.put(`${URI_API}/10/product?product=3&quantity=1`, null, {headers:this.headers});
   }
 
 }

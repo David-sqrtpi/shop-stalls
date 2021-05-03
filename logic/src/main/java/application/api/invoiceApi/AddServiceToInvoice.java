@@ -11,7 +11,7 @@ public class AddServiceToInvoice {
     @Autowired
     private ServiceItemService serviceItemService;
 
-    @PutMapping("invoices/{invoice}")
+    @PutMapping("invoices/{invoice}/service")
     public void addService(@PathVariable long invoice,
                            @RequestParam long service,
                            @RequestParam int quantity) {

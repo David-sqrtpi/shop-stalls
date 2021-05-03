@@ -21,11 +21,11 @@ public class ProductItemService {
     @Autowired
     private ProductItemRepository productItemRepository;
 
-    public void create(long cart, long product) {
-        Invoice invoice = invoiceRepository.findById(cart);
-        Product product1 = productRepository.findById(product);
+    public void create(long invoiceId, long productId, int quantity) {
+        Invoice invoice = invoiceRepository.findById(invoiceId);
+        Product product = productRepository.findById(productId);
 
-        ProductItem productItem = new ProductItem(-1, invoice, product1, 1, 0);
+        ProductItem productItem = new ProductItem(invoice, product, quantity);
 
         productItemRepository.save(productItem);
     }

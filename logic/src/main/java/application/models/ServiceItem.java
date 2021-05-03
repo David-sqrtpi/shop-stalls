@@ -19,6 +19,13 @@ public class ServiceItem {
     private Invoice invoice;
     @ManyToOne
     private Service service;
-    private long quantity;
+    private int quantity;
     private long subtotal;
+
+    public ServiceItem(Invoice invoice, Service service, int quantity) {
+        this.invoice = invoice;
+        this.service = service;
+        this.quantity = quantity;
+        this.subtotal = service.getPrice() * quantity;
+    }
 }

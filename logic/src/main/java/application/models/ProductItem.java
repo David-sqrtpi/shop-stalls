@@ -19,6 +19,13 @@ public class ProductItem {
     private Invoice invoice;
     @ManyToOne
     private Product product;
-    private long quantity;
+    private int quantity;
     private long subtotal;
+
+    public ProductItem(Invoice invoice, Product product, int quantity) {
+        this.invoice = invoice;
+        this.product = product;
+        this.quantity = quantity;
+        this.subtotal = product.getPrice() * quantity;
+    }
 }

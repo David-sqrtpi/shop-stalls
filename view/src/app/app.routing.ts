@@ -23,22 +23,23 @@ import { ItemServiceComponent } from "./components/item-service/item-service.com
 
 
 const appRoutes = [
-    {path:'login', component: LogInComponent, canActivate:[NegateUserLoggedGuard]},
     {path:'', component: HomeComponent, canActivate:[NegateUserLoggedGuard]},
-    {path:'products/create', component: AddProductComponent, canActivate:[AuthGuard]},
-    {path:'users/create', component: CreateUserComponent, canActivate:[AuthGuard]},
-    {path:'services/create', component: AddServicesComponent, canActivate:[AuthGuard]},
-    {path:'products/modify', component: ModifyProductComponent, canActivate:[AuthGuard]},
-    {path:'services/modify', component: ModifyServicesComponent, canActivate:[AuthGuard]},
+    {path:'login', component: LogInComponent, canActivate:[NegateUserLoggedGuard]},
     {path:'welcome', component: WelcomeComponent, canActivate:[AuthGuard]},
-    {path:'users', component: UserListComponent, canActivate:[AuthGuard]},
+    {path:'products/create', component: AddProductComponent, canActivate:[AuthGuard]},
+    {path:'products/modify', component: ModifyProductComponent, canActivate:[AuthGuard]},
     {path:'products', component: ProductListComponent, canActivate:[AuthGuard]},
+    {path:'products/:id', component: ProductDetailComponent, canActivate:[AuthGuard]},
+    {path:'users', component: UserListComponent, canActivate:[AuthGuard]},
+    {path:'users/create', component: CreateUserComponent, canActivate:[AuthGuard]},
+    {path:'users/:id', component: UserDetailComponent, canActivate:[AuthGuard]},
     {path:'services', component: ServiceListComponent, canActivate:[AuthGuard]},
+    {path:'services/create', component: AddServicesComponent, canActivate:[AuthGuard]},
+    {path:'services/modify', component: ModifyServicesComponent, canActivate:[AuthGuard]},
     {path:'invoices', component: InvoiceComponent, canActivate:[AuthGuard]},
     {path:'invoices/:id', component: InvoiceDetailComponent, canActivate:[AuthGuard]},
     {path:'invoices/:id/product', component: ItemProductComponent, canActivate:[AuthGuard]},
-    {path:'products/:id/service', component: ItemServiceComponent, canActivate:[AuthGuard]},
-    {path:'users/:id', component: UserDetailComponent, canActivate:[AuthGuard]},
+    {path:'invoices/:id/service', component: ItemServiceComponent, canActivate:[AuthGuard]},
     {path:'**', component: NotFoundComponent},
 ]
 

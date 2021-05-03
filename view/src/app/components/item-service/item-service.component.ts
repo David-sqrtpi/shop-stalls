@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpInvoiceService } from 'src/app/services/http-invoice.service';
 
 @Component({
   selector: 'app-item-service',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ItemServiceComponent implements OnInit {
 
-  constructor() { }
+  constructor(private http:HttpInvoiceService) { }
 
   ngOnInit(): void {
+  }
+
+  addService() {
+
   }
 
 }

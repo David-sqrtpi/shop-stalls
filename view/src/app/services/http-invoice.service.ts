@@ -18,8 +18,8 @@ export class HttpInvoiceService {
     return this.http.post(URI_API, null, {headers:this.headers});
   }
 
-  add() {
-    return this.http.put(`${URI_API}/10/product?product=3&quantity=1`, null, {headers:this.headers});
+  addProduct(invoice:number, product:number, quantity:number) {
+    return this.http.put(`${URI_API}/${invoice}/product?product=${product}&quantity=${quantity}`, null, {headers:this.headers});
   }
 
 }

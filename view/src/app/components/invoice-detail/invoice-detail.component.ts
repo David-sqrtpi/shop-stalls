@@ -13,15 +13,4 @@ export class InvoiceDetailComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  addProduct() {
-    this.http.add().subscribe(
-      res=>{
-        console.log("Product added");
-      },
-      err=>{
-        console.log(err);
-      }
-    )
-  }
-
 }

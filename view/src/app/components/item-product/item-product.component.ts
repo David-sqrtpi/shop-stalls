@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { HttpInvoiceService } from 'src/app/services/http-invoice.service';
 
 @Component({
@@ -7,14 +9,21 @@ import { HttpInvoiceService } from 'src/app/services/http-invoice.service';
   styleUrls: ['./item-product.component.css']
 })
 export class ItemProductComponent implements OnInit {
+  
+  itemForm = this.fb.group({
+    id: ['', Validators.required],
+    quantity: ['', Validators.required]
+  });
 
-  constructor(private http:HttpInvoiceService) { }
+  constructor(private http:HttpInvoiceService,
+    private router:ActivatedRoute,
+    private fb:FormBuilder) { }
 
   ngOnInit(): void {
   }
 
-  addProduct() {
-    this.http.addProduct(10, 3, 4).subscribe(
+  onSubmit() {
+    this.http.addProduct(this.router.snapshot.params['id'], this.itemForm.get('id').value, this.itemForm.get('quantity').value).subscribe(
       res=>{
         console.log(res);
       },

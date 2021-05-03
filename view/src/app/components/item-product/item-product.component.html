@@ -1,1 +1,19 @@
-<button mat-raised-button routerLink='product' (click)='addProduct()'>Añadir producto</button>
+<form [formGroup]='itemForm' (ngSubmit)='onSubmit()' *ngIf='itemForm'>
+    <p>
+        <mat-form-field appearance="outline" hideRequiredMarker>
+            <mat-label>ID</mat-label>
+            <input matInput required formControlName='id' type="number">
+            <mat-error *ngIf="itemForm.invalid">Campo requerido</mat-error>
+        </mat-form-field>
+    </p>
+
+    <p>
+        <mat-form-field appearance="outline" hideRequiredMarker>
+            <mat-label>Cantidad</mat-label>
+            <input matInput required formControlName="quantity" type="number">
+            <mat-error *ngIf="itemForm.invalid">Campo requerido</mat-error>
+        </mat-form-field>
+    </p>
+
+    <button mat-raised-button type="submit" [disabled]='itemForm.invalid'>Añadir</button>
+</form>

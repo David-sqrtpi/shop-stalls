@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormArray, FormBuilder } from "@angular/forms";
+import { Validators, FormArray, FormBuilder } from "@angular/forms";
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpUserServiceService } from 'src/app/services/http-user-service.service';
 
@@ -26,7 +26,9 @@ export class CreateUserComponent implements OnInit {
   waiting: boolean = false;
   response: string = null;
 
-  constructor(private httpUser: HttpUserServiceService, private snackBar:MatSnackBar, private fb: FormBuilder) { }
+  constructor(private httpUser:HttpUserServiceService,
+    private snackBar:MatSnackBar,
+    private fb: FormBuilder) { }
 
   ngOnInit(): void {
   }

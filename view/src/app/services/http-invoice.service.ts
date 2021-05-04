@@ -26,4 +26,9 @@ export class HttpInvoiceService {
     return this.http.get(`${URI_API}/${invoice}`, {headers:this.headers});
   }
 
+
+  getInvoiceItems(invoice:number) {
+    return this.http.get(`${URI_API}/${invoice}/items`, {headers:this.headers});
+  }
+
 }

@@ -7,21 +7,32 @@ import { HttpInvoiceService } from 'src/app/services/http-invoice.service';
   templateUrl: './invoice-detail.component.html',
   styleUrls: ['./invoice-detail.component.css']
 })
+
 export class InvoiceDetailComponent implements OnInit {
 
+  invoiceId:number = this.router.snapshot.params['id'];
   invoice: object;
-
+  items:object;
+  
   constructor(private http: HttpInvoiceService, private router: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.http.getInvoice(this.router.snapshot.params['id']).subscribe(
+    this.http.getInvoice(this.invoiceId).subscribe(
       res => {
         this.invoice = res;
       },
       err => {
         console.log(err);
       }
-    )
-  }
+    );
 
+    this.http.getInvoiceItems(this.invoiceId).subscribe(
+      res => {
+        this.items = res;
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
 }

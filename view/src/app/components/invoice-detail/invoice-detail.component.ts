@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { HttpInvoiceService } from 'src/app/services/http-invoice.service';
 
 @Component({
@@ -8,9 +9,19 @@ import { HttpInvoiceService } from 'src/app/services/http-invoice.service';
 })
 export class InvoiceDetailComponent implements OnInit {
 
-  constructor(private http:HttpInvoiceService) { }
+  invoice: object;
+
+  constructor(private http: HttpInvoiceService, private router: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.http.getInvoice(this.router.snapshot.params['id']).subscribe(
+      res => {
+        this.invoice = res;
+      },
+      err => {
+        console.log(err);
+      }
+    )
   }
 
 }

@@ -1,4 +1,8 @@
-.loginForm {
+.login-form {
     margin-top: 20px;
     margin-left: 20px;
+}
+
+.mat-form-field {
+    width: 230px;
 }

@@ -2,7 +2,7 @@
     <h2>Inicio de Sesión</h2>
 </div>
 
-<form [formGroup]='loginForm' (ngSubmit)='loginForm.valid? logIn():null' class="loginForm">
+<form [formGroup]='loginForm' (ngSubmit)='loginForm.valid? logIn():null' class="login-form">
     <p>
         <mat-form-field appearance="outline" hideRequiredMarker>
             <mat-label>Correo electrónico</mat-label>
@@ -30,5 +30,5 @@
 <mat-spinner *ngIf='waiting' diameter='50'></mat-spinner>
 
 <div *ngIf="result">
-    {{result | json}}
+    Inicio de sesión fallido
 </div>

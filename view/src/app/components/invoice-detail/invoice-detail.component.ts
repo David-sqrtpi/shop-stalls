@@ -11,7 +11,7 @@ import { HttpInvoiceService } from 'src/app/services/http-invoice.service';
 export class InvoiceDetailComponent implements OnInit {
 
   invoiceId:number = this.router.snapshot.params['id'];
-  invoice: object;
+  invoice: object = null;
   items:object;
   displayedColumns: string[] = ['product', 'quantity', 'price', 'subtotal'];
 
@@ -22,6 +22,8 @@ export class InvoiceDetailComponent implements OnInit {
     this.http.getInvoice(this.invoiceId).subscribe(
       res => {
         this.invoice = res;
+        console.log(res);
+        
       },
       err => {
         console.log(err);

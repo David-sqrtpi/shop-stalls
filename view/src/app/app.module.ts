@@ -16,6 +16,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
 
 //My Components
 import { HomeComponent } from './components/home/home.component';
@@ -43,6 +44,7 @@ import { InvoiceComponent } from './components/invoice/invoice.component';
 import { InvoiceDetailComponent } from './components/invoice-detail/invoice-detail.component';
 import { ItemProductComponent } from './components/item-product/item-product.component';
 import { ItemServiceComponent } from './components/item-service/item-service.component';
+import { ClientNameFormComponent } from './components/client-name-form/client-name-form.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +72,7 @@ import { ItemServiceComponent } from './components/item-service/item-service.com
     InvoiceDetailComponent,
     ItemProductComponent,
     ItemServiceComponent,
+    ClientNameFormComponent,
   
   ],
   imports: [
@@ -87,7 +90,8 @@ import { ItemServiceComponent } from './components/item-service/item-service.com
     MatTableModule,
     MatToolbarModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

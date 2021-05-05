@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { HttpInvoiceService } from 'src/app/services/http-invoice.service';
 import { HttpUserServiceService } from 'src/app/services/http-user-service.service';
+import { ClientNameFormComponent } from '../client-name-form/client-name-form.component';
 
 @Component({
   selector: 'app-welcome',
@@ -13,13 +15,12 @@ export class WelcomeComponent implements OnInit {
   name = null;
 
   constructor(private http: HttpUserServiceService,
-    private httpInvoice:HttpInvoiceService,
-    private router:Router) { }
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
     if (localStorage.getItem('userId')) {
       this.name = localStorage.getItem('name');
-      
+
     }
     else {
       this.http.getUserByEmail(localStorage.getItem("email")).subscribe(
@@ -35,16 +36,11 @@ export class WelcomeComponent implements OnInit {
     }
   }
 
-  createInvoice(){
-    this.httpInvoice.create().subscribe(
-      res => {
-        console.log(res);
-        this.router.navigate([`invoices/${res["id"]}`]);
-      },
-      err => {
-        console.log(err);
-      }
-    )
+  openDialog() {
+    const dialogRef = this.dialog.open(ClientNameFormComponent, {
+      height: '200px',
+      width: '300px',
+    });
   }
 
 }

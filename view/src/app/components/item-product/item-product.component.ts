@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { HttpInvoiceService } from 'src/app/services/http-invoice.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-item-product',
@@ -10,6 +11,8 @@ import { HttpInvoiceService } from 'src/app/services/http-invoice.service';
 })
 export class ItemProductComponent implements OnInit {
   
+  waiting:boolean = false;
+
   itemForm = this.fb.group({
     id: ['', Validators.required],
     quantity: ['', Validators.required]
@@ -17,17 +20,22 @@ export class ItemProductComponent implements OnInit {
 
   constructor(private http:HttpInvoiceService,
     private router:ActivatedRoute,
-    private fb:FormBuilder) { }
+    private fb:FormBuilder,
+    private location:Location) { }
 
   ngOnInit(): void {
   }
 
   onSubmit() {
+    this.waiting = true;
     this.http.addProduct(this.router.snapshot.params['id'], this.itemForm.get('id').value, this.itemForm.get('quantity').value).subscribe(
       res=>{
+        this.waiting = false;
         console.log(res);
+        this.location.back();
       },
       err=>{
+        this.waiting = false;
         console.log(err);
       }
     )

@@ -18,14 +18,13 @@ export class ClientNameFormComponent implements OnInit {
 
   constructor(private httpInvoice:HttpInvoiceService,
     private router:Router,
-    private fb:FormBuilder,
-    private dialog:MatDialog) { }
+    private fb:FormBuilder) { }
 
   ngOnInit(): void {
   }
 
   onSubmit() {
-    this.httpInvoice.create(this.invoice).subscribe(
+    this.httpInvoice.create(this.invoice.value).subscribe(
       res => {
         console.log(res);
         this.router.navigate([`invoices/${res["id"]}`]);

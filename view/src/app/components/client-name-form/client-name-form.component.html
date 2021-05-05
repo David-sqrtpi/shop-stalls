@@ -3,8 +3,8 @@
         <mat-form-field appearance="outline" hideRequiredMarker>
             <mat-label>Nombre del cliente</mat-label>
                 <input matInput required formControlName='clientName' type="text">
-                <mat-error *ngIf='client.invalid'>Campo requerido</mat-error>
+                <mat-error *ngIf='invoice.invalid'>Campo requerido</mat-error>
         </mat-form-field>
     </p>
-    <button mat-raised-button type="submit" [disabled]='client.invalid'>Continuar</button>
+    <button mat-raised-button type="submit" [disabled]='invoice.invalid'>Continuar</button>
 </form>

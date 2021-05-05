@@ -13,6 +13,8 @@ export class InvoiceDetailComponent implements OnInit {
   invoiceId:number = this.router.snapshot.params['id'];
   invoice: object;
   items:object;
+  displayedColumns: string[] = ['product', 'quantity', 'price', 'subtotal'];
+
   
   constructor(private http: HttpInvoiceService, private router: ActivatedRoute) { }
 

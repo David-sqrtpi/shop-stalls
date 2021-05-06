@@ -1,6 +1,8 @@
 package application.api.ServicesApi;
 
 import application.Repository.ServiceRepository;
+import application.enums.State;
+import application.models.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,6 +18,8 @@ public class DeleteService {
 
     @DeleteMapping("services/{service}")
     public void delete(@PathVariable long service) {
-        serviceRepository.deleteById(service);
+        Service service1 = serviceRepository.findById(service);
+        service1.setState(State.NOT_AVAILABLE);
+        serviceRepository.save(service1);
     }
 }

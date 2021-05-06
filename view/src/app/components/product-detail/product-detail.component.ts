@@ -9,7 +9,8 @@ import { HttpProdutService } from '../../services/produt.service';
 })
 export class ProductDetailComponent implements OnInit {
 
-  private id:number = this.route.snapshot.params['id'];  
+  public product:object = null;
+  private id:number = this.route.snapshot.params['id'];
 
   constructor(private http:HttpProdutService, private route:ActivatedRoute) { }
 
@@ -20,6 +21,7 @@ export class ProductDetailComponent implements OnInit {
   getProduct() {
     this.http.getProductById(this.id).subscribe(
       res=>{
+        this.product = res;
         console.log(res);
       },
       err=>{

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { HttpProdutService } from '../../services/produt.service';
 
 @Component({
@@ -12,7 +13,8 @@ export class ProductListComponent implements OnInit {
 
   displayedColumns: string[] = ['name', 'price', 'quantity'];
 
-  constructor (private http:HttpProdutService) {
+  constructor (private http:HttpProdutService,
+    private router:Router) {
 
   }
 
@@ -26,6 +28,7 @@ export class ProductListComponent implements OnInit {
   }
 
   onClick(row:any){
+    this.router.navigate([`products/${row['id']}`]);
     console.log(row);
   }
 

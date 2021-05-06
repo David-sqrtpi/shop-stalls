@@ -45,6 +45,7 @@ import { InvoiceDetailComponent } from './components/invoice-detail/invoice-deta
 import { ItemProductComponent } from './components/item-product/item-product.component';
 import { ItemServiceComponent } from './components/item-service/item-service.component';
 import { ClientNameFormComponent } from './components/client-name-form/client-name-form.component';
+import { SupplyComponent } from './components/supply/supply.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { ClientNameFormComponent } from './components/client-name-form/client-na
     ItemProductComponent,
     ItemServiceComponent,
     ClientNameFormComponent,
+    SupplyComponent,
   
   ],
   imports: [

@@ -25,5 +25,6 @@ public class Product {
     private String name;
     private int quantity;
     private long price;
+    @Enumerated(value = EnumType.STRING)
     private State state = State.AVAILABLE;
 }

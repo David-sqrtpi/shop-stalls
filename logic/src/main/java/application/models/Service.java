@@ -17,10 +17,9 @@ public class Service {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
     @ManyToOne
     private Company company;
-
+    @Enumerated(value = EnumType.STRING)
     private State state = State.AVAILABLE;
     private String name;
     private long price;

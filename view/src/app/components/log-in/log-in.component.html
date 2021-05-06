@@ -29,6 +29,6 @@
 
 <mat-spinner *ngIf='waiting' diameter='50'></mat-spinner>
 
-<div *ngIf="result">
+<mat-error *ngIf="result">
     Inicio de sesión fallido
-</div>
+</mat-error>

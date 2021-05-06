@@ -32,8 +32,9 @@ export class LogInComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public logIn() {  
+  public logIn() {
     this.waiting = true;
+    this.result = null;
     this.Jwt.generateToken(this.loginForm.value).subscribe(
       token => {
         this.waiting = false;

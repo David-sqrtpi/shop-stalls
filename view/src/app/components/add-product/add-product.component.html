@@ -1,23 +1,33 @@
 <h2>Registro de Producto</h2>
-<form method="post" class="register_form">
+<form [formGroup]='productForm' class="register_form" (ngSubmit)="createProduct()">
+  <p>
+    <mat-form-field appearance="outline" hideRequiredMarker>
+      <mat-label>Código</mat-label>
+      <input matInput required formControlName="id" type="number">
+      <mat-error *ngIf='productForm.invalid'>Campo requerido</mat-error>
+    </mat-form-field>
+  </p>
   <p>
     <mat-form-field appearance="outline" hideRequiredMarker>
       <mat-label>Nombre</mat-label>
-      <input matInput required [formControl]="name">
+      <input matInput required formControlName="name" type="text">
+      <mat-error *ngIf='productForm.invalid'>Campo requerido</mat-error>
     </mat-form-field>
   </p>
   <p>
     <mat-form-field appearance="outline" hideRequiredMarker>
       <mat-label>Precio</mat-label>
-      <input matInput required [formControl]="price" type="number">
+      <input matInput required formControlName="price" type="number">
+      <mat-error *ngIf='productForm.invalid'>Campo requerido</mat-error>
     </mat-form-field>
   </p>
   <p>
     <mat-form-field appearance="outline" hideRequiredMarker>
       <mat-label>Cantidad</mat-label>
-      <input matInput required [formControl]="quantity" type="number">
+      <input matInput required formControlName="quantity" type="number">
+      <mat-error *ngIf='productForm.invalid'>Campo requerido</mat-error>
     </mat-form-field>
   </p>
-  <button mat-raised-button type="submit" (click)="createProduct()"
-    [disabled]="name.invalid || price.invalid ||quantity.invalid">Registrar</button>
+  <button mat-raised-button type="submit"
+    [disabled]="productForm.invalid">Registrar</button>
 </form>

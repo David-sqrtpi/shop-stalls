@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
-import { HttpClient} from '@angular/common/http';
+import { FormBuilder, Validators } from '@angular/forms';
 import { HttpProdutService } from 'src/app/services/produt.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
@@ -9,32 +9,33 @@ import { HttpProdutService } from 'src/app/services/produt.service';
 })
 export class AddProductComponent implements OnInit {
 
-  
-  name= new FormControl 
-  price= new FormControl 
-  quantity= new FormControl 
- 
-  constructor(private product:HttpProdutService) { }
+
+  productForm = this.fb.group({
+    id: ['', Validators.required],
+    name: ['', Validators.required],
+    price: ['', Validators.required],
+    quantity: ['', Validators.required],
+    company: [+localStorage.getItem('company')]
+  });
+
+  constructor(private product: HttpProdutService,
+    private fb: FormBuilder,
+    private snack: MatSnackBar) { }
 
   ngOnInit(): void {
   }
-  
-  createProduct(){
-    console.log(this.buidObject());
-    
-   this.product.addProduct(this.buidObject()).subscribe(
-     response => console.log(response)
-   )
+
+  createProduct() {
+    this.product.addProduct(this.productForm.value).subscribe(
+      () => this.openSnackBar("Producto añadido"),
+      err => console.log(err)
+    )
   }
 
-  buidObject(){
-    return {
-      product_type_id:1,
-      name:this.name.value,
-      price:this.price.value,
-      quantity:this.quantity.value
-
-    }
+  openSnackBar(message: string) {
+    this.snack.open(message, null, {
+      duration: 3000,
+    });
+    window.location.reload();
   }
-
 }

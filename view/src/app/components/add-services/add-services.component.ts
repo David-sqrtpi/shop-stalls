@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
-import { HttpClient} from '@angular/common/http';
+import { FormBuilder, Validators } from '@angular/forms';
 import { HttpServicesService } from 'src/app/services/http.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-services',
@@ -10,32 +10,31 @@ import { HttpServicesService } from 'src/app/services/http.service';
 })
 export class AddServicesComponent implements OnInit {
 
-  name_service=new FormControl 
-  price=new FormControl 
-  characteristics=new FormControl 
-  
-  constructor(private services:HttpServicesService) { }
+  serviceForm = this.fb.group({
+    id: ['', Validators.required],
+    name: ['', Validators.required],
+    price: ['', Validators.required],
+    characteristics: ['', Validators.required],
+  });
+
+  constructor(private services: HttpServicesService,
+    private fb: FormBuilder,
+    private snack:MatSnackBar) { }
 
   ngOnInit(): void {
-  
   }
 
-    createService() {
-      console.log(this.buidObject());
-    
-   this.services.addServices(this.buidObject()).subscribe(
-     response => console.log(response)
-   )
-
-   }
-
-    buidObject(){
-      return {
-        
-        name_service:this.name_service.value,
-        price:this.price.value,
-        characteristics:this.characteristics.value,
-  
-      }
-    }
+  createService() {
+    this.services.addServices(this.serviceForm.value).subscribe(
+      () => this.openSnackBar("Servicio añadido"),
+      err => console.log(err)
+    )
   }
+
+  openSnackBar(message: string) {
+    this.snack.open(message, null, {
+      duration: 3000,
+    });
+    window.location.reload();
+  }
+}

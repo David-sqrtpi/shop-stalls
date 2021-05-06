@@ -14,12 +14,7 @@ export class CreateUserComponent implements OnInit {
     name: ['', Validators.required],
     email: ['', [Validators.email, Validators.required]],
     password: ['', [Validators.minLength(8), Validators.pattern(/^[^ñ^Ñ]+$/)]],
-    companyId:[+localStorage.getItem('company')],
-    roles: this.fb.array([
-      this.fb.control({
-        //id:['']//
-      })
-    ])
+    companyId:[+localStorage.getItem('company')]
   })
 
   hidePass:boolean = true;
@@ -34,18 +29,12 @@ export class CreateUserComponent implements OnInit {
   }
 
   createUser() {
-
     this.waiting = true;
     this.response = null;
-
-    console.log(this.userForm.value);
-    
-
     this.httpUser.addUser(this.userForm.value).subscribe(
-      response => {
+      () => {
         this.waiting = false;
-        console.log(response);
-        this.openSnackBar('Usuario Creado', "");
+        this.openSnackBar('Usuario Creado');
       },
       err => {
         console.log(err);
@@ -55,10 +44,11 @@ export class CreateUserComponent implements OnInit {
     )
   }
 
-  openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
+  openSnackBar(message: string) {
+    this.snackBar.open(message, null, {
       duration: 3000,
     });
+    window.location.reload();
   }
   
   get name() {
@@ -72,14 +62,4 @@ export class CreateUserComponent implements OnInit {
   get password() {
     return this.userForm.get('password');
   }
-
-  get roles() {
-    return this.userForm.get('roles') as FormArray;
-  }
-
-  addRole(value) {
-    this.roles.clear();
-    this.roles.push(this.fb.control(value));
-  }
-
 }

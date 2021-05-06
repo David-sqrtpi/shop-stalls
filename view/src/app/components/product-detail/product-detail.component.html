@@ -1,5 +1,5 @@
 <pre *ngIf='product'>
     {{product | json}}
 </pre>
-<button mat-raised-button>Eliminar</button>
+<button mat-raised-button (click)='deleteProduct()'>Eliminar</button>
 <button mat-raised-button>Modificar</button>

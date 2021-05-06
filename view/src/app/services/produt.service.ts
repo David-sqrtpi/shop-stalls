@@ -9,7 +9,6 @@ const URI_API:string =  environment.url_backend + "products/";
   providedIn: 'root'
 })
 export class HttpProdutService {
-
   private headers = this.header.generateHeader();
 
   constructor(private http:HttpClient, private header:AuthHeadGeneratorService) { }
@@ -32,6 +31,10 @@ export class HttpProdutService {
 
   modifyProduct(body:object){
     return this.http.put(URI_API, body, {headers:this.headers});
+  }
+
+  deleteProduct(id:number) {
+    return this.http.delete(`${URI_API}/${id}`, {headers:this.headers});
   }
 
 }

@@ -8,26 +8,34 @@ import { HttpProdutService } from '../../services/produt.service';
   styleUrls: ['./product-detail.component.css']
 })
 export class ProductDetailComponent implements OnInit {
+  public product: object = null;
+  private id: number = this.route.snapshot.params['id'];
 
-  public product:object = null;
-  private id:number = this.route.snapshot.params['id'];
-
-  constructor(private http:HttpProdutService, private route:ActivatedRoute) { }
+  constructor(private http: HttpProdutService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.getProduct();
-  }
-
-  getProduct() {
     this.http.getProductById(this.id).subscribe(
-      res=>{
+      res => {
         this.product = res;
         console.log(res);
       },
-      err=>{
+      err => {
         console.warn(err);
       }
-    )
+    );
   }
+
+  deleteProduct() {
+    this.http.deleteProduct(this.id).subscribe(
+      () => console.log("deleted"),
+      err => console.warn(err)
+    );
+  }
+
+  modifyProduct() {
+
+  }
+
+
 
 }

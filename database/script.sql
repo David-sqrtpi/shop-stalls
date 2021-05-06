@@ -86,4 +86,8 @@ create table invoice_detail (
     foreign key (service_id) references invoice (id)
 );
 
-insert into company values (1, "foo", "www.foo.com", "foo", "1234567890");
+insert into company values (0, "Avenida 12", "Motomaniacos", "31108762364", "www.motomaniacos.com");
+insert into user values (0, 22, "yeison@motomaniacos.com", "yeison", "12345678", 0);
+insert into product values (0, "Aceite Castrol 400W", 10000, 10, 123, "AVAILABLE", 0);
+insert into service values (0, "Según el aceite seleccionado", "Cambio de Aceite", 10000, "AVAILABLE", 0);
+insert into supplier values (0, "Ave 129 Palo Alto California", "Grand Scott Garage", "312982374", 0);

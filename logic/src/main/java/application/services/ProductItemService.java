@@ -21,9 +21,9 @@ public class ProductItemService {
     @Autowired
     private ProductItemRepository productItemRepository;
 
-    public void create(long invoiceId, long productId, int quantity) {
+    public void create(long invoiceId, long productSku, int quantity) {
         Invoice invoice = invoiceRepository.findById(invoiceId);
-        Product product = productRepository.findById(productId);
+        Product product = productRepository.findBySku(productSku);
 
         ProductItem productItem = new ProductItem(invoice, product, quantity);
 

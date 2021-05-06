@@ -16,9 +16,9 @@ public class GetProduct {
     @Autowired
     private ProductConverter productConverter;
 
-    @GetMapping("/{id}")
-    public ProductDTO get(@PathVariable long id) {
-        return productConverter.fromEntity(repositoryProductService.findById(id));
+    @GetMapping("/{product}")
+    public ProductDTO get(@PathVariable long product) {
+        return productConverter.fromEntity(repositoryProductService.findBySku(product));
     }
 }
 

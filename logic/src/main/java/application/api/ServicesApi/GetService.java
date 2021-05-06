@@ -2,6 +2,7 @@ package application.api.ServicesApi;
 
 import application.DTO.ServiceDTO;
 import application.Repository.ServiceRepository;
+import application.models.Service;
 import application.util.ServiceConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,7 @@ public class GetService {
     private ServiceConverter serviceConverter;
 
     @GetMapping("/{id}")
-    public ServiceDTO get(@PathVariable long id) {
-        return serviceConverter.fromEntity(serviceRepository.findById(id));
+    public Service get(@PathVariable long id) {
+        return serviceRepository.findById(id);
     }
 }

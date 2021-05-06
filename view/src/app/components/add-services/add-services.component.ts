@@ -15,6 +15,9 @@ export class AddServicesComponent implements OnInit {
     name: ['', Validators.required],
     price: ['', Validators.required],
     characteristics: ['', Validators.required],
+    company: this.fb.group({
+      id: [+localStorage.getItem('company')]
+    })
   });
 
   constructor(private services: HttpServicesService,

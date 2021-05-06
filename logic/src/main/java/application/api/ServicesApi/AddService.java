@@ -13,8 +13,8 @@ public class AddService {
     ServiceRepository servicesRepository;
 
     @PostMapping
-    public void add(@RequestBody Service services) {
-        servicesRepository.save(services);
+    public void add(@RequestBody Service service) {
+        servicesRepository.save(service);
     }
 
 }

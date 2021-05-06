@@ -14,7 +14,9 @@ export class CreateUserComponent implements OnInit {
     name: ['', Validators.required],
     email: ['', [Validators.email, Validators.required]],
     password: ['', [Validators.minLength(8), Validators.pattern(/^[^ñ^Ñ]+$/)]],
-    companyId:[+localStorage.getItem('company')]
+    company: this.fb.group({
+      id: [+localStorage.getItem('company')]
+    })
   })
 
   hidePass:boolean = true;

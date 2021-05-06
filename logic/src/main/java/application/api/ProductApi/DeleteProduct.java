@@ -19,7 +19,7 @@ public class DeleteProduct {
     @DeleteMapping("products/{product}")
     public void delete(@PathVariable long product) {
 
-        Product product1 = productRepository.findBySku(product);
+        Product product1 = productRepository.findById(product);
         product1.setState(State.NOT_AVAILABLE);
         productRepository.save(product1);
     }

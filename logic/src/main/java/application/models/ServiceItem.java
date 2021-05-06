@@ -8,8 +8,6 @@ import javax.persistence.*;
 
 @Entity
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class ServiceItem {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -9,8 +9,6 @@ import java.util.Date;
 
 @Entity
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Purchase {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

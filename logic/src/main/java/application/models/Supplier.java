@@ -6,8 +6,6 @@ import javax.persistence.*;
 
 @Entity
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Supplier {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

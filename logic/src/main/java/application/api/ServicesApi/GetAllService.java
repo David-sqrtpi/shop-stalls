@@ -2,6 +2,7 @@ package application.api.ServicesApi;
 
 
 import application.DTO.ServiceDTO;
+import application.models.Service;
 import application.util.ServiceConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,8 +22,8 @@ public class GetAllService {
     private application.Repository.ServiceRepository serviceRepository;
 
     @GetMapping
-    public List<ServiceDTO> getAll() {
-        return serviceConverter.fromEntity(serviceRepository.findAll());
+    public List<Service> getAll() {
+        return serviceRepository.findAll();
     }
 
     

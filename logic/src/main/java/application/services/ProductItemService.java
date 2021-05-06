@@ -23,7 +23,7 @@ public class ProductItemService {
 
     public void create(long invoiceId, long productSku, int quantity) {
         Invoice invoice = invoiceRepository.findById(invoiceId);
-        Product product = productRepository.findBySku(productSku);
+        Product product = productRepository.findById(productSku);
 
         ProductItem productItem = new ProductItem(invoice, product, quantity);
 

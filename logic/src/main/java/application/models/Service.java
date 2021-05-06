@@ -1,21 +1,14 @@
 package application.models;
 
 import application.enums.State;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
-@AllArgsConstructor
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 @Entity
 public class Service {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     @ManyToOne
     private Company company;

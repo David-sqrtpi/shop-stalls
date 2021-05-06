@@ -16,6 +16,7 @@ public class DetailPurchase {
     private long id;
     @ManyToOne
     private Purchase purchase;
+    @ManyToOne
     private Product product;
     private int quantity;
     private long cost;

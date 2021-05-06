@@ -1,6 +1,6 @@
 package application.models;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +9,10 @@ import javax.persistence.Id;
 import java.util.Date;
 
 @Entity
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Invoice {
 
     @Id

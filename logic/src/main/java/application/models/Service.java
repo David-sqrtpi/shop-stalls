@@ -5,8 +5,11 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@Data
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Service {
     @Id
     private long id;

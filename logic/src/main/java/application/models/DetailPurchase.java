@@ -1,13 +1,14 @@
 package application.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class DetailPurchase {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

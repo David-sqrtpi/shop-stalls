@@ -26,7 +26,7 @@ export class HttpProdutService {
   }
 
   getProduct(){
-    return this.http.get(`${URI_API}`, {headers:this.headers});
+    return this.http.get(URI_API, {headers:this.headers});
   }
 
   modifyProduct(body:object){

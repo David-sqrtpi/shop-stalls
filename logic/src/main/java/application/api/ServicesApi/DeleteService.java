@@ -2,7 +2,7 @@ package application.api.ServicesApi;
 
 import application.Repository.ServiceRepository;
 import application.enums.State;
-import application.models.Service;
+import application.entity.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;

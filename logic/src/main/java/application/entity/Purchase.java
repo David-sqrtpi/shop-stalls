@@ -1,4 +1,4 @@
-package application.models;
+package application.entity;
 
 import lombok.*;
 
@@ -14,7 +14,7 @@ public class Purchase {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @OneToOne
+    @ManyToOne
     private Supplier supplier;
     private Date date;
     private long amountToPay;

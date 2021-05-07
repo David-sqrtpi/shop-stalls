@@ -1,9 +1,7 @@
 package application.api.ServicesApi;
 
 
-import application.DTO.ServiceDTO;
-import application.models.Service;
-import application.util.ServiceConverter;
+import application.entity.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,8 +14,6 @@ import java.util.List;
 @RequestMapping("services")
 @CrossOrigin
 public class GetAllService {
-    @Autowired
-    private ServiceConverter serviceConverter;
     @Autowired
     private application.Repository.ServiceRepository serviceRepository;
 

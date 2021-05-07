@@ -1,6 +1,6 @@
 package application.Repository;
 
-import application.models.User;
+import application.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

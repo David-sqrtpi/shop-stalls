@@ -1,6 +1,6 @@
 package application.api.ProductApi;
 
-import application.models.Product;
+import application.entity.Product;
 import application.Repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

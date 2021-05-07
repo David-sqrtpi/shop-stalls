@@ -1,10 +1,10 @@
 package application.services;
 
+import application.Repository.InvoiceDetailRepository;
 import application.Repository.InvoiceRepository;
-import application.Repository.ServiceItemRepository;
 import application.Repository.ServiceRepository;
-import application.models.Invoice;
-import application.models.ServiceItem;
+import application.entity.Invoice;
+import application.entity.InvoiceDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,16 +18,16 @@ public class ServiceItemService {
     private ServiceRepository serviceRepository;
 
     @Autowired
-    private ServiceItemRepository serviceItemRepository;
+    private InvoiceDetailRepository invoiceDetailRepository;
 
     public void create(long invoiceId, long serviceId, int quantity) {
 
         Invoice invoice = invoiceRepository.findById(invoiceId);
-        application.models.Service service = serviceRepository.findById(serviceId);
+        application.entity.Service service = serviceRepository.findById(serviceId);
 
-        ServiceItem serviceItem = new ServiceItem(invoice, service, quantity);
+        InvoiceDetail serviceItem = new InvoiceDetail(invoice, service);
 
-        serviceItemRepository.save(serviceItem);
+        invoiceDetailRepository.save(serviceItem);
     }
 
 }

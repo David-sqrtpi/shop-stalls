@@ -1,6 +1,6 @@
 package application.Repository;
 
-import application.models.Company;
+import application.entity.Company;
 import org.springframework.data.repository.CrudRepository;
 
 

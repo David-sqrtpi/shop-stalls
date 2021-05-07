@@ -3,10 +3,9 @@ package application.util;
 import application.DTO.UserDTO;
 import application.Repository.CompanyRepository;
 import application.Repository.RoleRepository;
-import application.models.Company;
-import application.models.Role;
-import application.models.User;
-import application.util.DtoConverter;
+import application.entity.Company;
+import application.entity.Role;
+import application.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

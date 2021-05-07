@@ -1,9 +1,9 @@
 package application.api.invoiceApi;
 
+import application.Repository.InvoiceDetailRepository;
 import application.Repository.InvoiceRepository;
-import application.Repository.ProductItemRepository;
-import application.models.Invoice;
-import application.models.ProductItem;
+import application.entity.Invoice;
+import application.entity.InvoiceDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +17,7 @@ public class GetInvoice {
     private InvoiceRepository invoiceRepository;
 
     @Autowired
-    private ProductItemRepository productItemRepository;
+    private InvoiceDetailRepository invoiceDetailRepository;
 
     @GetMapping("invoices/{invoice}")
     public Invoice getInvoice(@PathVariable long invoice) {
@@ -31,16 +31,16 @@ public class GetInvoice {
 
     //TODO create a DTO for retrieve all invoice details in one request
     @GetMapping("invoices/{invoice}/items")
-    public List<ProductItem> getInvoiceItems(@PathVariable long invoice) {
-        return productItemRepository.findByInvoiceId(invoice);
+    public List<InvoiceDetail> getInvoiceItems(@PathVariable long invoice) {
+        return invoiceDetailRepository.findByInvoiceId(invoice);
     }
 
     private long getInvoiceTotal(long invoice) {
-         List<ProductItem> items = productItemRepository.findByInvoiceId(invoice);
+         List<InvoiceDetail> items = invoiceDetailRepository.findByInvoiceId(invoice);
 
          long total = 0;
 
-         for (ProductItem item:items) {
+         for (InvoiceDetail item:items) {
              total += item.getSubtotal();
          }
 

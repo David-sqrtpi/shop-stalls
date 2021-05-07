@@ -1,4 +1,4 @@
-package application.models;
+package application.entity;
 
 import lombok.*;
 
@@ -14,7 +14,6 @@ import java.util.Date;
 @Getter
 @Setter
 public class Invoice {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;

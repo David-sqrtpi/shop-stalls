@@ -1,11 +1,11 @@
 package application.services;
 
+import application.Repository.InvoiceDetailRepository;
 import application.Repository.InvoiceRepository;
-import application.Repository.ProductItemRepository;
 import application.Repository.ProductRepository;
-import application.models.Invoice;
-import application.models.Product;
-import application.models.ProductItem;
+import application.entity.Invoice;
+import application.entity.InvoiceDetail;
+import application.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,15 +19,15 @@ public class ProductItemService {
     private ProductRepository productRepository;
 
     @Autowired
-    private ProductItemRepository productItemRepository;
+    private InvoiceDetailRepository invoiceDetailRepository;
 
     public void create(long invoiceId, long productSku, int quantity) {
         Invoice invoice = invoiceRepository.findById(invoiceId);
         Product product = productRepository.findById(productSku);
 
-        ProductItem productItem = new ProductItem(invoice, product, quantity);
+        InvoiceDetail productItem = new InvoiceDetail(invoice, product, quantity);
 
-        productItemRepository.save(productItem);
+        invoiceDetailRepository.save(productItem);
     }
 
 }

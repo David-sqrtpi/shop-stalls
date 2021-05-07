@@ -1,6 +1,9 @@
-package application.models;
+package application.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -9,14 +12,12 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Setter
-public class DetailPurchase {
+public class Inventory {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     @ManyToOne
-    private Purchase purchase;
-    @ManyToOne
     private Product product;
     private int quantity;
-    private long cost;
+    private long costSale;
 }

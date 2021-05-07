@@ -1,4 +1,4 @@
-package application.models;
+package application.entity;
 
 import application.enums.State;
 import lombok.*;
@@ -10,14 +10,14 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Product {
+public class Service {
     @Id
     private long id;
     @ManyToOne
     private Company company;
     private String name;
-    private int quantity;
     private long price;
+    private String details;
     @Enumerated(value = EnumType.STRING)
     private State state = State.AVAILABLE;
 }

@@ -1,5 +1,6 @@
-package application.models;
+package application.entity;
 
+import application.enums.State;
 import lombok.*;
 
 import javax.persistence.*;
@@ -15,6 +16,8 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    @ManyToOne
+    private Company company;
     @Column(nullable = false)
     private String name;
     @Column(unique = true, nullable = false)
@@ -22,8 +25,9 @@ public class User {
     @Column(nullable = false)
     private String password;
     private int age;
-    @ManyToOne
-    private Company company;
+    @Enumerated(value = EnumType.STRING)
+    private State state = State.AVAILABLE;
+
     @ManyToMany
     @Column(nullable = false)
     private List<Role> roles = new ArrayList<>();

@@ -1,7 +1,7 @@
 package application.api.CompanyApi;
 
 import application.Repository.CompanyRepository;
-import application.models.Company;
+import application.entity.Company;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

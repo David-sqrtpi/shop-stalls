@@ -1,6 +1,6 @@
 package application.Repository;
 
-import application.models.Product;
+import application.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 

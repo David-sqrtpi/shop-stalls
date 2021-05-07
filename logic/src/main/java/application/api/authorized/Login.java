@@ -1,6 +1,6 @@
 package application.api.authorized;
 
-import application.models.AuthRequest;
+import application.entity.AuthRequest;
 import application.services.AuthenticationService;
 import application.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;

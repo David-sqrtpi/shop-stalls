@@ -1,6 +1,6 @@
 package application.services;
 
-import application.models.AuthRequest;
+import application.entity.AuthRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;

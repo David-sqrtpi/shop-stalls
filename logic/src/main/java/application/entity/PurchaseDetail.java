@@ -9,7 +9,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Setter
-public class DetailPurchase {
+public class PurchaseDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -19,4 +19,11 @@ public class DetailPurchase {
     private Product product;
     private int quantity;
     private long subtotal;
+
+    public PurchaseDetail (Purchase purchase, Product product, int quantity) {
+        this.purchase = purchase;
+        this.product = product;
+        this.quantity = quantity;
+        this.subtotal = product.getPrice() * quantity;
+    }
 }

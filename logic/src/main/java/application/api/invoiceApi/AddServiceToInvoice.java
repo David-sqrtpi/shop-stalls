@@ -1,6 +1,6 @@
 package application.api.invoiceApi;
 
-import application.services.InvoiceDetailService;
+import application.services.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.*;
 public class AddServiceToInvoice {
 
     @Autowired
-    private InvoiceDetailService invoiceDetailService;
+    private InvoiceService invoiceService;
 
     @PutMapping("invoices/{invoice}/service")
     public void addService(@PathVariable long invoice,
                            @RequestParam long service) {
-        invoiceDetailService.addService(invoice, service);
+        invoiceService.addService(invoice, service);
     }
 }

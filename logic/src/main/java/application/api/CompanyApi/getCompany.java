@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @CrossOrigin
 @RequestMapping("/companies")
-public class getCompany {
+public class GetCompany {
 
     @Autowired
     private CompanyRepository companyRepository;

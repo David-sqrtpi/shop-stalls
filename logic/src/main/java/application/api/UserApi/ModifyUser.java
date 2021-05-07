@@ -1,8 +1,7 @@
 package application.api.UserApi;
 
-import application.DTO.UserDTO;
 import application.Repository.UserRepository;
-import application.util.UserConverter;
+import application.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,13 +11,10 @@ import org.springframework.web.bind.annotation.*;
 public class ModifyUser {
 
     @Autowired
-    private UserConverter userConverter;
-
-    @Autowired
     private UserRepository userRepository;
 
     @PutMapping("users")
-    public void modify(@RequestBody UserDTO userDto) {
-        userRepository.save(userConverter.fromDto(userDto));
+    public void modify(@RequestBody User user) {
+        userRepository.save(user);
     }
 }

@@ -1,6 +1,6 @@
 package application.api.invoiceApi;
 
-import application.services.InvoiceDetailService;
+import application.services.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 public class AddProductToInvoice {
 
     @Autowired
-    private InvoiceDetailService productItemService;
+    private InvoiceService productItemService;
 
     @PutMapping("invoices/{invoice}/product")
     public void addProduct(@PathVariable long invoice,

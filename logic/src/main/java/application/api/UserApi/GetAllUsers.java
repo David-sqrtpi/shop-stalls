@@ -1,8 +1,7 @@
 package application.api.UserApi;
 
-import application.DTO.UserDTO;
 import application.Repository.UserRepository;
-import application.util.UserConverter;
+import application.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,12 +18,9 @@ public class GetAllUsers {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private UserConverter userConverter;
-
     @GetMapping
-    public List<UserDTO> getAll() {
-        return userConverter.fromEntity(userRepository.findAll());
+    public List<User> getAll() {
+        return userRepository.findAll();
     }
 
 }

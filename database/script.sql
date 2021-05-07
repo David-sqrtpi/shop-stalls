@@ -87,8 +87,14 @@ create table invoice_detail (
 );
 
 insert into company values (1, "Avenida 12", "Motomaniacos", "31108762364", "www.motomaniacos.com");
-insert into user values (1, 22, "yeison@motomaniacos.com", "yeison", "12345678", 1);
-insert into product values (1, "Aceite Castrol 400W", 10000, 10, "AVAILABLE", 1);
+insert into user values (1, 22, "yeison@motomaniacos.com", "Yeison", "12345678", "AVAILABLE", 1);
+insert into user values (2, 20, "vivi@motomaniacos.com", "Viviana", "12345678", "AVAILABLE", 1);
+insert into product values (1, 10, "Aceite Castrol 400W", 10000, "AVAILABLE", 1);
 insert into service values (1, "Según el aceite seleccionado", "Cambio de Aceite", 10000, "AVAILABLE", 1);
 insert into supplier values (1, "Ave 129 Palo Alto California", "Grand Scott Garage", "312982374", 1);
-update hibernate_sequence set next_val=2;
+insert into role values (1, "Administrador");
+insert into role values (2, "Vendedor");
+insert into user_roles values (1, 1);
+insert into user_roles values (1, 2);
+insert into user_roles values (2, 2);
+update hibernate_sequence set next_val=3;

@@ -29,7 +29,7 @@ export class WelcomeComponent implements OnInit {
           this.name = result["name"];
           localStorage.setItem('userId', result['id']);
           localStorage.setItem('name', result['name']);
-          localStorage.setItem('company', result['companyId']);
+          localStorage.setItem('company', result['company']['id']);
           localStorage.removeItem('email');
         }
       );

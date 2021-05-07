@@ -23,8 +23,8 @@
   </p>
   <p>
     <mat-form-field appearance="outline" hideRequiredMarker>
-      <mat-label>Cantidad</mat-label>
-      <input matInput required formControlName="quantity" type="number">
+      <mat-label>Stock mínimo</mat-label>
+      <input matInput required formControlName="minStock" type="number">
       <mat-error *ngIf='productForm.invalid'>Campo requerido</mat-error>
     </mat-form-field>
   </p>

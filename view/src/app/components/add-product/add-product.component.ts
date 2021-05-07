@@ -14,7 +14,7 @@ export class AddProductComponent implements OnInit {
     id: ['', Validators.required],
     name: ['', Validators.required],
     price: ['', Validators.required],
-    quantity: ['', Validators.required],
+    minStock: ['', Validators.required],
     company: this.fb.group({
       id: [+localStorage.getItem('company')]
     })

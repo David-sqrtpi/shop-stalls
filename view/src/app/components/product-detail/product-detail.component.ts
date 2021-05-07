@@ -27,7 +27,10 @@ export class ProductDetailComponent implements OnInit {
 
   deleteProduct() {
     this.http.deleteProduct(this.id).subscribe(
-      () => console.log("deleted"),
+      () => {
+        console.log("deleted");
+        window.location.reload();
+      },
       err => console.warn(err)
     );
   }
@@ -35,7 +38,4 @@ export class ProductDetailComponent implements OnInit {
   modifyProduct() {
 
   }
-
-
-
 }

@@ -1,5 +1,25 @@
-<pre *ngIf='product'>
-    {{product | json}}
-</pre>
-<button mat-raised-button (click)='deleteProduct()'>Eliminar</button>
-<button mat-raised-button>Modificar</button>
+<mat-card class="card" *ngIf='product'>
+    <mat-card-header>
+        <mat-card-title>{{ product['name'] }}</mat-card-title>
+        <mat-card-subtitle>Código: {{ product['id'] }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <p>
+            Precio de venta: ${{ product['price'] }}
+        </p>
+        <p>
+            Stock mínimo: {{ product['minStock'] }}
+        </p>
+        <p *ngIf='product["state"] == "AVAILABLE"'>
+            Estado: Producto disponible
+        </p>
+        <p *ngIf='product["state"] != "AVAILABLE"'>
+            Estado: Producto no disponible
+        </p>
+    </mat-card-content>
+    <mat-card-actions>
+        <button *ngIf='product["state"] == "AVAILABLE"' mat-raised-button (click)='deleteProduct()'>Eliminar</button>
+        <button *ngIf='product["state"] != "AVAILABLE"' mat-raised-button (click)='deleteProduct()'>Recuperar</button>
+        <button mat-raised-button (click)='modifyProduct()'>Modificar</button>
+    </mat-card-actions>
+</mat-card>

@@ -30,7 +30,7 @@ export class PurchaseComponent implements OnInit {
         debounceTime(350)
       )
       .subscribe(
-        value => this.getProduct(value)
+        value => value ? this.getProduct(value) : null
       );
   }
 

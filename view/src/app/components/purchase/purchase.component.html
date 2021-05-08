@@ -17,8 +17,8 @@
     </p>
     <button mat-raised-button type="submit">Añadir</button>
   </form>
-  
+
 </div>
-<div class="d2">
+<div class="d2" *ngIf='products.length'>
   {{ products | json }}
 </div>

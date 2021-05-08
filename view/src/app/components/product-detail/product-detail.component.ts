@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpProdutService } from '../../services/produt.service';
 
@@ -7,9 +7,10 @@ import { HttpProdutService } from '../../services/produt.service';
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.css']
 })
-export class ProductDetailComponent implements OnInit {
+export class ProductDetailComponent implements OnInit, OnChanges {
+  @Input() id: number = this.route.snapshot.params['id'];
+
   public product: object = null;
-  private id: number = this.route.snapshot.params['id'];
 
   constructor(private http: HttpProdutService, private route: ActivatedRoute) { }
 
@@ -33,6 +34,15 @@ export class ProductDetailComponent implements OnInit {
       },
       err => console.warn(err)
     );
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log("working on the weekend like usually");
+
+    for (const propName in changes) {
+      const change = changes[propName];
+      this.ngOnInit();
+    }
   }
 
   modifyProduct() {

@@ -37,11 +37,10 @@ export class ProductDetailComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("working on the weekend like usually");
-
     for (const propName in changes) {
-      const change = changes[propName];
-      this.ngOnInit();
+      if (changes[propName].currentValue) {
+        this.ngOnInit();
+      }
     }
   }
 

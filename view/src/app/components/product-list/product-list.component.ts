@@ -11,7 +11,7 @@ export class ProductListComponent implements OnInit {
 
   products:any;
 
-  displayedColumns: string[] = ['name', 'price', 'quantity'];
+  displayedColumns: string[] = ['code', 'name', 'price'];
 
   constructor (private http:HttpProdutService,
     private router:Router) {

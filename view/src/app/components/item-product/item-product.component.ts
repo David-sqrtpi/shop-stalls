@@ -13,7 +13,7 @@ import { debounceTime } from "rxjs/operators";
 export class ItemProductComponent implements OnInit {
 
   waiting: boolean = false;
-  id: number = 0;
+  id: number;
 
   itemForm = this.fb.group({
     id: ['', Validators.required],
@@ -30,9 +30,7 @@ export class ItemProductComponent implements OnInit {
       )
       .subscribe(
         value => {
-          if (value) {
-            this.id = value;
-          }
+          this.id = value;
         }
       );
   }

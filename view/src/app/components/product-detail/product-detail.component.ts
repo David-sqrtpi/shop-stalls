@@ -39,7 +39,7 @@ export class ProductDetailComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     for (const propName in changes) {
       if (changes[propName].currentValue) {
-        this.ngOnInit();
+        this.ngOnInit(); //Because there are only one item property
       }
     }
   }

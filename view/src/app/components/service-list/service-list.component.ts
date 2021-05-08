@@ -18,7 +18,7 @@ export class ServiceListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.http.getAllServices().subscribe(
+    this.http.getServices().subscribe(
       res=>{
         console.log(res);
         this.services = res;

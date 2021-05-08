@@ -3,10 +3,7 @@ package application.api.UserApi;
 import application.Repository.UserRepository;
 import application.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,8 +16,7 @@ public class GetAllUsers {
     private UserRepository userRepository;
 
     @GetMapping
-    public List<User> getAll() {
-        return userRepository.findAll();
+    public List<User> getAll(@RequestParam long company) {
+        return userRepository.findByCompanyId(company);
     }
-
 }

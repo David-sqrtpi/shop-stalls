@@ -10,6 +10,8 @@ import application.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class InvoiceService {
 
@@ -56,4 +58,13 @@ public class InvoiceService {
         return invoiceDetailRepository.existsByInvoiceIdAndProductId(invoice, product);
     }
 
+    public long getInvoiceTotal(List<InvoiceDetail> items) {
+        long total = 0;
+
+        for (InvoiceDetail item:items) {
+            total += item.getSubtotal();
+        }
+
+        return total;
+    }
 }

@@ -30,7 +30,7 @@ export class InvoiceDetailComponent implements OnInit {
       }
     );
 
-    this.http.getInvoiceItems(this.invoiceId).subscribe(
+    this.http.getInvoice(this.invoiceId).subscribe(
       res => {
         this.items = res;
       },

@@ -14,9 +14,9 @@ public class GetAllProducts {
     @Autowired
     private ProductRepository productRepository;
 
-    @GetMapping
-    public List<Product> getAll() {
-        return productRepository.findAll();
+    @GetMapping()
+    public List<Product> getAll(@RequestParam long company) {
+        return productRepository.findByCompanyId(company);
     }
 
 }

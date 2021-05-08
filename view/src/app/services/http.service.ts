@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { AuthHeadGeneratorService } from './auth-head-generator.service';
 
-const URI_API:string =  environment.url_backend + "services/";
+const URI_API:string =  environment.url_backend + "services";
 
 @Injectable({
   providedIn: 'root'
@@ -16,17 +16,13 @@ export class HttpServicesService {
   addServices(service:object) {
     return this.http.post(URI_API, service, {headers:this.headers, responseType:'text' as 'json'})
   }
-
-  getAllServices() {
-    return this.http.get(URI_API, {headers:this.headers});
-  }
   
   getServicesById(id:number) {
     return this.http.get(URI_API+id, {headers:this.headers});
   }
 
   getServices(){
-    return this.http.get(URI_API, {headers:this.headers});
+    return this.http.get(`${URI_API}?company=${localStorage.getItem('company')}`, {headers:this.headers});
   }
 
   modifyServices(body:object){

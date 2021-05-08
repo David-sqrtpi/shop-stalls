@@ -29,7 +29,7 @@ export class HttpUserServiceService {
   }
 
   getUsers(){
-    return this.http.get(URI_API, {headers:this.headers});
+    return this.http.get(`${URI_API}?company=${localStorage.getItem('company')}`, {headers:this.headers});
   }
   
 }

@@ -4,7 +4,7 @@ import { Supplier } from '../models/Supplier';
 import { environment } from 'src/environments/environment.prod';
 import { AuthHeadGeneratorService } from './auth-head-generator.service';
 
-const URI_API = environment.url_backend + 'supplieres';
+const URI_API = environment.url_backend + 'suppliers';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +15,6 @@ export class HttpSupplierService {
   constructor(private http:HttpClient, private header:AuthHeadGeneratorService) { }
 
   getAll() {
-    return this.http.get<Supplier[]>(URI_API, {headers:this.headers});
+    return this.http.get<Supplier[]>(`${URI_API}?company=${localStorage.getItem('company')}`, {headers:this.headers});
   }
 }

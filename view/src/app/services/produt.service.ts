@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { Product } from '../models/Product';
 import { AuthHeadGeneratorService } from './auth-head-generator.service';
 
 const URI_API:string =  environment.url_backend + "products";
@@ -22,7 +23,7 @@ export class HttpProdutService {
   }
   
   getProductById(id:number) {
-    return this.http.get(`${URI_API}/${id}`, {headers:this.headers});
+    return this.http.get<Product>(`${URI_API}/${id}`, {headers:this.headers});
   }
 
   modifyProduct(body:object){

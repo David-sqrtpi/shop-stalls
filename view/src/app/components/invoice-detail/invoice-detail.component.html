@@ -33,3 +33,6 @@
 <h3 *ngIf='!items["length"]'>No hay nada aquí. Añade el primer producto o servicio</h3>
 <button mat-raised-button routerLink='product'>Añadir producto</button>
 <!-- <button mat-raised-button routerLink='service'>Añadir servicio</button> -->
+<pre>
+  {{ items | json}}
+</pre>

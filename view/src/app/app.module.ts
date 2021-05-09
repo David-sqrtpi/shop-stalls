@@ -48,6 +48,7 @@ import { ItemServiceComponent } from './components/item-service/item-service.com
 import { ClientNameFormComponent } from './components/client-name-form/client-name-form.component';
 import { SupplyComponent } from './components/supply/supply.component';
 import { PurchaseComponent } from './components/purchase/purchase.component';
+import { PurchaseDetailComponent } from './components/purchase-detail/purchase-detail.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +79,7 @@ import { PurchaseComponent } from './components/purchase/purchase.component';
     ClientNameFormComponent,
     SupplyComponent,
     PurchaseComponent,
+    PurchaseDetailComponent,
   ],
   imports: [
     BrowserModule,

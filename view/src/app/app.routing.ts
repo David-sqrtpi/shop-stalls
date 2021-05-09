@@ -21,6 +21,7 @@ import { InvoiceDetailComponent } from "./components/invoice-detail/invoice-deta
 import { ItemProductComponent } from "./components/item-product/item-product.component";
 import { ItemServiceComponent } from "./components/item-service/item-service.component";
 import { PurchaseComponent } from "./components/purchase/purchase.component";
+import { PurchaseDetailComponent } from "./components/purchase-detail/purchase-detail.component";
 
 
 const appRoutes = [
@@ -41,6 +42,7 @@ const appRoutes = [
     {path:'invoices/:id', component: InvoiceDetailComponent, canActivate:[AuthGuard]},
     {path:'invoices/:id/product', component: ItemProductComponent, canActivate:[AuthGuard]},
     {path:'invoices/:id/service', component: ItemServiceComponent, canActivate:[AuthGuard]},
+    {path:'purchases/:id', component: PurchaseDetailComponent, canActivate:[AuthGuard]},
     {path:'supply', component: PurchaseComponent, canActivate:[AuthGuard]},
     {path:'**', component: NotFoundComponent},
 ]

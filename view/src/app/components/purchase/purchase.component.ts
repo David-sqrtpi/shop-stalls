@@ -13,7 +13,6 @@ import { PurchaseItem } from 'src/app/models/purchase-item';
   styleUrls: ['./purchase.component.css']
 })
 export class PurchaseComponent implements OnInit {
-  @ViewChild('table') private table;
   idProd:number = 0;
   
   purchaseForm = this.fb.group({
@@ -21,7 +20,6 @@ export class PurchaseComponent implements OnInit {
     provider: []
   });
 
-  displayedColumns: string[] = ['name', 'price', 'quantity'];
   suppliers: Supplier[];
   purchaseItems: PurchaseItem[] = new Array;
   retrievedProduct: Product;
@@ -73,18 +71,17 @@ export class PurchaseComponent implements OnInit {
         quantity: 1,
         subtotal: 1 * this.retrievedProduct.price
       }
-      console.log(this.purchaseItem);
       this.purchaseItems.push(this.purchaseItem);
-      try {
-        this.table.renderRows();
-      } catch (error) {
-
-      }
+      this.purchaseItems = this.purchaseItems.slice();
       this.retrievedProduct = null;
     }
   }
 
   removeProduct() {
+  }
+
+  createPurchase() {
+    
   }
 
   get code() {

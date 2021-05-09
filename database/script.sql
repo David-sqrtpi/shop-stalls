@@ -86,15 +86,34 @@ create table invoice_detail (
     foreign key (service_id) references invoice (id)
 );
 
-insert into company values (1, "Avenida 12", "Motomaniacos", "31108762364", "www.motomaniacos.com");
-insert into user values (1, 22, "yeison@motomaniacos.com", "Yeison", "12345678", "AVAILABLE", 1);
-insert into user values (2, 20, "vivi@motomaniacos.com", "Viviana", "12345678", "AVAILABLE", 1);
-insert into product values (1, 10, "Aceite Castrol 400W", 10000, "AVAILABLE", 1);
-insert into service values (1, "Según el aceite seleccionado", "Cambio de Aceite", 10000, "AVAILABLE", 1);
-insert into supplier values (1, "Ave 129 Palo Alto California", "Grand Scott Garage", "312982374", 1);
 insert into role values (1, "Administrador");
 insert into role values (2, "Vendedor");
+
+insert into company values (1, "Avenida 12", "Motos", "31108762364", "www.motos.com");
+
+insert into user values (1, 22, "yeison@motos.com", "Yeison", "12345678", "AVAILABLE", 1);
+insert into user values (2, 20, "vivi@motos.com", "Viviana", "12345678", "AVAILABLE", 1);
+
+insert into product values (1, 10, "Aceite Castrol 400W", 0, "AVAILABLE", 1);
+
+insert into service values (1, "Según el aceite seleccionado", "Cambio de Aceite", 10000, "AVAILABLE", 1);
+
+insert into supplier values (1, "Ave 129 Palo Alto California", "Grand Scott Garage", "312982374", 1);
+
 insert into user_roles values (1, 1);
 insert into user_roles values (1, 2);
 insert into user_roles values (2, 2);
-update hibernate_sequence set next_val=3;
+
+insert into company values (2, "Mountain View", "Google", "140293842", "www.google.com");
+
+insert into user values (3, 22, "svetlana@google.com", "Svetlana", "12345678", "AVAILABLE", 2);
+insert into user values (4, 20, "laurel@google.com", "Laurel", "12345678", "AVAILABLE", 2);
+insert into product values (2, 10, "Add", 10000, "AVAILABLE", 2);
+insert into service values (2, "El horno es inteligente", "Instalación de horno microondas", 10000, "AVAILABLE", 2);
+insert into supplier values (2, "Taz 32 53 23", "Alphabet", "895432330", 2);
+
+insert into user_roles values (4, 1);
+insert into user_roles values (3, 2);
+insert into user_roles values (4, 2);
+
+update hibernate_sequence set next_val=5;

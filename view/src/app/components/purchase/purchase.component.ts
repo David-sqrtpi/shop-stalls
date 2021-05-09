@@ -6,6 +6,9 @@ import { HttpSupplierService } from 'src/app/services/http-supplier.service';
 import { HttpProdutService } from 'src/app/services/produt.service';
 import { debounceTime } from 'rxjs/operators';
 import { PurchaseItem } from 'src/app/models/purchase-item';
+import { Purchase } from 'src/app/models/purchase';
+import { HttpPurchaseService } from 'src/app/services/http-purchase.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-purchase',
@@ -27,7 +30,9 @@ export class PurchaseComponent implements OnInit {
 
   constructor(private http: HttpSupplierService,
     private httpProduct: HttpProdutService,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    private httpPurchase: HttpPurchaseService,
+    private router: Router) {
     this.code.valueChanges
       .pipe(
         debounceTime(350)
@@ -81,7 +86,13 @@ export class PurchaseComponent implements OnInit {
   }
 
   createPurchase() {
-    
+    this.httpPurchase.createPurchase().subscribe(
+      res => {
+        console.log(res)
+        this.router.navigate([`purchases/${res.id}`]);
+      },
+      err => console.error(err)
+    );
   }
 
   get code() {

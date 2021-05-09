@@ -21,11 +21,9 @@ export class PurchaseDetailComponent implements OnInit, OnChanges {
     private route: ActivatedRoute) { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("void man");
     try {
       this.table.renderRows();      
     } catch (error) {
-      
     }
   }
 

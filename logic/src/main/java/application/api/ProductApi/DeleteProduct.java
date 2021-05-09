@@ -4,10 +4,7 @@ import application.Repository.ProductRepository;
 import application.enums.State;
 import application.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
 @RestController
@@ -17,9 +14,10 @@ public class DeleteProduct {
     private ProductRepository productRepository;
 
     @DeleteMapping("products/{product}")
-    public void delete(@PathVariable long product) {
+    public void delete(@PathVariable long product,
+                       @RequestParam long company) {
 
-        Product product1 = productRepository.findById(product);
+        Product product1 = productRepository.findByCompanyIdAndId(company, product);
         product1.setState(State.NOT_AVAILABLE);
         productRepository.save(product1);
     }

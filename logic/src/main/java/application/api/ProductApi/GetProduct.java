@@ -5,17 +5,15 @@ import application.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-
+@RestController
+@CrossOrigin
 public class GetProduct {
     @Autowired
-    private ProductRepository repositoryProductService;
+    private ProductRepository productRepository;
 
     @GetMapping("products/{product}")
-    public Product get(@PathVariable long product) {
-        return repositoryProductService.findById(product);
+    public Product get(@PathVariable long product,
+                       @RequestParam long company) {
+        return productRepository.findByCompanyIdAndId(company, product);
     }
 }
-
-
-
-

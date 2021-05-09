@@ -1,7 +1,7 @@
 package application.api.inventory;
 
-import application.Repository.InventoryRepository;
-import application.entity.Inventory;
+import application.Repository.InventoryProductRepository;
+import application.entity.InventoryProduct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,10 +14,10 @@ import java.util.List;
 @CrossOrigin
 public class GetInventory {
     @Autowired
-    private InventoryRepository inventoryRepository;
+    private InventoryProductRepository inventoryProductRepository;
 
     @GetMapping("companies/{company}/inventory")
-    public List<Inventory> get(@PathVariable long company) {
-        return inventoryRepository.findByProductCompanyId(company);
+    public List<InventoryProduct> get(@PathVariable long company) {
+        return inventoryProductRepository.findByInventoryCompanyId(company);
     }
 }

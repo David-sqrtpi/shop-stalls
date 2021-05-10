@@ -17,11 +17,12 @@ import { HttpPurchaseDetailService } from 'src/app/services/http-purchase-detail
   styleUrls: ['./purchase.component.css']
 })
 export class PurchaseComponent implements OnInit {
-  idProd:number = 0;
-  
+  idProd: number = 0;
+
   purchaseForm = this.fb.group({
     code: [''],
-    provider: []
+    provider: [],
+    quantity: ['']
   });
 
   purchase: Purchase;
@@ -35,7 +36,7 @@ export class PurchaseComponent implements OnInit {
     private fb: FormBuilder,
     private httpPurchase: HttpPurchaseService,
     private router: Router,
-    private httpPurchaseItem:HttpPurchaseDetailService) {
+    private httpPurchaseItem: HttpPurchaseDetailService) {
     this.code.valueChanges
       .pipe(
         debounceTime(350)
@@ -69,22 +70,25 @@ export class PurchaseComponent implements OnInit {
       err => {
         console.error(err);
         this.retrievedProduct = null;
-      }      
+      }
     )
   }
 
   addProduct() {
-    if (this.retrievedProduct) {
+    if (!this.purchaseItems
+      .some(
+        element => element.product.id == this.retrievedProduct.id
+      ) && this.retrievedProduct
+    ) {
       this.purchaseItem = {
         id: null,
         purchase: this.purchase,
         product: this.retrievedProduct,
-        quantity: 1,
-        subtotal: 1 * this.retrievedProduct.price
+        quantity: this.quantity.value,
+        subtotal: this.quantity.value * this.retrievedProduct.price
       }
       this.purchaseItems.push(this.purchaseItem);
       this.purchaseItems = this.purchaseItems.slice();
-      this.retrievedProduct = null;
       console.log(this.purchaseItems);
     }
   }
@@ -102,7 +106,15 @@ export class PurchaseComponent implements OnInit {
     );
   }
 
+  something(quantity) {
+    console.log(quantity);
+  }
+
   get code() {
     return this.purchaseForm.get('code');
+  }
+
+  get quantity() {
+    return this.purchaseForm.get('quantity');
   }
 }

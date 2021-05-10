@@ -15,6 +15,12 @@
         <input matInput type="number" formControlName='code'>
       </mat-form-field>
     </p>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Cantidad</mat-label>
+        <input matInput type="number" formControlName='quantity'>
+      </mat-form-field>
+    </p>
     <button mat-raised-button type="submit">Añadir</button>
   </form>
 
@@ -22,7 +28,7 @@
 
 </div>
 <div class="d2" *ngIf='purchaseItems.length' style="position: absolute;">
-  <app-purchase-detail #table [purchaseItems]='purchaseItems'></app-purchase-detail>
+  <app-purchase-detail #table [purchaseItems]='purchaseItems' (event)='something($event)'></app-purchase-detail>
   <button mat-raised-button (click)='createPurchase()'>Continuar</button>
   <button mat-raised-button>Salir</button>
 </div>

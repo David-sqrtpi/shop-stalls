@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild, Output, EventEmitter } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Purchase } from 'src/app/models/purchase';
@@ -12,6 +12,7 @@ import { HttpPurchaseService } from 'src/app/services/http-purchase.service';
 })
 export class PurchaseDetailComponent implements OnInit, OnChanges {
   @Input() purchaseItems: PurchaseItem[];
+  @Output() event = new EventEmitter<number>();
   @ViewChild('table') private table;
   
   quantityInput = new FormControl(1, [Validators.required, Validators.min(1)]);
@@ -21,7 +22,11 @@ export class PurchaseDetailComponent implements OnInit, OnChanges {
   displayedColumns: string[] = ['name', 'quantity', 'price', 'subtotal', 'x'];
   purchase: Purchase;
   constructor(private http: HttpPurchaseService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute) { 
+      this.quantityInput.valueChanges.subscribe(
+        res => this.sendQuantity(res)
+      );
+    }
 
   ngOnChanges(changes: SimpleChanges): void {
     try {
@@ -35,5 +40,10 @@ export class PurchaseDetailComponent implements OnInit, OnChanges {
       res => this.purchaseItems = res,
       err => console.error(err)
     );
+  }
+
+  sendQuantity(quantity:number) {
+    //this.purchaseItems.find(element => element.product.id)
+    this.event.emit(quantity);
   }
 }

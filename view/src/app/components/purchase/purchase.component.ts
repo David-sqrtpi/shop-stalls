@@ -93,7 +93,8 @@ export class PurchaseComponent implements OnInit {
     }
   }
 
-  removeProduct() {
+  removeProduct(productId:number) {
+    this.purchaseItems = this.purchaseItems.filter(element => element.product.id != productId);
   }
 
   createPurchase() {
@@ -104,10 +105,6 @@ export class PurchaseComponent implements OnInit {
       },
       err => console.error(err)
     );
-  }
-
-  something(quantity) {
-    console.log(quantity);
   }
 
   get code() {

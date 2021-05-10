@@ -29,7 +29,8 @@ export class PurchaseDetailComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.http.getPurchase(this.id).subscribe(
-      
+      res => this.purchaseItems = res,
+      err => console.error(err)
     );
   }
 

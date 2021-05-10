@@ -23,6 +23,7 @@ export class PurchaseComponent implements OnInit {
     provider: []
   });
 
+  purchase: Purchase;
   suppliers: Supplier[];
   purchaseItems: PurchaseItem[] = new Array;
   retrievedProduct: Product;
@@ -46,10 +47,13 @@ export class PurchaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.httpPurchase.createPurchase().subscribe(
+      res => this.purchase = res,
+      err => console.error(err)
+    );
     this.http.getAll().subscribe(
       res => {
         this.suppliers = res;
-        console.log(res);
       },
       err => console.error(err)
     )
@@ -71,7 +75,7 @@ export class PurchaseComponent implements OnInit {
     if (this.retrievedProduct) {
       this.purchaseItem = {
         id: null,
-        purchase: null,
+        purchase: this.purchase,
         product: this.retrievedProduct,
         quantity: 1,
         subtotal: 1 * this.retrievedProduct.price
@@ -79,6 +83,7 @@ export class PurchaseComponent implements OnInit {
       this.purchaseItems.push(this.purchaseItem);
       this.purchaseItems = this.purchaseItems.slice();
       this.retrievedProduct = null;
+      console.log(this.purchaseItems);
     }
   }
 
@@ -86,10 +91,10 @@ export class PurchaseComponent implements OnInit {
   }
 
   createPurchase() {
-    this.httpPurchase.createPurchase().subscribe(
+    this.httpPurchase.addPurchaseProducts(this.purchaseItems).subscribe(
       res => {
         console.log(res)
-        this.router.navigate([`purchases/${res.id}`]);
+        this.router.navigate([`purchases/${this.purchase.id}`]);
       },
       err => console.error(err)
     );

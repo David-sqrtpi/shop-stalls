@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Purchase } from 'src/app/models/purchase';
 import { PurchaseItem } from 'src/app/models/purchase-item';
@@ -13,6 +14,8 @@ export class PurchaseDetailComponent implements OnInit, OnChanges {
   @Input() purchaseItems: PurchaseItem[];
   @ViewChild('table') private table;
   
+  quantityInput = new FormControl(1, [Validators.required, Validators.min(1)]);
+
   id: number = this.route.snapshot.params['id'];
 
   displayedColumns: string[] = ['name', 'quantity', 'price', 'subtotal', 'x'];
@@ -33,5 +36,4 @@ export class PurchaseDetailComponent implements OnInit, OnChanges {
       err => console.error(err)
     );
   }
-
 }

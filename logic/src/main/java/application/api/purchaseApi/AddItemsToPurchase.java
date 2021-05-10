@@ -15,7 +15,7 @@ public class AddItemsToPurchase {
     @Autowired
     private PurchaseDetailRepository purchaseDetailRepository;
 
-    @PutMapping("purchases")
+    @PostMapping("purchase-items")
     public void addItemsToPurchase(@RequestBody List<PurchaseDetail> items) {
         purchaseDetailRepository.saveAll(items);
     }

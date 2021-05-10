@@ -15,7 +15,7 @@ export class PurchaseDetailComponent implements OnInit, OnChanges {
   
   id: number = this.route.snapshot.params['id'];
 
-  displayedColumns: string[] = ['name', 'price', 'quantity'];
+  displayedColumns: string[] = ['name', 'quantity', 'price', 'subtotal', 'x'];
   purchase: Purchase;
   constructor(private http: HttpPurchaseService,
     private route: ActivatedRoute) { }

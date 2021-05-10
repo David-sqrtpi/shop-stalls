@@ -22,8 +22,4 @@ export class HttpPurchaseService {
   getPurchase(id: number) {
     return this.http.get<PurchaseItem[]>(`${URI_API}/${id}`, { headers: this.headers });
   }
-
-  addPurchaseProducts(items:PurchaseItem[]) {
-    return this.http.put(URI_API, items, { headers: this.headers });
-  }
 }

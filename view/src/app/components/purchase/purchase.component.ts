@@ -9,6 +9,7 @@ import { PurchaseItem } from 'src/app/models/purchase-item';
 import { Purchase } from 'src/app/models/purchase';
 import { HttpPurchaseService } from 'src/app/services/http-purchase.service';
 import { Router } from '@angular/router';
+import { HttpPurchaseDetailService } from 'src/app/services/http-purchase-detail.service';
 
 @Component({
   selector: 'app-purchase',
@@ -33,7 +34,8 @@ export class PurchaseComponent implements OnInit {
     private httpProduct: HttpProdutService,
     private fb: FormBuilder,
     private httpPurchase: HttpPurchaseService,
-    private router: Router) {
+    private router: Router,
+    private httpPurchaseItem:HttpPurchaseDetailService) {
     this.code.valueChanges
       .pipe(
         debounceTime(350)
@@ -91,7 +93,7 @@ export class PurchaseComponent implements OnInit {
   }
 
   createPurchase() {
-    this.httpPurchase.addPurchaseProducts(this.purchaseItems).subscribe(
+    this.httpPurchaseItem.addPurchaseProducts(this.purchaseItems).subscribe(
       res => {
         console.log(res)
         this.router.navigate([`purchases/${this.purchase.id}`]);

@@ -13,6 +13,7 @@ import { HttpPurchaseService } from 'src/app/services/http-purchase.service';
 export class PurchaseDetailComponent implements OnInit, OnChanges {
   @Input() purchaseItems: PurchaseItem[];
   @Output() event = new EventEmitter<number>();
+  @Output() quantityEvent = new EventEmitter<number>();
   @ViewChild('table') private table;
   
   quantityInput = new FormControl(1, [Validators.required, Validators.min(1)]);
@@ -22,7 +23,11 @@ export class PurchaseDetailComponent implements OnInit, OnChanges {
   displayedColumns: string[] = ['name', 'quantity', 'price', 'subtotal', 'x'];
   purchase: Purchase;
   constructor(private http: HttpPurchaseService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute) {
+      this.quantityInput.valueChanges.subscribe(
+        res => this.inputChange(res)
+      );
+    }
 
   ngOnChanges(changes: SimpleChanges): void {
     try {
@@ -40,5 +45,9 @@ export class PurchaseDetailComponent implements OnInit, OnChanges {
 
   delete(productId:number) {
     this.event.emit(productId);
+  }
+
+  inputChange(id:number){
+
   }
 }

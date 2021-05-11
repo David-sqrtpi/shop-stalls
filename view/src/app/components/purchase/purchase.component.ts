@@ -94,6 +94,9 @@ export class PurchaseComponent implements OnInit {
   }
 
   removeProduct(productId:number) {
+    /* //Approach to dynamic quantity and subtotal
+    this.purchaseItems.find(element => element.id == clickedId);
+    this.purchaseItems.findIndex(element => element.id == clickedId);*/
     this.purchaseItems = this.purchaseItems.filter(element => element.product.id != productId);
   }
 

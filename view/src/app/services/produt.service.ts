@@ -19,7 +19,7 @@ export class HttpProdutService {
   }
 
   getProducts() {
-    return this.http.get(`${URI_API}/?company=${this.company}`, {headers:this.headers});
+    return this.http.get<Product[]>(`${URI_API}/?company=${this.company}`, {headers:this.headers});
   }
   
   getProductById(id:number) {

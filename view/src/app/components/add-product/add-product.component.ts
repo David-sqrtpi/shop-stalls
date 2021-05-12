@@ -7,13 +7,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './add-product.component.html',
   styleUrls: ['./add-product.component.css']
 })
+
 export class AddProductComponent implements OnInit {
-
-
   productForm = this.fb.group({
-    id: ['', Validators.required],
+    barcode: ['', Validators.required],
     name: ['', Validators.required],
-    price: ['', Validators.required],
     minStock: ['', Validators.required],
     company: this.fb.group({
       id: [+localStorage.getItem('company')]

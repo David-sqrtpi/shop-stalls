@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { Service } from '../models/service';
 import { AuthHeadGeneratorService } from './auth-head-generator.service';
 
 const URI_API:string =  environment.url_backend + "services";
@@ -17,12 +18,12 @@ export class HttpServicesService {
     return this.http.post(URI_API, service, {headers:this.headers, responseType:'text' as 'json'})
   }
   
-  getServicesById(id:number) {
+  getServicesById<Service>(id:number) {
     return this.http.get(URI_API+id, {headers:this.headers});
   }
 
   getServices(){
-    return this.http.get(`${URI_API}?company=${localStorage.getItem('company')}`, {headers:this.headers});
+    return this.http.get<Service[]>(`${URI_API}?company=${localStorage.getItem('company')}`, {headers:this.headers});
   }
 
   modifyServices(body:object){

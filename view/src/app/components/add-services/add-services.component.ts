@@ -8,13 +8,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './add-services.component.html',
   styleUrls: ['./add-services.component.css']
 })
-export class AddServicesComponent implements OnInit {
 
+export class AddServicesComponent implements OnInit {
   serviceForm = this.fb.group({
-    id: ['', Validators.required],
+    code: ['', Validators.required],
     name: ['', Validators.required],
     price: ['', Validators.required],
-    characteristics: ['', Validators.required],
+    details: ['', Validators.required],
     company: this.fb.group({
       id: [+localStorage.getItem('company')]
     })

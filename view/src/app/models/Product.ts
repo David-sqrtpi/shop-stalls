@@ -2,9 +2,10 @@ import { Company } from "./Company";
 
 export interface Product {
     id: number,
+    // category: Category
     company: Company,
     name: string,
-    price: number,
     minStock: number,
     state: string,
+    barcode: string
 }

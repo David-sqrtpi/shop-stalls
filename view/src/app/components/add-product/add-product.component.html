@@ -3,7 +3,7 @@
   <p>
     <mat-form-field appearance="outline" hideRequiredMarker>
       <mat-label>Código</mat-label>
-      <input matInput required formControlName="id" type="number">
+      <input matInput required formControlName="barcode" type="number">
       <mat-error *ngIf='productForm.invalid'>Campo requerido</mat-error>
     </mat-form-field>
   </p>
@@ -11,13 +11,6 @@
     <mat-form-field appearance="outline" hideRequiredMarker>
       <mat-label>Nombre</mat-label>
       <input matInput required formControlName="name" type="text">
-      <mat-error *ngIf='productForm.invalid'>Campo requerido</mat-error>
-    </mat-form-field>
-  </p>
-  <p>
-    <mat-form-field appearance="outline" hideRequiredMarker>
-      <mat-label>Precio</mat-label>
-      <input matInput required formControlName="price" type="number">
       <mat-error *ngIf='productForm.invalid'>Campo requerido</mat-error>
     </mat-form-field>
   </p>

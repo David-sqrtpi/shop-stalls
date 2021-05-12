@@ -85,7 +85,7 @@ export class PurchaseComponent implements OnInit {
         purchase: this.purchase,
         product: this.retrievedProduct,
         quantity: this.quantity.value,
-        subtotal: this.quantity.value * this.retrievedProduct.price
+        subtotal: 1
       }
       this.purchaseItems.push(this.purchaseItem);
       this.purchaseItems = this.purchaseItems.slice();

@@ -9,7 +9,6 @@ const URI_API:string = environment.url_backend + "invoices";
   providedIn: 'root'
 })
 export class HttpInvoiceService {
-
   private headers = this.header.generateHeader();
 
   constructor(private http:HttpClient, private header:AuthHeadGeneratorService) { }

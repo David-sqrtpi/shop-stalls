@@ -4,7 +4,7 @@
   <p>
     <mat-form-field appearance="outline" hideRequiredMarker>
       <mat-label>Código</mat-label>
-      <input matInput required formControlName="id" type="number">
+      <input matInput required formControlName="code" type="number">
       <mat-error *ngIf='serviceForm.invalid'>Campo requerido</mat-error>
     </mat-form-field>
   </p>
@@ -25,7 +25,7 @@
   <p>
     <mat-form-field appearance="outline" hideRequiredMarker>
       <mat-label>Caracteristicas</mat-label>
-      <input matInput required formControlName="characteristics" type="text">
+      <input matInput required formControlName="details" type="text">
       <mat-error *ngIf='serviceForm.invalid'>Campo requerido</mat-error>
     </mat-form-field>
   </p>

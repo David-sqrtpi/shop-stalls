@@ -13,8 +13,10 @@ import { HttpPurchaseService } from 'src/app/services/http-purchase.service';
 export class PurchaseDetailComponent implements OnInit, OnChanges {
   @Input() purchaseItems: PurchaseItem[];
   @Output() event = new EventEmitter<number>();
-  @Output() quantityEvent = new EventEmitter<number>();
+  @Output() quantityEvent = new EventEmitter<number[]>();
   @ViewChild('table') private table;
+
+  testEvent = new EventEmitter<number>();
   
   quantityInput = new FormControl(1, [Validators.required, Validators.min(1)]);
 
@@ -25,7 +27,7 @@ export class PurchaseDetailComponent implements OnInit, OnChanges {
   constructor(private http: HttpPurchaseService,
     private route: ActivatedRoute) {
       this.quantityInput.valueChanges.subscribe(
-        res => this.inputChange(res)
+        res => console.log(res)
       );
     }
 
@@ -45,9 +47,5 @@ export class PurchaseDetailComponent implements OnInit, OnChanges {
 
   delete(productId:number) {
     this.event.emit(productId);
-  }
-
-  inputChange(id:number){
-
   }
 }

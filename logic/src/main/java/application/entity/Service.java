@@ -15,6 +15,7 @@ public class Service {
     private long id;
     @ManyToOne
     private Company company;
+    private String code;
     private String name;
     private long price;
     private String details;

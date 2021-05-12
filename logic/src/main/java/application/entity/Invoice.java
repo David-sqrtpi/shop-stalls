@@ -2,10 +2,7 @@ package application.entity;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -16,8 +13,10 @@ import java.util.Date;
 public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @OneToOne
+    private Sale sale;
     private String clientName;
+    private long dni;
     private Date date;
     private long total;
 }

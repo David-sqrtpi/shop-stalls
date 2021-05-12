@@ -12,12 +12,15 @@ import javax.persistence.*;
 @Setter
 public class Product {
     @Id
+    @GeneratedValue (strategy = GenerationType.AUTO)
     private long id;
+    @ManyToOne
+    private Category category;
     @ManyToOne
     private Company company;
     private String name;
-    private long price;
     private int minStock;
     @Enumerated(value = EnumType.STRING)
     private State state = State.AVAILABLE;
+    private String barcode;
 }

@@ -1,7 +1,5 @@
 package application.api.inventory;
 
-import application.Repository.InventoryProductRepository;
-import application.entity.InventoryProduct;
 import application.entity.PurchaseDetail;
 import application.services.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;

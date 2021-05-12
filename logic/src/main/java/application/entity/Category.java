@@ -1,6 +1,9 @@
 package application.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +15,7 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Role {
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;

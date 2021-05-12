@@ -18,12 +18,12 @@ public class PurchaseDetail {
     @ManyToOne
     private Product product;
     private int quantity;
-    private long subtotal;
+    private long price;
 
     public PurchaseDetail (Purchase purchase, Product product, int quantity) {
         this.purchase = purchase;
         this.product = product;
         this.quantity = quantity;
-        this.subtotal = product.getPrice() * quantity;
+        this.price = product.getPrice() * quantity;
     }
 }

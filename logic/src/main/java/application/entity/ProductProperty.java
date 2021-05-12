@@ -12,14 +12,12 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Setter
-public class InventoryProduct {
+public class ProductProperty {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     @ManyToOne
-    private Inventory inventory;
-    @OneToOne
     private Product product;
-    private int quantity;
-    private long costSale;
+    private String name;
+    private String value;
 }

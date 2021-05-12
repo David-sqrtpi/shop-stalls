@@ -1,7 +1,7 @@
 package application.services;
 
-import application.Repository.InventoryProductRepository;
-import application.entity.InventoryProduct;
+import application.Repository.InventoryRepository;
+import application.entity.Inventory;
 import application.entity.PurchaseDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,20 +13,19 @@ import java.util.List;
 public class InventoryService {
 
     @Autowired
-    private InventoryProductRepository inventoryProductRepository;
+    private InventoryRepository inventoryRepository;
 
-    public void addToinventory(List<PurchaseDetail> purchaseProduts) {
+    public void addToinventory(List<PurchaseDetail> purchaseProducts) {
+        List<Inventory> inventoryProducts = new ArrayList<>();
 
-        List<InventoryProduct> inventoryProducts = new ArrayList<>();
-
-        for(PurchaseDetail purchaseDetail: purchaseProduts){
-            InventoryProduct inventoryProduct = new InventoryProduct();
+        for(PurchaseDetail purchaseDetail: purchaseProducts){
+            Inventory inventoryProduct = new Inventory();
             inventoryProduct.setProduct(purchaseDetail.getProduct());
             inventoryProduct.setQuantity(purchaseDetail.getQuantity());
-            long price = purchaseDetail.getSubtotal() / purchaseDetail.getQuantity();
-            inventoryProduct.setCostSale(price);
+            long price = purchaseDetail.getPrice() / purchaseDetail.getQuantity();
+            inventoryProduct.setPurchasePrice(price);
             inventoryProducts.add(inventoryProduct);
         }
-        inventoryProductRepository.saveAll(inventoryProducts);
+        inventoryRepository.saveAll(inventoryProducts);
     }
 }

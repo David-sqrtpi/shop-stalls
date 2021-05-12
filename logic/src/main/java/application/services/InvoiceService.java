@@ -1,12 +1,9 @@
 package application.services;
 
-import application.Repository.InvoiceDetailRepository;
-import application.Repository.InvoiceRepository;
-import application.Repository.ProductRepository;
-import application.Repository.ServiceRepository;
+import application.Repository.*;
+import application.entity.Inventory;
 import application.entity.Invoice;
 import application.entity.InvoiceDetail;
-import application.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,19 +24,22 @@ public class InvoiceService {
     @Autowired
     private InvoiceDetailRepository invoiceDetailRepository;
 
+    @Autowired
+    private InventoryRepository inventoryRepository;
+
     public void addProduct(long invoiceId, long productId, int quantity) {
         Invoice invoice = invoiceRepository.findById(invoiceId);
-        Product product = productRepository.findById(productId);
+        Inventory inventory = inventoryRepository.findByProductBarcode(productId);
         InvoiceDetail invoiceDetail;
 
         if (!exists(invoiceId, productId)) {
-            invoiceDetail = new InvoiceDetail(invoice, product, quantity);
+            invoiceDetail = new InvoiceDetail(invoice, inventory.getProduct(), quantity);
         } else {
             invoiceDetail = invoiceDetailRepository.findByInvoiceIdAndProductId(invoiceId, productId);
             int newQuantity = invoiceDetail.getQuantity() + quantity;
-            long newSubtotal = newQuantity * product.getPrice();
+            long newSubtotal = newQuantity * inventory.getSalePrice();
             invoiceDetail.setQuantity(newQuantity);
-            invoiceDetail.setSubtotal(newSubtotal);
+            invoiceDetail.setPrice(newSubtotal);
         }
 
         invoiceDetailRepository.save(invoiceDetail);
@@ -62,7 +62,7 @@ public class InvoiceService {
         long total = 0;
 
         for (InvoiceDetail item:items) {
-            total += item.getSubtotal();
+            total += item.getPrice();
         }
 
         return total;

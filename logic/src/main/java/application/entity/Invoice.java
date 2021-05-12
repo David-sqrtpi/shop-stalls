@@ -13,6 +13,7 @@ import java.util.Date;
 public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     @OneToOne
     private Sale sale;
     private String clientName;

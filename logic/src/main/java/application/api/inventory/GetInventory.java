@@ -18,6 +18,6 @@ public class GetInventory {
 
     @GetMapping("companies/{company}/inventory")
     public List<Inventory> get(@PathVariable long company) {
-        return inventoryRepository.findByInventoryProductCompanyId(company);
+        return inventoryRepository.findByProductCompanyId(company);
     }
 }

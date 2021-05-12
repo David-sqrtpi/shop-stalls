@@ -20,10 +20,10 @@ public class PurchaseDetail {
     private int quantity;
     private long price;
 
-    public PurchaseDetail (Purchase purchase, Product product, int quantity) {
+    public PurchaseDetail (Purchase purchase, Product product, int quantity, long price) {
         this.purchase = purchase;
         this.product = product;
         this.quantity = quantity;
-        this.price = product.getPrice() * quantity;
+        this.price = price;
     }
 }

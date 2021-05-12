@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 public class ModifyProduct {
     @Autowired
-    ProductRepository productRepository ;
+    ProductRepository productRepository;
 
     @PutMapping
     public void modify(@RequestBody Product product){

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Inventory } from 'src/app/models/inventory';
+import { HttpInventoryService } from 'src/app/services/http-inventory.service';
 import { HttpProdutService } from '../../services/produt.service';
 
 @Component({
@@ -9,25 +11,23 @@ import { HttpProdutService } from '../../services/produt.service';
 })
 export class ProductListComponent implements OnInit {
 
-  products:any;
+  inventory: Inventory[];
 
-  displayedColumns: string[] = ['code', 'name', 'price'];
+  displayedColumns: string[] = ['barcode', 'name', 'quantity', 'purchasePrice', 'salePrice'];
 
-  constructor (private http:HttpProdutService,
-    private router:Router) {
-
-  }
+  constructor(private http: HttpInventoryService,
+    private router: Router) { }
 
   ngOnInit(): void {
-    this.http.getProducts().subscribe(
-      res=>{
+    this.http.getInventory().subscribe(
+      res => {
         console.log(res);
-        this.products = res;
+        this.inventory = res;
       }
     );
   }
 
-  onClick(row:any){
+  onClick(row: any) {
     this.router.navigate([`products/${row['id']}`]);
     console.log(row);
   }

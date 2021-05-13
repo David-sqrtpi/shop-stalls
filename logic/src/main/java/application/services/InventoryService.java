@@ -1,6 +1,7 @@
 package application.services;
 
 import application.Repository.InventoryRepository;
+import application.Repository.ProductRepository;
 import application.entity.Inventory;
 import application.entity.InvoiceDetail;
 import application.entity.Product;
@@ -13,32 +14,10 @@ import java.util.List;
 
 @Service
 public class InventoryService {
-
     @Autowired
     private InventoryRepository inventoryRepository;
-
-    public void addToinventory(List<PurchaseDetail> purchaseProducts) {
-        List<Inventory> inventoryProducts = new ArrayList<>();
-
-        for (PurchaseDetail purchaseDetail : purchaseProducts) {
-            if (inventoryRepository.existsByProductId(purchaseDetail.getId())){
-
-            }
-            Inventory inventoryProduct = new Inventory();
-
-            long price = purchaseDetail.getPrice() / purchaseDetail.getQuantity();
-            inventoryProduct.setProduct(purchaseDetail.getProduct());
-            inventoryProduct.setQuantity(purchaseDetail.getQuantity() + inventoryProduct.getQuantity());
-            if (inventoryProduct.getPurchasePrice() == 0) {
-                inventoryProduct.setPurchasePrice(price);
-            } else {
-                long purchasePrice = inventoryProduct.getPurchasePrice();
-                inventoryProduct.setPurchasePrice((price + purchasePrice) / 2);
-            }
-            inventoryProducts.add(inventoryProduct);
-        }
-        inventoryRepository.saveAll(inventoryProducts);
-    }
+    @Autowired
+    private ProductRepository productRepository;
 
     public void removeFromInventory(List<InvoiceDetail> invoiceProducts){
         List<Inventory> inventoryProducts = new ArrayList<>();

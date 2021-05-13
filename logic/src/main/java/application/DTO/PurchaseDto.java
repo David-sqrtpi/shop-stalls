@@ -16,9 +16,6 @@ import java.util.List;
 @Getter
 @Setter
 public class PurchaseDto {
-    private long id;
-    private Supplier supplier;
-    private Date date;
-    private long amountToPay;
+    private Purchase purchase;
     private List<PurchaseDetail> products;
 }

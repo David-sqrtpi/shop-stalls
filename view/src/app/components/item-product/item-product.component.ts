@@ -11,7 +11,6 @@ import { debounceTime } from "rxjs/operators";
   styleUrls: ['./item-product.component.css']
 })
 export class ItemProductComponent implements OnInit {
-
   waiting: boolean = false;
   id: number;
 
@@ -40,7 +39,7 @@ export class ItemProductComponent implements OnInit {
 
   onSubmit() {
     this.waiting = true;
-    this.http.addProduct(this.router.snapshot.params['id'], this.itemForm.get('id').value, this.itemForm.get('quantity').value).subscribe(
+    this.http.addProduct(this.router.snapshot.params['id'], this.id, this.itemForm.get('quantity').value).subscribe(
       res => {
         this.waiting = false;
         console.log(res);

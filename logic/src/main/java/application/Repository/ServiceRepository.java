@@ -10,4 +10,6 @@ public interface ServiceRepository extends JpaRepository<Service, Long> {
     Service findById(long id);
 
     List<Service> findByCompanyId(long id);
+
+    Service findByCompanyIdAndCode(long company, String code);
 }

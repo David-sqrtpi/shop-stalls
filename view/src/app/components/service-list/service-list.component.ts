@@ -11,7 +11,7 @@ export class ServiceListComponent implements OnInit {
 
   services:any;
 
-  displayedColumns: string[] = ['name', 'price', 'characteristics'];
+  displayedColumns: string[] = ['name', 'price', 'details'];
 
   constructor (private http:HttpServicesService) {
 

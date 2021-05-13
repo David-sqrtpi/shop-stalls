@@ -3,6 +3,7 @@ package application.services;
 import application.Repository.InventoryRepository;
 import application.entity.Inventory;
 import application.entity.InvoiceDetail;
+import application.entity.Product;
 import application.entity.PurchaseDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,9 @@ public class InventoryService {
         List<Inventory> inventoryProducts = new ArrayList<>();
 
         for (PurchaseDetail purchaseDetail : purchaseProducts) {
+            if (inventoryRepository.existsByProductId(purchaseDetail.getId())){
+
+            }
             Inventory inventoryProduct = new Inventory();
 
             long price = purchaseDetail.getPrice() / purchaseDetail.getQuantity();
@@ -48,5 +52,11 @@ public class InventoryService {
             inventoryProducts.add(inventoryProduct);
         }
         inventoryRepository.saveAll(inventoryProducts);
+    }
+
+    public void addProduct(Product product) {
+        Inventory inventory = new Inventory();
+        inventory.setProduct(product);
+        inventoryRepository.save(inventory);
     }
 }

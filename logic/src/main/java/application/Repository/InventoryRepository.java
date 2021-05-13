@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface InventoryRepository extends JpaRepository<Inventory, Long> {
     List<Inventory> findByProductCompanyId(long company);
-    Inventory findByProductBarcode(long product);
+    boolean existsByProductId(long product);
 }

@@ -4,6 +4,7 @@ import application.Repository.InventoryRepository;
 import application.entity.Inventory;
 import application.entity.Product;
 import application.Repository.ProductRepository;
+import application.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,15 +13,10 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 public class AddProduct {
     @Autowired
-    ProductRepository productRepository;
-    @Autowired
-    InventoryRepository inventoryRepository;
+    private ProductService productService;
 
     @PostMapping
     public void add(@RequestBody Product product){
-        Inventory inventory = new Inventory();
-        inventory.setProduct(product);
-        productRepository.save(product);
-        inventoryRepository.save(inventory);
+        productService.save(product);
     }
 }

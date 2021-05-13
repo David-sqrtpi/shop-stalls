@@ -20,6 +20,8 @@ public class InvoiceDetailService {
     private ProductRepository productRepository;
     @Autowired
     private ServiceRepository serviceRepository;
+    @Autowired
+    private InventoryService inventoryService;
 
     public void addInvoiceDetail(InvoiceDetail invoiceDetail) {
         Invoice invoice = invoiceRepository.findById(invoiceDetail.getInvoice().getId());
@@ -38,6 +40,7 @@ public class InvoiceDetailService {
         Product product = productRepository.findByCompanyIdAndBarcode(invoiceDetail.getProduct().getCompany().getId(),
                 invoiceDetail.getProduct().getBarcode());
         invoiceDetail.getProduct().setId(product.getId());
+        inventoryService.reduceInventory(invoiceDetail);
     }
 
     private void addServiceDetail(InvoiceDetail invoiceDetail) {

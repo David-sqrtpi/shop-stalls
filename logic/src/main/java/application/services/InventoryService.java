@@ -16,21 +16,11 @@ import java.util.List;
 public class InventoryService {
     @Autowired
     private InventoryRepository inventoryRepository;
-    @Autowired
-    private ProductRepository productRepository;
 
-    public void removeFromInventory(List<InvoiceDetail> invoiceProducts){
-        List<Inventory> inventoryProducts = new ArrayList<>();
-
-        for (InvoiceDetail invoiceDetail : invoiceProducts) {
-            Inventory inventoryProduct = new Inventory();
-
-            long price = invoiceDetail.getPrice() / invoiceDetail.getQuantity();
-            inventoryProduct.setProduct(invoiceDetail.getProduct());
-            inventoryProduct.setQuantity(inventoryProduct.getQuantity() - invoiceDetail.getQuantity());
-            inventoryProducts.add(inventoryProduct);
-        }
-        inventoryRepository.saveAll(inventoryProducts);
+    public void reduceInventory(InvoiceDetail invoiceDetail) {
+        Inventory inventory = inventoryRepository.findByProductId(invoiceDetail.getProduct().getId());
+        inventory.setQuantity(inventory.getQuantity() - invoiceDetail.getQuantity());
+        inventoryRepository.save(inventory);
     }
 
     public void addProduct(Product product) {

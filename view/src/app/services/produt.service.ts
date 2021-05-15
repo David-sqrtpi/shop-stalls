@@ -26,6 +26,10 @@ export class HttpProdutService {
     return this.http.get<Product>(`${URI_API}/${id}?company=${this.company}`, {headers:this.headers});
   }
 
+  getProductByBarcode(barcode:string) {
+    return this.http.get<Product>(`${URI_API}/${barcode}?company=${this.company}`, {headers:this.headers});
+  }
+
   modifyProduct(body:object){
     return this.http.put(URI_API, body, {headers:this.headers});
   }
@@ -33,5 +37,4 @@ export class HttpProdutService {
   deleteProduct(id:number) {
     return this.http.delete(`${URI_API}/${id}`, {headers:this.headers});
   }
-
 }

@@ -49,6 +49,7 @@ import { ClientNameFormComponent } from './components/client-name-form/client-na
 import { SupplyComponent } from './components/supply/supply.component';
 import { PurchaseComponent } from './components/purchase/purchase.component';
 import { PurchaseDetailComponent } from './components/purchase-detail/purchase-detail.component';
+import { InventoryComponent } from './components/inventory/inventory.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { PurchaseDetailComponent } from './components/purchase-detail/purchase-d
     SupplyComponent,
     PurchaseComponent,
     PurchaseDetailComponent,
+    InventoryComponent,
   ],
   imports: [
     BrowserModule,

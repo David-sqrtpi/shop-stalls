@@ -17,11 +17,9 @@ import { HttpPurchaseDetailService } from 'src/app/services/http-purchase-detail
   styleUrls: ['./purchase.component.css']
 })
 export class PurchaseComponent implements OnInit {
-  idProd: number = 0;
-
   purchaseForm = this.fb.group({
-    code: [''],
     provider: [],
+    code: [''],
     quantity: ['']
   });
 
@@ -43,7 +41,6 @@ export class PurchaseComponent implements OnInit {
       )
       .subscribe(
         value => {
-          this.idProd = value;
           this.getProduct(value)
         }
       );
@@ -62,8 +59,8 @@ export class PurchaseComponent implements OnInit {
     )
   }
 
-  getProduct(id: number) {
-    this.httpProduct.getProductById(id).subscribe(
+  getProduct(barcode: string) {
+    this.httpProduct.getProductByBarcode(barcode).subscribe(
       res => {
         this.retrievedProduct = res;
       },

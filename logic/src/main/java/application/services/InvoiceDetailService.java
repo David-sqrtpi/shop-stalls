@@ -40,7 +40,7 @@ public class InvoiceDetailService {
         Product product = productRepository.findByCompanyIdAndBarcode(invoiceDetail.getProduct().getCompany().getId(),
                 invoiceDetail.getProduct().getBarcode());
         invoiceDetail.getProduct().setId(product.getId());
-        inventoryService.reduceInventory(invoiceDetail);
+        inventoryService.decreaseInventory(invoiceDetail);
     }
 
     private void addServiceDetail(InvoiceDetail invoiceDetail) {

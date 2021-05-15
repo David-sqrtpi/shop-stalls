@@ -17,7 +17,7 @@ public class InventoryService {
     @Autowired
     private InventoryRepository inventoryRepository;
 
-    public void reduceInventory(InvoiceDetail invoiceDetail) {
+    public void decreaseInventory(InvoiceDetail invoiceDetail) {
         Inventory inventory = inventoryRepository.findByProductId(invoiceDetail.getProduct().getId());
         inventory.setQuantity(inventory.getQuantity() - invoiceDetail.getQuantity());
         inventoryRepository.save(inventory);

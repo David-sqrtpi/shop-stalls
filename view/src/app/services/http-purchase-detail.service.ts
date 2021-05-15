@@ -4,7 +4,7 @@ import { environment } from 'src/environments/environment';
 import { PurchaseItem } from '../models/purchase-item';
 import { AuthHeadGeneratorService } from './auth-head-generator.service';
 
-const URI_API: string = environment.url_backend + "purchase-items";
+const URI_API: string = environment.url_backend + "purchase";
 
 @Injectable({
   providedIn: 'root'

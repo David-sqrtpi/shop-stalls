@@ -1,3 +1,4 @@
+import { PurchaseItem } from "./purchase-item";
 import { Supplier } from "./Supplier";
 
 export interface Purchase {
@@ -5,4 +6,5 @@ export interface Purchase {
     supplier: Supplier,
     date: Date,
     amountToPay: number
+    products: PurchaseItem[]
 }

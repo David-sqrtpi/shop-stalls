@@ -22,6 +22,7 @@ import { ItemProductComponent } from "./components/item-product/item-product.com
 import { ItemServiceComponent } from "./components/item-service/item-service.component";
 import { PurchaseComponent } from "./components/purchase/purchase.component";
 import { PurchaseDetailComponent } from "./components/purchase-detail/purchase-detail.component";
+import { InventoryComponent } from "./components/inventory/inventory.component";
 
 
 const appRoutes = [
@@ -32,6 +33,7 @@ const appRoutes = [
     {path:'products/modify', component: ModifyProductComponent, canActivate:[AuthGuard]},
     {path:'products', component: ProductListComponent, canActivate:[AuthGuard]},
     {path:'products/:id', component: ProductDetailComponent, canActivate:[AuthGuard]},
+    {path:'inventory', component: InventoryComponent, canActivate:[AuthGuard]},
     {path:'users', component: UserListComponent, canActivate:[AuthGuard]},
     {path:'users/create', component: CreateUserComponent, canActivate:[AuthGuard]},
     {path:'users/:id', component: UserDetailComponent, canActivate:[AuthGuard]},

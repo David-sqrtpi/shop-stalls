@@ -12,8 +12,8 @@ public class GetProduct {
     private ProductRepository productRepository;
 
     @GetMapping("products/{product}")
-    public Product get(@PathVariable long product,
+    public Product get(@PathVariable String product,
                        @RequestParam long company) {
-        return productRepository.findByCompanyIdAndId(company, product);
+        return productRepository.findByCompanyIdAndBarcode(company, product);
     }
 }

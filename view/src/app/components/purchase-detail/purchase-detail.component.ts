@@ -19,16 +19,21 @@ export class PurchaseDetailComponent implements OnInit, OnChanges {
   testEvent = new EventEmitter<number>();
   
   quantityInput = new FormControl(1, [Validators.required, Validators.min(1)]);
-
+  displayedColumns: string[]
   id: number = this.route.snapshot.params['id'];
-
-  displayedColumns: string[] = ['name', 'quantity', 'price', 'subtotal', 'x'];
   purchase: Purchase;
+
   constructor(private http: HttpPurchaseService,
     private route: ActivatedRoute) {
       this.quantityInput.valueChanges.subscribe(
         res => console.log(res)
       );
+
+      if(!this.id) {
+        this.displayedColumns = ['name', 'quantity', 'price', 'subtotal', 'x'];
+      } else {
+        this.displayedColumns = ['name', 'quantity', 'price', 'subtotal'];
+      }
     }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -40,7 +45,11 @@ export class PurchaseDetailComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.http.getPurchase(this.id).subscribe(
-      res => this.purchaseItems = res,
+      res => {
+        console.log(res);
+        this.purchase = res;
+        this.purchaseItems = res.products;
+      },
       err => console.error(err)
     );
   }

@@ -28,7 +28,7 @@ export class InventoryComponent implements OnInit {
   }
 
   onClick(row: any) {
-    this.router.navigate([`inventory/${row['id']}`]);
+    //this.router.navigate([`inventory/${row['id']}`]);
     console.log(row);
   }
 

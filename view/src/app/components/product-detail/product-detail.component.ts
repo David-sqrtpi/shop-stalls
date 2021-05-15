@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Product } from 'src/app/models/Product';
 import { HttpProdutService } from '../../services/produt.service';
 
 @Component({
@@ -8,14 +9,13 @@ import { HttpProdutService } from '../../services/produt.service';
   styleUrls: ['./product-detail.component.css']
 })
 export class ProductDetailComponent implements OnInit, OnChanges {
-  @Input() id: number = this.route.snapshot.params['id'];
-
-  public product: object = null;
+  @Input() id: string = this.route.snapshot.params['id'];
+  product: Product;
 
   constructor(private http: HttpProdutService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.http.getProductById(this.id).subscribe(
+    this.http.getProductByBarcode(this.id).subscribe(
       res => {
         this.product = res;
         console.log(res);

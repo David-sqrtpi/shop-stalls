@@ -34,7 +34,7 @@ export class HttpProdutService {
     return this.http.put(URI_API, body, {headers:this.headers});
   }
 
-  deleteProduct(id:number) {
+  deleteProduct(id:string) {
     return this.http.delete(`${URI_API}/${id}`, {headers:this.headers});
   }
 }

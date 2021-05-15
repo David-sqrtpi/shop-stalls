@@ -10,6 +10,8 @@ import { Purchase } from 'src/app/models/purchase';
 import { HttpPurchaseService } from 'src/app/services/http-purchase.service';
 import { Router } from '@angular/router';
 import { HttpPurchaseDetailService } from 'src/app/services/http-purchase-detail.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AddProductComponent } from '../add-product/add-product.component';
 
 @Component({
   selector: 'app-purchase',
@@ -17,6 +19,7 @@ import { HttpPurchaseDetailService } from 'src/app/services/http-purchase-detail
   styleUrls: ['./purchase.component.css']
 })
 export class PurchaseComponent implements OnInit {
+  barcode:string;
   purchaseForm = this.fb.group({
     provider: [],
     code: [''],
@@ -34,13 +37,15 @@ export class PurchaseComponent implements OnInit {
     private fb: FormBuilder,
     private httpPurchase: HttpPurchaseService,
     private router: Router,
-    private httpPurchaseItem: HttpPurchaseDetailService) {
+    private httpPurchaseItem: HttpPurchaseDetailService,
+    private dialog: MatDialog) {
     this.code.valueChanges
       .pipe(
         debounceTime(350)
       )
       .subscribe(
         value => {
+          this.barcode = value;
           this.getProduct(value)
         }
       );
@@ -98,13 +103,20 @@ export class PurchaseComponent implements OnInit {
   }
 
   createPurchase() {
-    this.httpPurchaseItem.addPurchaseProducts(this.purchaseItems).subscribe(
+    this.httpPurchaseItem.addPurchaseProducts(this.purchaseItems, this.purchase.id).subscribe(
       res => {
         console.log(res)
         this.router.navigate([`purchases/${this.purchase.id}`]);
       },
       err => console.error(err)
     );
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(AddProductComponent, {
+      height: '95%',
+      width: '95%',
+    });
   }
 
   get code() {

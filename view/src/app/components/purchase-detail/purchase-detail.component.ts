@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Purchase } from 'src/app/models/purchase';
 import { PurchaseItem } from 'src/app/models/purchase-item';
 import { HttpPurchaseService } from 'src/app/services/http-purchase.service';
+import { debounceTime } from 'rxjs/operators'
 
 @Component({
   selector: 'app-purchase-detail',
@@ -15,18 +16,22 @@ export class PurchaseDetailComponent implements OnInit, OnChanges {
   @Output() event = new EventEmitter<number>();
   @Output() quantityEvent = new EventEmitter<number[]>();
   @ViewChild('table') private table;
+  @ViewChild('element') public element;
 
-  testEvent = new EventEmitter<number>();
-  
   quantityInput = new FormControl(1, [Validators.required, Validators.min(1)]);
   displayedColumns: string[]
   id: number = this.route.snapshot.params['id'];
   purchase: Purchase;
+  currProdId:number;
 
   constructor(private http: HttpPurchaseService,
     private route: ActivatedRoute) {
-      this.quantityInput.valueChanges.subscribe(
-        res => console.log(res)
+      this.quantityInput.valueChanges
+      .pipe(debounceTime(250))
+      .subscribe(
+        res => {
+          this.emitQuantity(res);
+        }
       );
 
       if(!this.id) {
@@ -56,5 +61,14 @@ export class PurchaseDetailComponent implements OnInit, OnChanges {
 
   delete(productId:number) {
     this.event.emit(productId);
+  }
+
+  doSome(row:any) {
+    this.currProdId = row.product.id;
+  }
+
+  emitQuantity(quantity:number){
+    let idQuan = [this.currProdId, quantity];
+    this.quantityEvent.emit(idQuan);
   }
 }

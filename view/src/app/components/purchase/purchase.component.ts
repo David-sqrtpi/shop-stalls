@@ -40,9 +40,7 @@ export class PurchaseComponent implements OnInit {
     private httpPurchaseItem: HttpPurchaseDetailService,
     private dialog: MatDialog) {
     this.code.valueChanges
-      .pipe(
-        debounceTime(350)
-      )
+      .pipe(debounceTime(350))
       .subscribe(
         value => {
           this.barcode = value;
@@ -117,6 +115,10 @@ export class PurchaseComponent implements OnInit {
       height: '95%',
       width: '95%',
     });
+  }
+
+  changeRow(eventValue:number[]) {
+    console.log(eventValue);
   }
 
   get code() {

@@ -29,7 +29,7 @@
 
 </div>
 <div class="d2" *ngIf='purchaseItems.length' style="position: absolute;">
-  <app-purchase-detail #table [purchaseItems]='purchaseItems' (event)='removeProduct($event)'></app-purchase-detail>
+  <app-purchase-detail #table [purchaseItems]='purchaseItems' (event)='removeProduct($event)' (quantityEvent)='changeRow($event)'></app-purchase-detail>
   <button mat-raised-button (click)='createPurchase()'>Continuar</button>
   <button mat-raised-button>Salir</button>
 </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder } from '@angular/forms';
 import { Product } from 'src/app/models/Product';
 import { Supplier } from 'src/app/models/Supplier';
 import { HttpSupplierService } from 'src/app/services/http-supplier.service';
@@ -23,12 +23,20 @@ export class PurchaseComponent implements OnInit {
   purchaseForm = this.fb.group({
     provider: [],
     code: [''],
-    quantity: ['']
   });
+
+  form = this.fb.group({
+    items:this.fb.array([])
+  });
+
+  displayedColumns:string[] = ['name', 'quantity', 'price', 'subtotal', 'x'];
+
+  get items(): FormArray {
+    return this.form.get('items') as FormArray;
+  }
 
   purchase: Purchase;
   suppliers: Supplier[];
-  purchaseItems: PurchaseItem[] = new Array;
   retrievedProduct: Product;
   purchaseItem: PurchaseItem;
 
@@ -59,7 +67,10 @@ export class PurchaseComponent implements OnInit {
         this.suppliers = res;
       },
       err => console.error(err)
-    )
+    );
+    this.httpPurchaseItem.getAllAsFormArray().subscribe(
+      items => this.form.setControl('items', items)
+    );
   }
 
   getProduct(barcode: string) {
@@ -74,38 +85,26 @@ export class PurchaseComponent implements OnInit {
     )
   }
 
-  addProduct() {
-    if (!this.purchaseItems
-      .some(
-        element => element.product.id == this.retrievedProduct.id
-      ) && this.retrievedProduct
-    ) {
-      this.purchaseItem = {
-        id: null,
-        purchase: this.purchase,
-        product: this.retrievedProduct,
-        quantity: this.quantity.value,
-        subtotal: 1
-      }
-      this.purchaseItems.push(this.purchaseItem);
-      this.purchaseItems = this.purchaseItems.slice();
-      console.log(this.purchaseItems);
+  addProduct() {   
+    this.purchaseItem = {
+      product: this.retrievedProduct,
     }
+    this.httpPurchaseItem.addItem(this.purchaseItem);
   }
 
-  removeProduct(productId:number) {
-    this.purchaseItems = this.purchaseItems.filter(element => element.product.id != productId);
-  }
+  // removeProduct(productId:number) {
+  //   this.purchaseItems = this.purchaseItems.filter(element => element.product.id != productId);
+  // }
 
-  createPurchase() {
-    this.httpPurchaseItem.addPurchaseProducts(this.purchaseItems, this.purchase.id).subscribe(
-      res => {
-        console.log(res)
-        this.router.navigate([`purchases/${this.purchase.id}`]);
-      },
-      err => console.error(err)
-    );
-  }
+  // createPurchase() {
+  //   this.httpPurchaseItem.addPurchaseProducts(this.purchaseItems, this.purchase.id).subscribe(
+  //     res => {
+  //       console.log(res)
+  //       this.router.navigate([`purchases/${this.purchase.id}`]);
+  //     },
+  //     err => console.error(err)
+  //   );
+  // }
 
   openDialog() {
     const dialogRef = this.dialog.open(AddProductComponent, {

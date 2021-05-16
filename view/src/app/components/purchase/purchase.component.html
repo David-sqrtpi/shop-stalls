@@ -15,21 +15,64 @@
         <input matInput type="number" formControlName='code'>
       </mat-form-field>
     </p>
-    <p>
-      <mat-form-field appearance="outline">
-        <mat-label>Cantidad</mat-label>
-        <input matInput type="number" formControlName='quantity'>
-      </mat-form-field>
-    </p>
     <button mat-raised-button type="submit">Añadir</button>
   </form>
 
   <app-product-detail *ngIf="code.value" [id]='barcode'></app-product-detail>
-  <div *ngIf='!retrievedProduct && code.value'>Este producto no existe. <a [routerLink]='' (click)=openDialog()>Crear?</a></div>
-
+  <div *ngIf='!retrievedProduct && code.value'>Este producto no existe. <a [routerLink]=''
+      (click)=openDialog()>Crear?</a></div>
 </div>
-<div class="d2" *ngIf='purchaseItems.length' style="position: absolute;">
-  <!-- <app-purchase-detail #table [purchaseItems]='purchaseItems' (event)='removeProduct($event)' (quantityEvent)='changeRow($event)'></app-purchase-detail> -->
+
+<div class="d2" *ngIf='1' style="position: absolute;">
+  <mat-table [dataSource]="items.controls">
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+      <mat-cell *matCellDef="let element"> name </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="quantity">
+      <mat-header-cell *matHeaderCellDef> Precio </mat-header-cell>
+      <mat-cell *matCellDef="let element;" [formGroup]="element">
+        <mat-form-field>
+          <input matInput placeholder="Title" formControlName="price" required>
+        </mat-form-field>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <mat-header-cell *matHeaderCellDef> Cantidad </mat-header-cell>
+      <mat-cell *matCellDef="let element"> name </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="subtotal">
+      <mat-header-cell *matHeaderCellDef> Subtotal </mat-header-cell>
+      <mat-cell *matCellDef="let element"> name </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="x">
+        <th mat-header-cell *matHeaderCellDef> </th>
+        <td mat-cell *matCellDef="let element" (click)='delete(element.product.id)'>
+            <mat-icon>delete</mat-icon>
+        </td>
+    </ng-container>
+
+    <!-- <ng-container matColumnDef="title">
+      <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+      <mat-cell *matCellDef="let element;" [formGroup]="element">
+        <mat-form-field floatLabel="never" *ngIf="element.get('userId').value !== 3">
+          <input matInput placeholder="Title" formControlName="title" required>
+        </mat-form-field>
+      </mat-cell>
+    </ng-container> -->
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <pre>
+    {{ form.value | json}}
+  </pre>
+  
   <button mat-raised-button (click)='createPurchase()'>Continuar</button>
   <button mat-raised-button>Salir</button>
 </div>

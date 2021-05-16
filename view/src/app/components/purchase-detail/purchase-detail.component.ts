@@ -18,7 +18,7 @@ export class PurchaseDetailComponent implements OnInit, OnChanges {
   @ViewChild('table') private table;
   @ViewChild('element') public element;
 
-  quantityInput = new FormControl(1, [Validators.required, Validators.min(1)]);
+  //quantityInput = new FormControl(1, [Validators.required, Validators.min(1)]);
   displayedColumns: string[]
   id: number = this.route.snapshot.params['id'];
   purchase: Purchase;
@@ -26,13 +26,13 @@ export class PurchaseDetailComponent implements OnInit, OnChanges {
 
   constructor(private http: HttpPurchaseService,
     private route: ActivatedRoute) {
-      this.quantityInput.valueChanges
-      .pipe(debounceTime(250))
-      .subscribe(
-        res => {
-          this.emitQuantity(res);
-        }
-      );
+      // this.quantityInput.valueChanges
+      // .pipe(debounceTime(250))
+      // .subscribe(
+      //   res => {
+      //     this.emitQuantity(res);
+      //   }
+      // );
 
       if(!this.id) {
         this.displayedColumns = ['name', 'quantity', 'price', 'subtotal', 'x'];
@@ -64,6 +64,7 @@ export class PurchaseDetailComponent implements OnInit, OnChanges {
   }
 
   doSome(row:any) {
+    console.log(row);
     this.currProdId = row.product.id;
   }
 

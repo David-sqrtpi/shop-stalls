@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormControl } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Product } from 'src/app/models/Product';
 import { Supplier } from 'src/app/models/Supplier';
 import { HttpSupplierService } from 'src/app/services/http-supplier.service';
@@ -19,17 +19,19 @@ import { AddProductComponent } from '../add-product/add-product.component';
   styleUrls: ['./purchase.component.css']
 })
 export class PurchaseComponent implements OnInit {
-  barcode:string;
+  @ViewChild ('table') private table;
+
+  barcode: string;
   purchaseForm = this.fb.group({
     provider: [],
     code: [''],
   });
 
   form = this.fb.group({
-    items:this.fb.array([])
+    items: this.fb.array([])
   });
 
-  displayedColumns:string[] = ['name', 'quantity', 'price', 'subtotal', 'x'];
+  displayedColumns: string[] = ['name', 'quantity', 'price', 'subtotal', 'x'];
 
   get items(): FormArray {
     return this.form.get('items') as FormArray;
@@ -40,7 +42,7 @@ export class PurchaseComponent implements OnInit {
   retrievedProduct: Product;
   purchaseItem: PurchaseItem;
 
-  purchaseItems:PurchaseItem[] = [];
+  purchaseItems: PurchaseItem[] = [];
 
   constructor(private http: HttpSupplierService,
     private httpProduct: HttpProdutService,
@@ -70,9 +72,6 @@ export class PurchaseComponent implements OnInit {
       },
       err => console.error(err)
     );
-    this.httpPurchaseItem.getAllAsFormArray().subscribe(
-      items => this.form.setControl('items', items)
-    );
   }
 
   getProduct(barcode: string) {
@@ -87,17 +86,19 @@ export class PurchaseComponent implements OnInit {
     )
   }
 
-  addProduct() {  
-    this.purchaseItem = {
-      quantity:1,
-      price: 1,
-      product:this.retrievedProduct
-    }
-    this.purchaseItems.push(this.purchaseItem);
-    setTimeout(()=>{
-      this.items.setValue([{quantity:new FormControl(),price:new FormControl()}]);
-
-    },1000);
+  addProduct() {
+    this.items.push(this.fb.group({
+      quantity: [1, [Validators.required, Validators.min(1)]],
+      price: [1, [Validators.required, Validators.min(1)]],
+      product: this.fb.group({
+        barcode: ['this.retrievedProduct.barcode'],
+        name: ['Strong typed product'],
+        company: this.fb.group({
+          id: ['this.retrievedProduct.company.id']
+        })
+      })
+    }));
+    this.table.renderRows();
   }
 
   // removeProduct(productId:number) {

@@ -8,15 +8,12 @@ export class PurchaseItem {
     product: Product;
     quantity?: number;
     price?: number;
-    subtotal?:number;
+    subtotal?: number;
 
-    static asFormGroup(item: PurchaseItem): FormGroup {
+    static asFormGroup(): FormGroup {
         const fg = new FormGroup({
-            purchase: new FormControl(''),
-            product: new FormControl(),
             quantity: new FormControl('', [Validators.required, Validators.min(1)]),
             price: new FormControl('', [Validators.required, Validators.min(1)]),
-            //subtotal: new FormControl(''),
         });
         return fg;
     }

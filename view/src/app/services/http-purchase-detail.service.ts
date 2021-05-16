@@ -41,7 +41,6 @@ export class HttpPurchaseDetailService {
     return this.http.post(`${URI_API}/${purchaseId}`, items, { headers: this.headers });
   }
 
-
   getAllAsFormArray(): Observable<FormArray> {
     return this.getItems$().pipe(map((item: PurchaseItem[]) => {
       const fgs = item.map(PurchaseItem.asFormGroup);

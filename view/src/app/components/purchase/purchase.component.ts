@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl } from '@angular/forms';
 import { Product } from 'src/app/models/Product';
 import { Supplier } from 'src/app/models/Supplier';
 import { HttpSupplierService } from 'src/app/services/http-supplier.service';
@@ -39,6 +39,8 @@ export class PurchaseComponent implements OnInit {
   suppliers: Supplier[];
   retrievedProduct: Product;
   purchaseItem: PurchaseItem;
+
+  purchaseItems:PurchaseItem[] = [];
 
   constructor(private http: HttpSupplierService,
     private httpProduct: HttpProdutService,
@@ -85,11 +87,17 @@ export class PurchaseComponent implements OnInit {
     )
   }
 
-  addProduct() {   
+  addProduct() {  
     this.purchaseItem = {
-      product: this.retrievedProduct,
+      quantity:1,
+      price: 1,
+      product:this.retrievedProduct
     }
-    this.httpPurchaseItem.addItem(this.purchaseItem);
+    this.purchaseItems.push(this.purchaseItem);
+    setTimeout(()=>{
+      this.items.setValue([{quantity:new FormControl(),price:new FormControl()}]);
+
+    },1000);
   }
 
   // removeProduct(productId:number) {

@@ -19,7 +19,7 @@ import { AddProductComponent } from '../add-product/add-product.component';
   styleUrls: ['./purchase.component.css']
 })
 export class PurchaseComponent implements OnInit {
-  @ViewChild ('table') private table;
+  @ViewChild('table') private table;
 
   barcode: string;
   purchaseForm = this.fb.group({
@@ -33,15 +33,10 @@ export class PurchaseComponent implements OnInit {
 
   displayedColumns: string[] = ['name', 'quantity', 'price', 'subtotal', 'x'];
 
-  get items(): FormArray {
-    return this.form.get('items') as FormArray;
-  }
-
   purchase: Purchase;
   suppliers: Supplier[];
   retrievedProduct: Product;
   purchaseItem: PurchaseItem;
-
   purchaseItems: PurchaseItem[] = [];
 
   constructor(private http: HttpSupplierService,
@@ -87,25 +82,39 @@ export class PurchaseComponent implements OnInit {
   }
 
   addProduct() {
-    this.items.push(this.fb.group({
-      quantity: [1, [Validators.required, Validators.min(1)]],
-      price: [1, [Validators.required, Validators.min(1)]],
-      product: this.fb.group({
-        barcode: ['this.retrievedProduct.barcode'],
-        name: ['Strong typed product'],
-        company: this.fb.group({
-          id: ['this.retrievedProduct.company.id']
+    if (!this.purchaseItems
+      .some(
+        element => element.product.barcode == this.retrievedProduct.barcode
+      ) && this.retrievedProduct
+    ) {
+      this.items.push(this.fb.group({
+        quantity: [1, [Validators.required, Validators.min(1)]],
+        price: [1, [Validators.required, Validators.min(1)]],
+        purchase: this.fb.group({
+          id: [this.purchase.id]
+        }),
+        product: this.fb.group({
+          barcode: [this.retrievedProduct.barcode],
+          name: [this.retrievedProduct.name],
+          company: this.fb.group({
+            id: [this.retrievedProduct.company.id]
+          })
         })
-      })
-    }));
+      }));
+      this.table.renderRows();
+      this.purchaseItems = this.items.value;
+      console.log(this.purchaseItems);
+    }
+  }
+
+  removeProduct(barcode:string) {
+    this.purchaseItems.find(element=>element.product.barcode == barcode).product.barcode = '-1';
+    this.items.setValue(this.purchaseItems);
     this.table.renderRows();
   }
 
-  // removeProduct(productId:number) {
-  //   this.purchaseItems = this.purchaseItems.filter(element => element.product.id != productId);
-  // }
-
   // createPurchase() {
+  //this.purchaseItems = this.purchaseItems.filter(element => element.product.barcode != '-1');
   //   this.httpPurchaseItem.addPurchaseProducts(this.purchaseItems, this.purchase.id).subscribe(
   //     res => {
   //       console.log(res)
@@ -126,7 +135,7 @@ export class PurchaseComponent implements OnInit {
     return this.purchaseForm.get('code');
   }
 
-  get quantity() {
-    return this.purchaseForm.get('quantity');
+  get items(): FormArray {
+    return this.form.get('items') as FormArray;
   }
 }

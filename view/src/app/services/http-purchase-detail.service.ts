@@ -24,11 +24,6 @@ export class HttpPurchaseDetailService {
   }
 
   addItem(item:PurchaseItem) {
-    // if (!this.purchaseItems
-    //   .some(
-    //     element => element.product.id == this.retrievedProduct.id
-    //   ) && this.retrievedProduct
-    // )
     this.items.push(item);
     this.items$.next(this.items);
   }

@@ -54,18 +54,14 @@
     </ng-container>
 
     <ng-container matColumnDef="x">
-        <mat-header-cell *matHeaderCellDef> </mat-header-cell>
-        <mat-cell *matCellDef="let element" (click)='delete(element.product.id)'>
-            <mat-icon>delete</mat-icon>
-        </mat-cell>
+      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+      <mat-cell *matCellDef="let element" (click)="removeProduct(element.get('product.barcode').value)">
+        <mat-icon>delete</mat-icon>
+      </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-row *matRowDef="let element; columns: displayedColumns;" [class.hide]="element.get('product.barcode').value == -1"></mat-row>
   </mat-table>
-
-  <pre>
-    {{ form.value | json}}
-  </pre>  
   <button mat-raised-button (click)='createPurchase()'>Continuar</button>
   <button mat-raised-button>Salir</button>
 </div>

@@ -27,11 +27,11 @@
   <mat-table #table [dataSource]="items.controls" class="mat-elevation-z8" style="width: 100%;">
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.get('product.name').value}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.get('product.namer').value}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="quantity">
-      <mat-header-cell *matHeaderCellDef> Precio </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Cantidad </mat-header-cell>
       <mat-cell *matCellDef="let element" [formGroup]="element">
         <mat-form-field>
           <input matInput placeholder="cantidad" formControlName="quantity" required>
@@ -40,7 +40,7 @@
     </ng-container>
 
     <ng-container matColumnDef="price">
-      <mat-header-cell *matHeaderCellDef> Cantidad </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Precio </mat-header-cell>
       <mat-cell *matCellDef="let element" [formGroup]="element">
         <mat-form-field>
           <input matInput placeholder="precio" formControlName="price" required>
@@ -60,7 +60,7 @@
       </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let element; columns: displayedColumns;" [class.hide]="element.get('product.barcode').value == -1"></mat-row>
+    <mat-row *matRowDef="let element; columns: displayedColumns" [class.hide]="element.get('product.barcode').value == -1"></mat-row>
   </mat-table>
   <button mat-raised-button (click)='createPurchase()'>Continuar</button>
   <button mat-raised-button>Salir</button>

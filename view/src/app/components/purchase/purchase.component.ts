@@ -36,7 +36,6 @@ export class PurchaseComponent implements OnInit {
   purchase: Purchase;
   suppliers: Supplier[];
   retrievedProduct: Product;
-  purchaseItem: PurchaseItem;
   purchaseItems: PurchaseItem[] = [];
 
   constructor(private http: HttpSupplierService,
@@ -95,7 +94,7 @@ export class PurchaseComponent implements OnInit {
         }),
         product: this.fb.group({
           barcode: [this.retrievedProduct.barcode],
-          name: [this.retrievedProduct.name],
+          namer: [this.retrievedProduct.name],
           company: this.fb.group({
             id: [this.retrievedProduct.company.id]
           })
@@ -107,22 +106,24 @@ export class PurchaseComponent implements OnInit {
     }
   }
 
-  removeProduct(barcode:string) {
-    this.purchaseItems.find(element=>element.product.barcode == barcode).product.barcode = '-1';
+  removeProduct(barcode: string) {
+    this.purchaseItems.find(element => element.product.barcode == barcode).product.barcode = '-1';
     this.items.setValue(this.purchaseItems);
     this.table.renderRows();
   }
 
-  // createPurchase() {
-  //this.purchaseItems = this.purchaseItems.filter(element => element.product.barcode != '-1');
-  //   this.httpPurchaseItem.addPurchaseProducts(this.purchaseItems, this.purchase.id).subscribe(
-  //     res => {
-  //       console.log(res)
-  //       this.router.navigate([`purchases/${this.purchase.id}`]);
-  //     },
-  //     err => console.error(err)
-  //   );
-  // }
+  createPurchase() {
+    this.purchaseItems = this.items.value;
+    this.purchaseItems = this.purchaseItems.filter(element => element.product.barcode != '-1');
+    console.log(this.purchaseItems);
+    this.httpPurchaseItem.addPurchaseProducts(this.purchaseItems, this.purchase.id).subscribe(
+      res => {
+        console.log(res)
+        this.router.navigate([`purchases/${this.purchase.id}`]);
+      },
+      err => console.error(err)
+    );
+  }
 
   openDialog() {
     const dialogRef = this.dialog.open(AddProductComponent, {

@@ -14,32 +14,11 @@ const URI_API: string = environment.url_backend + "purchases";
 })
 export class HttpPurchaseDetailService {
   private headers = this.header.generateHeader();
-  private items: PurchaseItem[];
-  private items$: Subject<PurchaseItem[]>;
 
   constructor(private http: HttpClient,
-    private header: AuthHeadGeneratorService) {
-    this.items = [];
-    this.items$ = new Subject();
-  }
-
-  addItem(item:PurchaseItem) {
-    this.items.push(item);
-    this.items$.next(this.items);
-  }
-
-  getItems$():Observable<PurchaseItem[]> {
-    return this.items$.asObservable();
-  }
+    private header: AuthHeadGeneratorService) { }
 
   addPurchaseProducts(items: PurchaseItem[], purchaseId: number) {
     return this.http.post(`${URI_API}/${purchaseId}`, items, { headers: this.headers });
-  }
-
-  getAllAsFormArray(): Observable<FormArray> {
-    return this.getItems$().pipe(map((item: PurchaseItem[]) => {
-      const fgs = item.map(PurchaseItem.asFormGroup);
-      return new FormArray(fgs);
-    }));
   }
 }

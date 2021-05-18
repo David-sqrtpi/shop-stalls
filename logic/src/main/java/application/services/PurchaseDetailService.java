@@ -39,7 +39,7 @@ public class PurchaseDetailService {
                 inventory.setProduct(purchaseDetail.getProduct());
             }
 
-            long price = purchaseDetail.getPrice() / purchaseDetail.getQuantity();
+            long price = purchaseDetail.getPrice();
             inventory.setQuantity(purchaseDetail.getQuantity() + inventory.getQuantity());
             if (inventory.getPurchasePrice() == 0) {
                 inventory.setPurchasePrice(price);

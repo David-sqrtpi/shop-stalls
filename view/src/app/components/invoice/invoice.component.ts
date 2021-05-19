@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Product } from 'src/app/models/Product';
-import { Supplier } from 'src/app/models/Supplier';
 import { HttpSupplierService } from 'src/app/services/http-supplier.service';
 import { HttpProdutService } from 'src/app/services/produt.service';
 import { debounceTime } from 'rxjs/operators';
@@ -9,7 +8,6 @@ import { PurchaseItem } from 'src/app/models/purchase-item';
 import { Purchase } from 'src/app/models/purchase';
 import { Router } from '@angular/router';
 import { HttpPurchaseDetailService } from 'src/app/services/http-purchase-detail.service';
-import { MatDialog } from '@angular/material/dialog';
 import { HttpInvoiceService } from 'src/app/services/http-invoice.service';
 
 @Component({
@@ -40,8 +38,7 @@ export class InvoiceComponent implements OnInit {
     private fb: FormBuilder,
     private httpInvoice: HttpInvoiceService,
     private router: Router,
-    private httpPurchaseItem: HttpPurchaseDetailService,
-    private dialog: MatDialog) {
+    private httpPurchaseItem: HttpPurchaseDetailService) {
     this.code.valueChanges
       .pipe(debounceTime(350))
       .subscribe(

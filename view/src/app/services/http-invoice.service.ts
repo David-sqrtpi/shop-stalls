@@ -13,8 +13,8 @@ export class HttpInvoiceService {
 
   constructor(private http:HttpClient, private header:AuthHeadGeneratorService) { }
 
-  create(invoice) {
-    return this.http.post(URI_API, invoice, {headers:this.headers});
+  create() {
+    return this.http.post(URI_API, null, {headers:this.headers});
   }
 
   addProduct(invoice:number, product:number, quantity:number) {

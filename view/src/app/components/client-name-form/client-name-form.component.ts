@@ -23,16 +23,6 @@ export class ClientNameFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit() {
-    this.httpInvoice.create(this.invoice.value).subscribe(
-      res => {
-        console.log(res);
-        this.router.navigate([`invoices/${res["id"]}`]);
-      },
-      err => {
-        console.log(err);
-      }
-    )
-  }
+  onSubmit() { }
 
 }

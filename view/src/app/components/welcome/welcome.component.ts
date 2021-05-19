@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { HttpUserServiceService } from 'src/app/services/http-user-service.service';
-import { ClientNameFormComponent } from '../client-name-form/client-name-form.component';
 
 @Component({
   selector: 'app-welcome',
@@ -9,11 +7,8 @@ import { ClientNameFormComponent } from '../client-name-form/client-name-form.co
   styleUrls: ['./welcome.component.css']
 })
 export class WelcomeComponent implements OnInit {
-
   name = null;
-
-  constructor(private http: HttpUserServiceService,
-    private dialog: MatDialog) { }
+  constructor(private http: HttpUserServiceService) { }
 
   ngOnInit(): void {
     if (localStorage.getItem('userId')) {
@@ -33,12 +28,4 @@ export class WelcomeComponent implements OnInit {
       );
     }
   }
-
-  openDialog() {
-    const dialogRef = this.dialog.open(ClientNameFormComponent, {
-      height: '200px',
-      width: '300px',
-    });
-  }
-
 }

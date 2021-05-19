@@ -45,7 +45,7 @@ const appRoutes = [
     {path:'invoices/:id/product', component: ItemProductComponent, canActivate:[AuthGuard]},
     {path:'invoices/:id/service', component: ItemServiceComponent, canActivate:[AuthGuard]},
     {path:'purchases/:id', component: PurchaseDetailComponent, canActivate:[AuthGuard]},
-    {path:'supply', component: PurchaseComponent},
+    {path:'supply', component: PurchaseComponent},/////////////////////////
     {path:'**', component: NotFoundComponent},
 ]
 

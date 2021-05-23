@@ -19,7 +19,6 @@ public class CreateInvoice {
 
     @PostMapping("/invoices")
     public Invoice create(@RequestBody Invoice invoice) {
-        invoice.setDate(new Date());
         return invoiceRepository.save(invoice);
     }
 }

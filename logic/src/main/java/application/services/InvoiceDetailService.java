@@ -22,6 +22,12 @@ public class InvoiceDetailService {
     private ServiceRepository serviceRepository;
     @Autowired
     private InventoryService inventoryService;
+    
+    public void addAllInvoiceDetail(List<InvoiceDetail> items) {
+        for(InvoiceDetail item: items) {
+            addInvoiceDetail(item);
+        }
+    }
 
     public void addInvoiceDetail(InvoiceDetail invoiceDetail) {
         Invoice invoice = invoiceRepository.findById(invoiceDetail.getInvoice().getId());

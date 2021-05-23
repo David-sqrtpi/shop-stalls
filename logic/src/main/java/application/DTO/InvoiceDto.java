@@ -1,11 +1,13 @@
 package application.DTO;
 
-import application.entity.Invoice;
 import application.entity.InvoiceDetail;
+import application.entity.Sale;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Date;
 import java.util.List;
 
 
@@ -14,6 +16,11 @@ import java.util.List;
 @Getter
 @Setter
 public class InvoiceDto {
-    Invoice invoice;
+    private long id;
+    private Sale sale;
+    private String clientName;
+    private long dni;
+    private Date date;
+    private long total;
     private List<InvoiceDetail> items;
 }

@@ -3,7 +3,6 @@ import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Product } from 'src/app/models/Product';
 import { HttpProdutService } from 'src/app/services/produt.service';
 import { debounceTime } from 'rxjs/operators';
-import { PurchaseItem } from 'src/app/models/purchase-item';
 import { Purchase } from 'src/app/models/purchase';
 import { Router } from '@angular/router';
 import { HttpInvoiceService } from 'src/app/services/http-invoice.service';
@@ -30,7 +29,6 @@ export class InvoiceComponent implements OnInit {
 
   displayedColumns: string[] = ['name', 'quantity', 'price', 'subtotal', 'x'];
 
-  purchase: Purchase;
   retrievedProduct: Product;
   invoiceItems:InvoiceDetail[] = [];
 
@@ -81,9 +79,9 @@ export class InvoiceComponent implements OnInit {
     ) {
       this.items.push(this.fb.group({
         quantity: [1, [Validators.required, Validators.min(1)]],
-        price: [1, [Validators.required, Validators.min(1)]],
-        purchase: this.fb.group({
-          id: [this.purchase.id]
+        price: 999,
+        invoice: this.fb.group({
+          id: [this.invoice.id]
         }),
         product: this.fb.group({
           barcode: [this.retrievedProduct.barcode],
@@ -105,14 +103,14 @@ export class InvoiceComponent implements OnInit {
     this.table.renderRows();
   }
 
-  createPurchase() {
+  createInvoice() {
     this.invoiceItems = this.items.value;
     this.invoiceItems = this.invoiceItems.filter(element => element.product.barcode != '-1');
     console.log(this.invoiceItems);
     this.invoiceService.addInvoiceDetails(this.invoiceItems, this.invoice.id).subscribe(
       res => {
         console.log(res)
-        this.router.navigate([`invoices/${this.purchase.id}`]);
+        this.router.navigate([`invoices/${this.invoice.id}`]);
       },
       err => console.error(err)
     );

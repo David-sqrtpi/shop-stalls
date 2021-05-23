@@ -21,8 +21,13 @@ public class PurchaseConverter implements DtoConverter<Purchase, PurchaseDto>{
 
     @Override
     public PurchaseDto fromEntity(Purchase entity) {
-        List<PurchaseDetail> products = purchaseDetailRepository.findByPurchaseId(entity.getId());
+        PurchaseDto purchase = new PurchaseDto();
+        //purchase.setId();
+        purchase.setSupplier(entity.getSupplier());
+        purchase.setDate(entity.getDate());
+        purchase.setAmountToPay(entity.getAmountToPay());
+        purchase.setProducts(purchaseDetailRepository.findByPurchaseId(entity.getId()));
 
-        return new PurchaseDto(entity, products);
+        return purchase;
     }
 }

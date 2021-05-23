@@ -1,6 +1,5 @@
 package application.DTO;
 
-import application.entity.Purchase;
 import application.entity.PurchaseDetail;
 import application.entity.Supplier;
 import lombok.AllArgsConstructor;
@@ -16,6 +15,9 @@ import java.util.List;
 @Getter
 @Setter
 public class PurchaseDto {
-    private Purchase purchase;
+    private long id;
+    private Supplier supplier;
+    private Date date;
+    private long amountToPay;
     private List<PurchaseDetail> products;
 }

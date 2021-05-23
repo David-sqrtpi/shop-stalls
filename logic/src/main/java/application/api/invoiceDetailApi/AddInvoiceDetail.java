@@ -11,7 +11,7 @@ public class AddInvoiceDetail {
     @Autowired
     private InvoiceDetailService invoiceDetailService;
 
-    @PostMapping("invoices/{invoice}")
+    @PostMapping("invoice/{invoice}") //TODO Temp Test
     public void addInvoiceDetail(@PathVariable long invoice,
                                  @RequestBody InvoiceDetail invoiceDetail) {
         invoiceDetail.getInvoice().setId(invoice);

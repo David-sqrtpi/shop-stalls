@@ -1,14 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Product } from 'src/app/models/Product';
-import { HttpSupplierService } from 'src/app/services/http-supplier.service';
 import { HttpProdutService } from 'src/app/services/produt.service';
 import { debounceTime } from 'rxjs/operators';
 import { PurchaseItem } from 'src/app/models/purchase-item';
 import { Purchase } from 'src/app/models/purchase';
 import { Router } from '@angular/router';
-import { HttpPurchaseDetailService } from 'src/app/services/http-purchase-detail.service';
 import { HttpInvoiceService } from 'src/app/services/http-invoice.service';
+import { Invoice } from 'src/app/models/invoice';
+import { InvoiceDetail } from 'src/app/models/invoice-detail';
 
 @Component({
   selector: 'app-invoice',
@@ -17,6 +17,7 @@ import { HttpInvoiceService } from 'src/app/services/http-invoice.service';
 })
 export class InvoiceComponent implements OnInit {
   @ViewChild('table') private table;
+  invoice: Invoice;
 
   barcode: string;
   invoiceForm = this.fb.group({
@@ -31,14 +32,13 @@ export class InvoiceComponent implements OnInit {
 
   purchase: Purchase;
   retrievedProduct: Product;
-  purchaseItems: PurchaseItem[] = [];
+  invoiceItems:InvoiceDetail[] = [];
 
-  constructor(private http: HttpSupplierService,
-    private httpProduct: HttpProdutService,
+  constructor(private httpProduct: HttpProdutService,
     private fb: FormBuilder,
     private httpInvoice: HttpInvoiceService,
     private router: Router,
-    private httpPurchaseItem: HttpPurchaseDetailService) {
+    private invoiceService:HttpInvoiceService) {
     this.code.valueChanges
       .pipe(debounceTime(350))
       .subscribe(
@@ -51,8 +51,9 @@ export class InvoiceComponent implements OnInit {
 
   ngOnInit(): void {
     this.httpInvoice.create().subscribe(
-      res => {
-        console.log(res);
+      invoice => {
+        this.invoice = invoice
+        console.log(invoice);
       },
       err => {
         console.log(err);
@@ -73,7 +74,7 @@ export class InvoiceComponent implements OnInit {
   }
 
   onSubmit() {
-    if (!this.purchaseItems
+    if (!this.invoiceItems
       .some(
         element => element.product.barcode == this.retrievedProduct.barcode
       ) && this.retrievedProduct
@@ -93,25 +94,25 @@ export class InvoiceComponent implements OnInit {
         })
       }));
       this.table.renderRows();
-      this.purchaseItems = this.items.value;
-      console.log(this.purchaseItems);
+      this.invoiceItems = this.items.value;
+      console.log(this.invoiceItems);
     }
   }
 
   removeProduct(barcode: string) {
-    this.purchaseItems.find(element => element.product.barcode == barcode).product.barcode = '-1';
-    this.items.setValue(this.purchaseItems);
+    this.invoiceItems.find(element => element.product.barcode == barcode).product.barcode = '-1';
+    this.items.setValue(this.invoiceItems);
     this.table.renderRows();
   }
 
   createPurchase() {
-    this.purchaseItems = this.items.value;
-    this.purchaseItems = this.purchaseItems.filter(element => element.product.barcode != '-1');
-    console.log(this.purchaseItems);
-    this.httpPurchaseItem.addPurchaseProducts(this.purchaseItems, this.purchase.id).subscribe(
+    this.invoiceItems = this.items.value;
+    this.invoiceItems = this.invoiceItems.filter(element => element.product.barcode != '-1');
+    console.log(this.invoiceItems);
+    this.invoiceService.addInvoiceDetails(this.invoiceItems, this.invoice.id).subscribe(
       res => {
         console.log(res)
-        this.router.navigate([`purchases/${this.purchase.id}`]);
+        this.router.navigate([`invoices/${this.purchase.id}`]);
       },
       err => console.error(err)
     );

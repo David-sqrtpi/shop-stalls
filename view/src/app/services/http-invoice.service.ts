@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { Invoice } from '../models/invoice';
 import { InvoiceDetail } from '../models/invoice-detail';
 import { AuthHeadGeneratorService } from './auth-head-generator.service';
 
@@ -15,7 +16,7 @@ export class HttpInvoiceService {
   constructor(private http:HttpClient, private header:AuthHeadGeneratorService) { }
 
   create() {
-    return this.http.post(URI_API, null, {headers:this.headers});
+    return this.http.post<Invoice>(URI_API, null, {headers:this.headers});
   }
 
   addProduct(invoice:number, product:number, quantity:number) {

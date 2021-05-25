@@ -19,7 +19,7 @@ public class ProductService {
             Product product1 = productRepository.save(product);
             inventoryService.addProduct(product1);
         } else {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Product is registered already");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Product already exists");
         }
     }
 

@@ -2,6 +2,7 @@ package application.api.ServicesApi;
 
 import application.Repository.ServiceRepository;
 import application.entity.Service;
+import application.services.Services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,11 +11,10 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 public class AddService {
     @Autowired
-    ServiceRepository servicesRepository;
+    private Services services;
 
     @PostMapping
     public void add(@RequestBody Service service) {
-        servicesRepository.save(service);
+        services.addService(service);
     }
-
 }

@@ -30,7 +30,9 @@ export class AddProductComponent implements OnInit {
 
   createProduct() {
     this.product.addProduct(this.productForm.value).subscribe(
-      () => this.openSnackBar("Producto añadido"),
+      () => {
+        this.openSnackBar("Producto añadido");
+      },
       err => console.log(err)
     )
   }
@@ -40,5 +42,9 @@ export class AddProductComponent implements OnInit {
       duration: 3000,
     });
     this.dialogRef.close();
+  }
+
+  get barcode() {
+    return this.productForm.get('barcode');
   }
 }

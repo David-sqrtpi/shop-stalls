@@ -10,7 +10,6 @@ export class AuthHeadGeneratorService {
 
   generateHeader():HttpHeaders{
     let authHead:string  = 'Bearer '+ localStorage.getItem('token');
-    
     return new HttpHeaders().set("Authorization", authHead);
   }
 }

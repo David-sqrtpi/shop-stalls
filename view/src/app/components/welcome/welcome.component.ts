@@ -16,7 +16,8 @@ export class WelcomeComponent implements OnInit {
       this.name = localStorage.getItem('name');
     }
     else {
-      setTimeout(() => this.showUsername(), 100);
+      this.showUsername();
+      location.reload();
     }
   }
 

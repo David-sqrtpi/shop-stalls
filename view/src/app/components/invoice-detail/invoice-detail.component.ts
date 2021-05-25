@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Invoice } from 'src/app/models/invoice';
+import { InvoiceDetail } from 'src/app/models/invoice-detail';
 import { HttpInvoiceService } from 'src/app/services/http-invoice.service';
 
 @Component({
@@ -11,8 +13,8 @@ import { HttpInvoiceService } from 'src/app/services/http-invoice.service';
 export class InvoiceDetailComponent implements OnInit {
 
   invoiceId:number = this.router.snapshot.params['id'];
-  invoice: object = null;
-  items:object;
+  invoice: Invoice = null;
+  items:InvoiceDetail[];
   displayedColumns: string[] = ['product', 'quantity', 'price', 'subtotal'];
 
   
@@ -22,17 +24,8 @@ export class InvoiceDetailComponent implements OnInit {
     this.http.getInvoice(this.invoiceId).subscribe(
       res => {
         this.invoice = res;
+        this.items = this.invoice.items;
         console.log(res);
-        
-      },
-      err => {
-        console.log(err);
-      }
-    );
-
-    this.http.getInvoice(this.invoiceId).subscribe(
-      res => {
-        this.items = res;
       },
       err => {
         console.log(err);

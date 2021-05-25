@@ -127,8 +127,8 @@ export class PurchaseComponent implements OnInit {
 
   openDialog() {
     const dialogRef = this.dialog.open(AddProductComponent, {
-      height: '95%',
       width: '95%',
+      data: {code: this.code.value}
     });
   }
 

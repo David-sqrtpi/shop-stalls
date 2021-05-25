@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { HttpProdutService } from 'src/app/services/produt.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
@@ -10,7 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 export class AddProductComponent implements OnInit {
   productForm = this.fb.group({
-    barcode: ['', Validators.required],
+    barcode: [this.data.code, Validators.required],
     name: ['', Validators.required],
     minStock: ['', Validators.required],
     company: this.fb.group({
@@ -20,7 +21,9 @@ export class AddProductComponent implements OnInit {
 
   constructor(private product: HttpProdutService,
     private fb: FormBuilder,
-    private snack: MatSnackBar) { }
+    private snack: MatSnackBar,
+    @Inject(MAT_DIALOG_DATA) public data: {code: string},
+    public dialogRef: MatDialogRef<AddProductComponent>) { }
 
   ngOnInit(): void {
   }
@@ -36,6 +39,6 @@ export class AddProductComponent implements OnInit {
     this.snack.open(message, null, {
       duration: 3000,
     });
-    window.location.reload();
+    this.dialogRef.close();
   }
 }

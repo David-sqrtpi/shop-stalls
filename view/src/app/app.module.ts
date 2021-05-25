@@ -45,7 +45,6 @@ import { InvoiceComponent } from './components/invoice/invoice.component';
 import { InvoiceDetailComponent } from './components/invoice-detail/invoice-detail.component';
 import { ItemProductComponent } from './components/item-product/item-product.component';
 import { ItemServiceComponent } from './components/item-service/item-service.component';
-import { ClientNameFormComponent } from './components/client-name-form/client-name-form.component';
 import { SupplyComponent } from './components/supply/supply.component';
 import { PurchaseComponent } from './components/purchase/purchase.component';
 import { PurchaseDetailComponent } from './components/purchase-detail/purchase-detail.component';
@@ -77,7 +76,6 @@ import { InventoryComponent } from './components/inventory/inventory.component';
     InvoiceDetailComponent,
     ItemProductComponent,
     ItemServiceComponent,
-    ClientNameFormComponent,
     SupplyComponent,
     PurchaseComponent,
     PurchaseDetailComponent,

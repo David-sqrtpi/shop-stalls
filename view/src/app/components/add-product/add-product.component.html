@@ -10,7 +10,7 @@
   <p>
     <mat-form-field appearance="outline" hideRequiredMarker>
       <mat-label>Nombre</mat-label>
-      <input matInput required formControlName="name" type="text">
+      <input matInput required formControlName="name" type="text" cdkFocusInitial>
       <mat-error *ngIf='productForm.invalid'>Campo requerido</mat-error>
     </mat-form-field>
   </p>
@@ -22,5 +22,5 @@
     </mat-form-field>
   </p>
   <button mat-raised-button type="submit"
-    [disabled]="productForm.invalid">Registrar</button>
+    [disabled]="productForm.invalid" [mat-dialog-close]="data.code">Registrar</button>
 </form>

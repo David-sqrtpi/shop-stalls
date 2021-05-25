@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpUserServiceService } from 'src/app/services/http-user-service.service';
+import { retry } from 'rxjs/operators'
 
 @Component({
   selector: 'app-welcome',
@@ -13,19 +14,22 @@ export class WelcomeComponent implements OnInit {
   ngOnInit(): void {
     if (localStorage.getItem('userId')) {
       this.name = localStorage.getItem('name');
-
     }
     else {
-      this.http.getUserByEmail(localStorage.getItem("email")).subscribe(
-        result => {
-          console.log(result);
-          this.name = result["name"];
-          localStorage.setItem('userId', result['id']);
-          localStorage.setItem('name', result['name']);
-          localStorage.setItem('company', result['company']['id']);
-          localStorage.removeItem('email');
-        }
-      );
+      setTimeout(() => this.showUsername(), 100);
     }
   }
+
+  showUsername() {
+    this.http.getUserByEmail(localStorage.getItem("email")).subscribe(
+      result => {
+        this.name = result["name"];
+        localStorage.setItem('userId', result['id']);
+        localStorage.setItem('name', result['name']);
+        localStorage.setItem('company', result['company']['id']);
+        localStorage.removeItem('email');
+      }
+    );
+  }
+
 }

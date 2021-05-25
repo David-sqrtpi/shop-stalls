@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Product } from 'src/app/models/Product';
 import { HttpProdutService } from 'src/app/services/produt.service';
 import { debounceTime } from 'rxjs/operators';
@@ -17,11 +17,14 @@ import { InvoiceDetail } from 'src/app/models/invoice-detail';
 export class InvoiceComponent implements OnInit {
   @ViewChild('table') private table;
   invoice: Invoice;
-
   barcode: string;
+
   invoiceForm = this.fb.group({
-    code: [''],
+    dni: ['', Validators.required],
+    clientName: ['', Validators.required]
   });
+
+  barcodeInput = new FormControl('', Validators.required);
 
   form = this.fb.group({
     items: this.fb.array([])
@@ -37,7 +40,7 @@ export class InvoiceComponent implements OnInit {
     private httpInvoice: HttpInvoiceService,
     private router: Router,
     private invoiceService:HttpInvoiceService) {
-    this.code.valueChanges
+    this.barcodeInput.valueChanges
       .pipe(debounceTime(350))
       .subscribe(
         value => {
@@ -114,10 +117,6 @@ export class InvoiceComponent implements OnInit {
       },
       err => console.error(err)
     );
-  }
-
-  get code() {
-    return this.invoiceForm.get('code');
   }
 
   get items(): FormArray {

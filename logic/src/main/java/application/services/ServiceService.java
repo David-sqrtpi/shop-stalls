@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 @Service
-public class Services {
+public class ServiceService {
     @Autowired
     private ServiceRepository serviceRepository;
 

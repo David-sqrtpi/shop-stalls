@@ -19,7 +19,7 @@ public class InvoiceConverter implements DtoConverter<Invoice, InvoiceDto> {
     @Override
     public InvoiceDto fromEntity(Invoice entity) {
         InvoiceDto invoice = new InvoiceDto();
-        //invoice.setId();
+        invoice.setId(entity.getId());
         //invoice.setSale();
         invoice.setClientName(entity.getClientName());
         invoice.setDni(entity.getDni());

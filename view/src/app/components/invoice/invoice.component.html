@@ -2,12 +2,14 @@
 <hr>
 <form [formGroup]='invoiceForm'>
   <mat-form-field appearance="outline">
-    <mat-label>Identificación</mat-label>
+    <mat-label>Identificación del cliente</mat-label>
     <input matInput type="number" formControlName='dni'>
+    <mat-error *ngIf='invoiceForm.get("dni").invalid'>Campo requerido</mat-error>
   </mat-form-field>
   <mat-form-field appearance="outline">
-    <mat-label>Cliente</mat-label>
+    <mat-label>Nombre del Cliente</mat-label>
     <input matInput type="text" formControlName='clientName'>
+    <mat-error *ngIf='invoiceForm.get("clientName").invalid'>Campo requerido</mat-error>
   </mat-form-field>
 </form>
 <hr>
@@ -17,16 +19,15 @@
       <mat-form-field appearance="outline">
         <mat-label>Codigo</mat-label>
         <input matInput type="number" [formControl]='barcodeInput'>
+        <mat-error *ngIf='barcodeInput.invalid'>Campo requerido</mat-error>
       </mat-form-field>
     </p>
-    <button mat-raised-button type="submit">Añadir</button>
+    <button mat-raised-button type="submit" [disabled]='barcodeInput.invalid'>Añadir</button>
   </form>
   <app-product-detail *ngIf="barcodeInput.value" [id]='barcode'></app-product-detail>
-  <div *ngIf='!retrievedProduct && barcodeInput.value'>Este producto no existe. <a [routerLink]=''
-      >Crear?</a></div>
 </div>
 
-<div class="d2" *ngIf='1' style="position: absolute;">
+<div class="d2" *ngIf='items.length' style="position: absolute;">
   <mat-table #table [dataSource]="items.controls" class="mat-elevation-z8" style="width: 100%;">
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
@@ -61,6 +62,6 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let element; columns: displayedColumns" [class.hide]="element.get('product.barcode').value == -1"></mat-row>
   </mat-table>
-  <button mat-raised-button (click)='createInvoice()'>Continuar</button>
+  <button mat-raised-button (click)='createInvoice()' [disabled]='invoiceForm.invalid'>Continuar</button>
   <button mat-raised-button>Salir</button>
 </div>

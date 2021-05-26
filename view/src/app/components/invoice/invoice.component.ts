@@ -94,9 +94,8 @@ export class InvoiceComponent implements OnInit {
           })
         })
       }));
-      this.table.renderRows();
       this.invoiceItems = this.items.value;
-      console.log(this.invoiceItems);
+      this.table.renderRows();
     }
   }
 
@@ -107,6 +106,11 @@ export class InvoiceComponent implements OnInit {
   }
 
   createInvoice() {
+    this.invoice.clientName = this.invoiceForm.get('clientName').value;
+    this.invoice.dni = this.invoiceForm.get('dni').value;
+    this.invoice.date = new Date;
+    this.httpInvoice.modify(this.invoice).subscribe();
+
     this.invoiceItems = this.items.value;
     this.invoiceItems = this.invoiceItems.filter(element => element.product.barcode != '-1');
     console.log(this.invoiceItems);

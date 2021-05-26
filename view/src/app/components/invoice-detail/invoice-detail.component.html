@@ -1,7 +1,8 @@
 <h3>
-  ID: {{ invoice.id }} <br>
+  ID Factura: {{ invoice.id }} <br>
+  Identificación cliente: {{ invoice.dni }} <br>
   Cliente: {{ invoice.clientName }} <br>
-  Fecha: {{ invoice.date }}<br>
+  Fecha: {{ invoice.date | date:'medium' }}<br>
 </h3>
 <div *ngIf='items.length'>
   <table mat-table [dataSource]="items" class="mat-elevation-z8">

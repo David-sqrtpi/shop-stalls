@@ -19,6 +19,10 @@ export class HttpInvoiceService {
     return this.http.post<Invoice>(URI_API, null, {headers:this.headers});
   }
 
+  modify(invoice:Invoice) {
+    return this.http.put(URI_API, invoice, {headers:this.headers});
+  }
+
   addProduct(invoice:number, product:number, quantity:number) {
     return this.http.put(`${URI_API}/${invoice}/product?product=${product}&quantity=${quantity}`, null, {headers:this.headers});
   }

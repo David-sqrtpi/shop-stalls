@@ -28,4 +28,8 @@ public class InventoryService {
         inventory.setProduct(product);
         inventoryRepository.save(inventory);
     }
+
+    public Inventory getOne(long companyId, long productBarcode) {
+        return inventoryRepository.findByProductCompanyIdAndProductBarcode(companyId, productBarcode);
+    }
 }

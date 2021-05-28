@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-public class GetInventory {
+public class GetAllInventory {
     @Autowired
     private InventoryRepository inventoryRepository;
 

@@ -23,11 +23,11 @@
   </form>
 
   <app-product-detail *ngIf="code.value" [id]='barcode'></app-product-detail>
-  <div *ngIf='!retrievedProduct && code.value'>Este producto no existe. <a [routerLink]=''
+  <div *ngIf='!retrievedProduct && code.value && !isWaiting'>Este producto no existe. <a [routerLink]=''
       (click)=openDialog()>Crear?</a></div>
 </div>
 
-<div class="d2" *ngIf='1' style="position: absolute;">
+<div class="d2" *ngIf='items.length' style="position: absolute;">
   <mat-table #table [dataSource]="items.controls" class="mat-elevation-z8" style="width: 100%;">
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>

@@ -82,10 +82,10 @@ export class InvoiceComponent implements OnInit {
       ) && this.retrievedProduct
     ) {
       this.items.push(this.fb.group({
-        quantity: [1, [Validators.required, Validators.min(1)]],
+        quantity: [1, [Validators.required, Validators.min(1), Validators.max(this.retrievedInventory.quantity)]],
         price: this.retrievedInventory.salePrice,
         invoice: this.fb.group({
-          id: [this.invoice.id]
+          id: this.invoice.id
         }),
         product: this.fb.group({
           barcode: [this.retrievedProduct.barcode],

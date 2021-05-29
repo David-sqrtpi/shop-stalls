@@ -39,6 +39,11 @@
       <mat-cell *matCellDef="let element" [formGroup]="element">
         <mat-form-field>
           <input matInput placeholder="cantidad" formControlName="quantity" required>
+          <mat-error *ngIf='element.get("quantity").invalid'>
+            <mat-error *ngIf='element.get("quantity").errors.required'>Campo requerido</mat-error>
+            <mat-error *ngIf='element.get("quantity").errors.min'>Dato inválido</mat-error>
+            <mat-error *ngIf='element.get("quantity").errors.max'>Existencia excedida</mat-error>
+          </mat-error>
         </mat-form-field>
       </mat-cell>
     </ng-container>
@@ -60,8 +65,9 @@
       </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let element; columns: displayedColumns" [class.hide]="element.get('product.barcode').value == -1"></mat-row>
+    <mat-row *matRowDef="let element; columns: displayedColumns"
+      [class.hide]="element.get('product.barcode').value == -1"></mat-row>
   </mat-table>
-  <button mat-raised-button (click)='createInvoice()' [disabled]='invoiceForm.invalid'>Continuar</button>
+  <button mat-raised-button (click)='createInvoice()'>Continuar</button>
   <button mat-raised-button>Salir</button>
 </div>

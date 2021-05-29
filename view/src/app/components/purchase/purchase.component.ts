@@ -67,13 +67,18 @@ export class PurchaseComponent implements OnInit {
     );
   }
 
+  public isWaiting: Boolean= false;
+
   getProduct(barcode: string) {
+    this.isWaiting = true;
     this.httpProduct.getProductByBarcode(barcode).subscribe(
       res => {
         this.retrievedProduct = res;
+        this.isWaiting = false;
       },
       err => {
         console.error(err);
+        this.isWaiting = false;
         this.retrievedProduct = null;
       }
     )
@@ -99,9 +104,8 @@ export class PurchaseComponent implements OnInit {
           })
         })
       }));
-      this.table.renderRows();
       this.purchaseItems = this.items.value;
-      console.log(this.purchaseItems);
+      this.table.renderRows();
     }
   }
 
@@ -110,8 +114,6 @@ export class PurchaseComponent implements OnInit {
     this.items.setValue(this.purchaseItems);
     this.table.renderRows();
   }
-
-  public isWaiting: Boolean = false;
 
   createPurchase() {
     if(this.form.invalid || !this.items.length) {

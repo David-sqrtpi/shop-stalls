@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Date;
-
 @CrossOrigin
 @RestController
 public class ModifyPurchase {
@@ -18,7 +16,6 @@ public class ModifyPurchase {
 
     @PutMapping("purchases")
     public void modifyPurchase(@RequestBody Purchase purchase) {
-        purchase.setDate(new Date());
         purchaseRepository.save(purchase);
     }
 

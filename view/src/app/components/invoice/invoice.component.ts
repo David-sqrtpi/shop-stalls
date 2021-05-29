@@ -1,13 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Product } from 'src/app/models/Product';
-import { HttpProdutService } from 'src/app/services/produt.service';
 import { debounceTime } from 'rxjs/operators';
-import { Purchase } from 'src/app/models/purchase';
 import { Router } from '@angular/router';
 import { HttpInvoiceService } from 'src/app/services/http-invoice.service';
 import { Invoice } from 'src/app/models/invoice';
 import { InvoiceDetail } from 'src/app/models/invoice-detail';
+import { HttpInventoryService } from 'src/app/services/http-inventory.service';
+import { Inventory } from 'src/app/models/inventory';
 
 @Component({
   selector: 'app-invoice',
@@ -31,11 +31,11 @@ export class InvoiceComponent implements OnInit {
   });
 
   displayedColumns: string[] = ['name', 'quantity', 'price', 'subtotal', 'x'];
-
+  retrievedInventory: Inventory;
   retrievedProduct: Product;
   invoiceItems:InvoiceDetail[] = [];
 
-  constructor(private httpProduct: HttpProdutService,
+  constructor(private inventoryService: HttpInventoryService,
     private fb: FormBuilder,
     private httpInvoice: HttpInvoiceService,
     private router: Router,
@@ -63,15 +63,16 @@ export class InvoiceComponent implements OnInit {
   }
 
   getProduct(barcode: string) {
-    this.httpProduct.getProductByBarcode(barcode).subscribe(
-      res => {
-        this.retrievedProduct = res;
+    this.inventoryService.getOne(barcode).subscribe(
+      inventory => {
+        this.retrievedInventory = inventory;
+        this.retrievedProduct = inventory.product;
       },
       err => {
         console.error(err);
-        this.retrievedProduct = null;
+        this.retrievedInventory = null;
       }
-    )
+    );
   }
 
   onSubmit() {
@@ -82,7 +83,7 @@ export class InvoiceComponent implements OnInit {
     ) {
       this.items.push(this.fb.group({
         quantity: [1, [Validators.required, Validators.min(1)]],
-        price: 999,
+        price: this.retrievedInventory.salePrice,
         invoice: this.fb.group({
           id: [this.invoice.id]
         }),

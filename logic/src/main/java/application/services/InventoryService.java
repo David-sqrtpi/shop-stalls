@@ -29,7 +29,7 @@ public class InventoryService {
         inventoryRepository.save(inventory);
     }
 
-    public Inventory getOne(long companyId, long productBarcode) {
+        public Inventory getOne(long companyId, String productBarcode) {
         return inventoryRepository.findByProductCompanyIdAndProductBarcode(companyId, productBarcode);
     }
 }

@@ -18,6 +18,7 @@ import { AddProductComponent } from '../add-product/add-product.component';
   templateUrl: './purchase.component.html',
   styleUrls: ['./purchase.component.css']
 })
+
 export class PurchaseComponent implements OnInit {
   @ViewChild('table') private table;
   barcode: string;
@@ -120,10 +121,12 @@ export class PurchaseComponent implements OnInit {
     this.code.setValidators(Validators.nullValidator);
     this.code.setValue('');
     this.isWaiting = true;
-    this.purchase.supplier = this.provider.value;
+    this.purchase.supplier = {
+      id: this.provider.value
+    }
     this.purchase.date = new Date();
     this.httpPurchase.modify(this.purchase).subscribe(
-      
+
     );
     this.purchaseItems = this.items.value;
     this.purchaseItems = this.purchaseItems.filter(element => element.product.barcode != '-1');

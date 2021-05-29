@@ -18,8 +18,6 @@ import { ProductDetailComponent } from "./components/product-detail/product-deta
 import { ServiceListComponent } from "./components/service-list/service-list.component";
 import { InvoiceComponent } from "./components/invoice/invoice.component";
 import { InvoiceDetailComponent } from "./components/invoice-detail/invoice-detail.component";
-import { ItemProductComponent } from "./components/item-product/item-product.component";
-import { ItemServiceComponent } from "./components/item-service/item-service.component";
 import { PurchaseComponent } from "./components/purchase/purchase.component";
 import { PurchaseDetailComponent } from "./components/purchase-detail/purchase-detail.component";
 import { InventoryComponent } from "./components/inventory/inventory.component";
@@ -40,8 +38,6 @@ const appRoutes = [
     {path:'services/modify', component: ModifyServicesComponent, canActivate:[AuthGuard]},
     {path:'invoices', component: InvoiceComponent, canActivate:[AuthGuard]},
     {path:'invoices/:id', component: InvoiceDetailComponent, canActivate:[AuthGuard]},
-    {path:'invoices/:id/product', component: ItemProductComponent, canActivate:[AuthGuard]},
-    {path:'invoices/:id/service', component: ItemServiceComponent, canActivate:[AuthGuard]},
     {path:'purchases', component: PurchaseComponent, canActivate:[AuthGuard]},
     {path:'purchases/:id', component: PurchaseDetailComponent, canActivate:[AuthGuard]},
     {path:'**', component: NotFoundComponent},

@@ -43,12 +43,12 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { ServiceListComponent } from './components/service-list/service-list.component';
 import { InvoiceComponent } from './components/invoice/invoice.component';
 import { InvoiceDetailComponent } from './components/invoice-detail/invoice-detail.component';
-import { ItemProductComponent } from './components/item-product/item-product.component';
-import { ItemServiceComponent } from './components/item-service/item-service.component';
 import { SupplyComponent } from './components/supply/supply.component';
 import { PurchaseComponent } from './components/purchase/purchase.component';
 import { PurchaseDetailComponent } from './components/purchase-detail/purchase-detail.component';
 import { InventoryComponent } from './components/inventory/inventory.component';
+import { PurchaseListComponent } from './components/purchase-list/purchase-list.component';
+import { InvoiceListComponent } from './components/invoice-list/invoice-list.component';
 
 @NgModule({
   declarations: [
@@ -74,12 +74,12 @@ import { InventoryComponent } from './components/inventory/inventory.component';
     ServiceListComponent,
     InvoiceComponent,
     InvoiceDetailComponent,
-    ItemProductComponent,
-    ItemServiceComponent,
     SupplyComponent,
     PurchaseComponent,
     PurchaseDetailComponent,
     InventoryComponent,
+    PurchaseListComponent,
+    InvoiceListComponent,
   ],
   imports: [
     BrowserModule,

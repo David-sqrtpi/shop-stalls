@@ -19,11 +19,11 @@ export class HttpPurchaseService {
     return this.http.post<Purchase>(URI_API, null, { headers: this.headers });
   }
 
-  getPurchaseItems(id: number) {
-    return this.http.get<PurchaseItem[]>(`${URI_API}/${id}`, { headers: this.headers });
+  getPurchase(id: number) {
+    return this.http.get<Purchase>(`${URI_API}/${id}`, { headers: this.headers });
   }
 
-  getPurchase(id:number) {
-    return this.http.get<Purchase>(`${URI_API}/${id}`, { headers: this.headers });
+  getAll() {
+    return this.http.get<Purchase[]>(`${URI_API}?company=${localStorage.getItem('company')}`, { headers: this.headers });
   }
 }

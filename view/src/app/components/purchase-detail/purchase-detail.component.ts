@@ -21,6 +21,7 @@ export class PurchaseDetailComponent implements OnInit {
     this.http.getPurchase(this.id).subscribe(
       res => {
         this.purchase = res;
+        console.log(res);
       },
       err => console.error(err)
     );

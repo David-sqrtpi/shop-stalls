@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Purchase } from '../models/purchase';
-import { PurchaseItem } from '../models/purchase-item';
 import { AuthHeadGeneratorService } from './auth-head-generator.service';
 
 const URI_API: string = environment.url_backend + "purchases";
@@ -10,6 +9,7 @@ const URI_API: string = environment.url_backend + "purchases";
 @Injectable({
   providedIn: 'root'
 })
+
 export class HttpPurchaseService {
   constructor(private http: HttpClient,
     private header: AuthHeadGeneratorService) { }
@@ -17,6 +17,10 @@ export class HttpPurchaseService {
 
   createPurchase() {
     return this.http.post<Purchase>(URI_API, null, { headers: this.headers });
+  }
+
+  modify(purchase: Purchase) {
+    return this.http.put(URI_API, purchase, { headers: this.headers });
   }
 
   getPurchase(id: number) {

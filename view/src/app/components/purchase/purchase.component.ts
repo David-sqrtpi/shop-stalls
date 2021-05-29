@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Product } from 'src/app/models/Product';
 import { Supplier } from 'src/app/models/Supplier';
 import { HttpSupplierService } from 'src/app/services/http-supplier.service';
@@ -20,15 +20,13 @@ import { AddProductComponent } from '../add-product/add-product.component';
 })
 export class PurchaseComponent implements OnInit {
   @ViewChild('table') private table;
-
   barcode: string;
-  purchaseForm = this.fb.group({
-    provider: [],
-    code: [''],
-  });
+
+  code = new FormControl('', Validators.required);
 
   form = this.fb.group({
-    items: this.fb.array([])
+    items: this.fb.array([]),
+    provider: ['', Validators.required]
   });
 
   displayedColumns: string[] = ['name', 'quantity', 'price', 'subtotal', 'x'];
@@ -112,7 +110,21 @@ export class PurchaseComponent implements OnInit {
     this.table.renderRows();
   }
 
+  public isWaiting: Boolean = false;
+
   createPurchase() {
+    if(this.form.invalid || !this.items.length) {
+      alert('Faltan datos');
+      throw new Error("Incomplete data");
+    }
+    this.code.setValidators(Validators.nullValidator);
+    this.code.setValue('');
+    this.isWaiting = true;
+    this.purchase.supplier = this.provider.value;
+    this.purchase.date = new Date();
+    this.httpPurchase.modify(this.purchase).subscribe(
+      
+    );
     this.purchaseItems = this.items.value;
     this.purchaseItems = this.purchaseItems.filter(element => element.product.barcode != '-1');
     console.log(this.purchaseItems);
@@ -121,7 +133,11 @@ export class PurchaseComponent implements OnInit {
         console.log(res)
         this.router.navigate([`purchases/${this.purchase.id}`]);
       },
-      err => console.error(err)
+      err =>{
+        console.error(err);
+        this.isWaiting = false;
+        alert('Ha ocurrido un error');
+      }
     );
   }
 
@@ -143,11 +159,11 @@ export class PurchaseComponent implements OnInit {
     );
   }
 
-  get code() {
-    return this.purchaseForm.get('code');
-  }
-
   get items(): FormArray {
     return this.form.get('items') as FormArray;
+  }
+
+  get provider() {
+    return this.form.get('provider');
   }
 }

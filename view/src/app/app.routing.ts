@@ -1,5 +1,4 @@
-import { RouterModule, Routes } from "@angular/router";
-import { AddProductComponent } from "./components/add-product/add-product.component";
+import { RouterModule } from "@angular/router";
 import { AddServicesComponent } from "./components/add-services/add-services.component";
 import { CreateUserComponent } from "./components/create-user/create-user.component";
 import { HomeComponent } from "./components/home/home.component";
@@ -13,7 +12,6 @@ import { AuthGuard } from "./guards/auth.guard";
 import { NegateUserLoggedGuard } from "./guards/negate-user-logged.guard";
 import { UserListComponent } from "./components/user-list/user-list.component";
 import { UserDetailComponent } from "./components/user-detail/user-detail.component";
-import { ProductListComponent } from "./components/product-list/product-list.component";
 import { ProductDetailComponent } from "./components/product-detail/product-detail.component";
 import { ServiceListComponent } from "./components/service-list/service-list.component";
 import { InvoiceComponent } from "./components/invoice/invoice.component";
@@ -21,7 +19,6 @@ import { InvoiceDetailComponent } from "./components/invoice-detail/invoice-deta
 import { PurchaseComponent } from "./components/purchase/purchase.component";
 import { PurchaseDetailComponent } from "./components/purchase-detail/purchase-detail.component";
 import { InventoryComponent } from "./components/inventory/inventory.component";
-
 
 const appRoutes = [
     {path:'', component: HomeComponent, canActivate:[NegateUserLoggedGuard]},

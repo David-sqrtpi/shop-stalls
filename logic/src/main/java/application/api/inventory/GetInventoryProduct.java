@@ -16,7 +16,7 @@ public class GetInventoryProduct {
 
     @GetMapping("companies/{company}/inventory/{productBarcode}")
     public Inventory getInventoryProduct(@PathVariable long company,
-                                         @PathVariable string productBarcode) {
+                                         @PathVariable String productBarcode) {
         return inventoryService.getOne(company, productBarcode);
     }
 }

@@ -13,10 +13,8 @@ import { HttpInvoiceService } from 'src/app/services/http-invoice.service';
 export class InvoiceDetailComponent implements OnInit {
 
   invoiceId:number = this.router.snapshot.params['id'];
-  invoice: Invoice = null;
+  invoice: Invoice;
   items:InvoiceDetail[];
-  displayedColumns: string[] = ['product', 'quantity', 'price', 'subtotal'];
-
   
   constructor(private http: HttpInvoiceService, private router: ActivatedRoute) { }
 

@@ -10,7 +10,6 @@ import { HttpPurchaseService } from 'src/app/services/http-purchase.service';
 })
 
 export class PurchaseDetailComponent implements OnInit {
-  displayedColumns:string[] = ['name', 'quantity', 'price', 'subtotal'];
   id: number = this.route.snapshot.params['id'];
   purchase: Purchase;
 

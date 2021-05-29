@@ -1,34 +1,71 @@
-<h3>
-  ID Factura: {{ invoice.id }} <br>
-  Identificación cliente: {{ invoice.dni }} <br>
-  Cliente: {{ invoice.clientName }} <br>
-  Fecha: {{ invoice.date | date:'medium' }}<br>
-</h3>
-<div *ngIf='items.length'>
-  <table mat-table [dataSource]="items" class="mat-elevation-z8">
-    <ng-container matColumnDef="product">
-      <th mat-header-cell *matHeaderCellDef> Nombre </th>
-      <td mat-cell *matCellDef="let element"> {{ element.product.name }} </td>
-    </ng-container>
+<div class="invoice-box">
+  <table cellpadding="0" cellspacing="0">
+      <tr class="top">
+          <td colspan="2">
+              <table>
+                  <tr>
+                      <td class="title">
+                          <img src="https://www.sparksuite.com/images/logo.png"
+                              style="width: 100%; max-width: 300px" />
+                      </td>
 
-    <ng-container matColumnDef="quantity">
-      <th mat-header-cell *matHeaderCellDef> Cantidad </th>
-      <td mat-cell *matCellDef="let element"> {{ element.quantity }} </td>
-    </ng-container>
+                      <td>
+                          Factura de Venta #{{ invoice.id }}<br />
+                          Fecha de creación: {{ invoice.date | date: 'medium'}}<br />
+                      </td>
+                  </tr>
+              </table>
+          </td>
+      </tr>
 
-    <ng-container matColumnDef="price">
-      <th mat-header-cell *matHeaderCellDef> Precio </th>
-      <td mat-cell *matCellDef="let element"> {{ element.price }} </td>
-    </ng-container>
+      <tr class="information">
+          <td colspan="2">
+              <table>
+                  <tr>
+                      <td>
+                          <h2>Datos del Cliente</h2>
+                          <b>Nombre:</b> {{ invoice.clientName }}<br />
+                          <b>Cédula de Ciudadanía:</b> {{ invoice.dni }}<br />
+                      </td>
+                  </tr>
+              </table>
+          </td>
+      </tr>
 
-    <ng-container matColumnDef="subtotal">
-      <th mat-header-cell *matHeaderCellDef> Subtotal </th>
-      <td mat-cell *matCellDef="let element"> {{ element.price * element.quantity }} </td>
-    </ng-container>
+      <tr class="heading">
+          <td>Código</td>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <td>Producto</td>
+
+          <td>Cantidad</td>
+
+          <td>Precio Unitario</td>
+
+          <td>Subtotal</td>
+      </tr>
+
+      <tr class="item" *ngFor='let item of items'>
+          <td>{{ item.product.barcode }}</td>
+
+          <td>{{ item.product.name }}</td>
+
+          <td>{{ item.quantity }}</td>
+
+          <td>{{ item.price }}</td>
+
+          <td>{{ item.price * item.quantity }}</td>
+      </tr>
+
+      <tr class="total">
+          <td></td>
+
+          <td></td>
+
+          <td></td>
+
+          <td></td>
+
+          <td>Total: ${{ invoice.total }}</td>
+      </tr>
   </table>
-  <br>
 </div>
-

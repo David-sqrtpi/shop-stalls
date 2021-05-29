@@ -5,6 +5,7 @@ import { Inventory } from '../models/inventory';
 import { AuthHeadGeneratorService } from './auth-head-generator.service';
 
 const URI_API:string = environment.url_backend + "companies";
+const COMPANY_ID = localStorage.getItem('company');
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +16,10 @@ export class HttpInventoryService {
   constructor(private http:HttpClient, private header:AuthHeadGeneratorService) { }
 
   getInventory() {
-    return this.http.get<Inventory[]>(`${URI_API}/${localStorage.getItem('company')}/inventory`, {headers:this.headers});
+    return this.http.get<Inventory[]>(`${URI_API}/${COMPANY_ID}/inventory`, {headers:this.headers});
   }
 
-  addToInventory() {
-
+  getOne(barcode:string) {
+    return this.http.get<Inventory>(`${URI_API}/${COMPANY_ID}/inventory/${barcode}`, {headers:this.headers});
   }
 }

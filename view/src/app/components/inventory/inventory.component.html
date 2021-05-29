@@ -21,5 +21,5 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)='onClick(row)' class="hover-row"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" routerLink='{{ row.product.barcode }}' class="hover-row"></tr>
 </table>

@@ -1,15 +1,15 @@
 <h1>Venta</h1>
 <hr>
-<form [formGroup]='invoiceForm'>
+<form [formGroup]='form'>
   <mat-form-field appearance="outline">
     <mat-label>Identificación del cliente</mat-label>
     <input matInput type="number" formControlName='dni'>
-    <mat-error *ngIf='invoiceForm.get("dni").invalid'>Campo requerido</mat-error>
+    <mat-error *ngIf='form.get("dni").invalid'>Campo requerido</mat-error>
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>Nombre del Cliente</mat-label>
     <input matInput type="text" formControlName='clientName'>
-    <mat-error *ngIf='invoiceForm.get("clientName").invalid'>Campo requerido</mat-error>
+    <mat-error *ngIf='form.get("clientName").invalid'>Campo requerido</mat-error>
   </mat-form-field>
 </form>
 <hr>
@@ -25,6 +25,7 @@
     <button mat-raised-button type="submit" [disabled]='barcodeInput.invalid'>Añadir</button>
   </form>
   <app-product-detail *ngIf="barcodeInput.value" [id]='barcode'></app-product-detail>
+  <div *ngIf='!retrievedProduct && barcodeInput.value && !isWaiting'>Este producto no existe.</div>
 </div>
 
 <div class="d2" *ngIf='items.length' style="position: absolute;">
@@ -38,7 +39,7 @@
       <mat-header-cell *matHeaderCellDef> Cantidad </mat-header-cell>
       <mat-cell *matCellDef="let element" [formGroup]="element">
         <mat-form-field>
-          <input matInput placeholder="cantidad" formControlName="quantity" required>
+          <input matInput placeholder="Cantidad" formControlName="quantity">
           <mat-error *ngIf='element.get("quantity").invalid'>
             <mat-error *ngIf='element.get("quantity").errors.required'>Campo requerido</mat-error>
             <mat-error *ngIf='element.get("quantity").errors.min'>Dato inválido</mat-error>
@@ -71,3 +72,5 @@
   <button mat-raised-button (click)='createInvoice()'>Continuar</button>
   <button mat-raised-button>Salir</button>
 </div>
+
+<mat-spinner *ngIf='isWaiting' diameter:50></mat-spinner>

@@ -151,12 +151,14 @@ export class PurchaseComponent implements OnInit {
       width: '95%',
       data: {code: this.code.value}
     });
-
+    
     dialogRef.afterClosed().subscribe(
       res => {
+        this.code.setValidators(Validators.nullValidator);
+        this.code.setValue("");
         if(res) {
-          this.code.setValue("");
           setTimeout(() => {
+            this.code.setValidators(Validators.required);
             this.code.setValue(res);
           }, 350);
         }

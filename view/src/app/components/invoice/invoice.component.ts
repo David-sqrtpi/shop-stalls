@@ -19,32 +19,31 @@ export class InvoiceComponent implements OnInit {
   invoice: Invoice;
   barcode: string;
 
-  invoiceForm = this.fb.group({
-    dni: ['', Validators.required],
-    clientName: ['', Validators.required]
-  });
-
   barcodeInput = new FormControl('', Validators.required);
 
   form = this.fb.group({
+    dni: ['', Validators.required],
+    clientName: ['', Validators.required],
     items: this.fb.array([])
   });
 
   displayedColumns: string[] = ['name', 'quantity', 'price', 'subtotal', 'x'];
   retrievedInventory: Inventory;
   retrievedProduct: Product;
-  invoiceItems:InvoiceDetail[] = [];
+  invoiceItems: InvoiceDetail[] = [];
+  isWaiting: boolean = false;
 
   constructor(private inventoryService: HttpInventoryService,
     private fb: FormBuilder,
     private httpInvoice: HttpInvoiceService,
     private router: Router,
-    private invoiceService:HttpInvoiceService) {
+    private invoiceService: HttpInvoiceService) {
     this.barcodeInput.valueChanges
       .pipe(debounceTime(350))
       .subscribe(
         value => {
           this.barcode = value;
+          this.retrievedProduct = null;
           this.getProduct(value)
         }
       );
@@ -63,14 +62,20 @@ export class InvoiceComponent implements OnInit {
   }
 
   getProduct(barcode: string) {
+    this.isWaiting = true;
     this.inventoryService.getOne(barcode).subscribe(
       inventory => {
-        this.retrievedInventory = inventory;
-        this.retrievedProduct = inventory.product;
+        this.isWaiting = false;
+        try {
+          this.retrievedInventory = inventory;
+          this.retrievedProduct = inventory.product;
+        } catch (error) {
+        }
       },
       err => {
+        this.isWaiting = false;
         console.error(err);
-        this.retrievedInventory = null;
+        this.retrievedProduct = null;
       }
     );
   }
@@ -107,21 +112,30 @@ export class InvoiceComponent implements OnInit {
   }
 
   createInvoice() {
-    this.invoice.clientName = this.invoiceForm.get('clientName').value;
-    this.invoice.dni = this.invoiceForm.get('dni').value;
-    this.invoice.date = new Date;
-    this.httpInvoice.modify(this.invoice).subscribe();
+    this.isWaiting = true;
+    if (this.form.invalid || !this.items.length) {
+      alert("Faltan datos");
+      throw new Error("Incomplete data");
+    }
 
-    this.invoiceItems = this.items.value;
-    this.invoiceItems = this.invoiceItems.filter(element => element.product.barcode != '-1');
-    console.log(this.invoiceItems);
-    this.invoiceService.addInvoiceDetails(this.invoiceItems, this.invoice.id).subscribe(
-      res => {
-        console.log(res)
-        this.router.navigate([`invoices/${this.invoice.id}`]);
-      },
-      err => console.error(err)
+    this.invoice.clientName = this.form.get('clientName').value;
+    this.invoice.dni = this.form.get('dni').value;
+    this.invoice.date = new Date;
+    this.httpInvoice.modify(this.invoice).subscribe(
+      () => {
+        this.invoiceItems = this.items.value;
+        this.invoiceItems = this.invoiceItems.filter(element => element.product.barcode != '-1');
+        console.log(this.invoiceItems);
+        this.invoiceService.addInvoiceDetails(this.invoiceItems, this.invoice.id).subscribe(
+          res => {
+            console.log(res)
+            this.router.navigate([`invoices/${this.invoice.id}`]);
+          },
+          err => console.error(err)
+        );
+      }
     );
+
   }
 
   get items(): FormArray {

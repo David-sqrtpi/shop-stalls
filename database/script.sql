@@ -97,6 +97,7 @@ insert into user values (1, 22, "jairo@motos.com", "Jairo", "12345678", "AVAILAB
 insert into user values (2, 20, "vivi@motos.com", "Viviana", "12345678", "AVAILABLE", 1);
 
 insert into product values (1, "123", 10, "Aceite Castrol 400W", "AVAILABLE", null, 1);
+insert into inventory values (1, 0, 0, 10000, 1);
 
 insert into service values (1, "321", "Según el aceite seleccionado", "Cambio de Aceite", 10000, "AVAILABLE", 1);
 
@@ -114,6 +115,7 @@ insert into user values (3, 22, "svetlana@google.com", "Svetlana", "12345678", "
 insert into user values (4, 20, "laurel@google.com", "Laurel", "12345678", "AVAILABLE", 2);
 
 insert into product values (2, "234", 10, "Chromecast", "AVAILABLE", null, 2);
+insert into inventory values (2, 0, 0, 5000, 2);
 
 insert into service values (2, "432", "El horno es inteligente", "Instalación de horno microondas", 10000, "AVAILABLE", 2);
 

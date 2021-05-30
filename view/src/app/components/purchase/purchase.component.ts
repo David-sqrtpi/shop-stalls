@@ -32,7 +32,7 @@ export class PurchaseComponent implements OnInit {
 
   displayedColumns: string[] = ['name', 'quantity', 'price', 'subtotal', 'x'];
 
-  purchase: Purchase;
+  // purchase: Purchase;
   suppliers: Supplier[];
   retrievedProduct: Product;
   purchaseItems: PurchaseItem[] = [];
@@ -55,10 +55,6 @@ export class PurchaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.httpPurchase.createPurchase().subscribe(
-      res => this.purchase = res,
-      err => console.error(err)
-    );
     this.http.getAll().subscribe(
       res => {
         this.suppliers = res;
@@ -67,7 +63,7 @@ export class PurchaseComponent implements OnInit {
     );
   }
 
-  public isWaiting: Boolean= false;
+  public isWaiting: Boolean = false;
 
   getProduct(barcode: string) {
     this.isWaiting = true;
@@ -116,20 +112,19 @@ export class PurchaseComponent implements OnInit {
   }
 
   createPurchase() {
-    if(this.form.invalid || !this.items.length) {
+    if (this.form.invalid || !this.items.length) {
       alert('Faltan datos');
       throw new Error("Incomplete data");
     }
+
+    let purchase: Purchase = this.buildPurchase();
+    this.httpPurchase.create(purchase).subscribe();
+
     this.code.setValidators(Validators.nullValidator);
     this.code.setValue('');
-    this.isWaiting = true;
-    this.purchase.supplier = {
-      id: this.provider.value
-    }
-    this.purchase.date = new Date();
-    this.httpPurchase.modify(this.purchase).subscribe(
 
-    );
+    this.isWaiting = true;
+    
     this.purchaseItems = this.items.value;
     this.purchaseItems = this.purchaseItems.filter(element => element.product.barcode != '-1');
     console.log(this.purchaseItems);
@@ -138,7 +133,7 @@ export class PurchaseComponent implements OnInit {
         console.log(res)
         this.router.navigate([`purchases/${this.purchase.id}`]);
       },
-      err =>{
+      err => {
         console.error(err);
         this.isWaiting = false;
         alert('Ha ocurrido un error');
@@ -149,14 +144,14 @@ export class PurchaseComponent implements OnInit {
   openDialog() {
     const dialogRef = this.dialog.open(AddProductComponent, {
       width: '95%',
-      data: {code: this.code.value}
+      data: { code: this.code.value }
     });
-    
+
     dialogRef.afterClosed().subscribe(
       res => {
         this.code.setValidators(Validators.nullValidator);
         this.code.setValue("");
-        if(res) {
+        if (res) {
           setTimeout(() => {
             this.code.setValidators(Validators.required);
             this.code.setValue(res);
@@ -164,6 +159,20 @@ export class PurchaseComponent implements OnInit {
         }
       }
     );
+  }
+
+  buildPurchase(): Purchase {
+    let purchase: Purchase = {
+      date: new Date(),
+      supplier: {
+        id: this.provider.value
+      }
+    }
+    return purchase;
+  }
+
+  toPurchaseItemArray():PurchaseItem[] {
+
   }
 
   get items(): FormArray {

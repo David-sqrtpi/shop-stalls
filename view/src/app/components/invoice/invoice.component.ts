@@ -35,7 +35,6 @@ export class InvoiceComponent implements OnInit {
 
   constructor(private inventoryService: HttpInventoryService,
     private fb: FormBuilder,
-    private httpInvoice: HttpInvoiceService,
     private router: Router,
     private invoiceService: HttpInvoiceService) {
     this.barcodeInput.valueChanges
@@ -50,7 +49,7 @@ export class InvoiceComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.httpInvoice.create().subscribe(
+    this.invoiceService.create().subscribe(
       invoice => {
         this.invoice = invoice
         console.log(invoice);
@@ -121,7 +120,7 @@ export class InvoiceComponent implements OnInit {
     this.invoice.clientName = this.form.get('clientName').value;
     this.invoice.dni = this.form.get('dni').value;
     this.invoice.date = new Date;
-    this.httpInvoice.modify(this.invoice).subscribe(
+    this.invoiceService.modify(this.invoice).subscribe(
       () => {
         this.invoiceItems = this.items.value;
         this.invoiceItems = this.invoiceItems.filter(element => element.product.barcode != '-1');

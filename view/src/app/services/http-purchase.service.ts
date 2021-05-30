@@ -15,12 +15,8 @@ export class HttpPurchaseService {
     private header: AuthHeadGeneratorService) { }
   private headers = this.header.generateHeader();
 
-  createPurchase() {
-    return this.http.post<Purchase>(URI_API, null, { headers: this.headers });
-  }
-
-  modify(purchase: Purchase) {
-    return this.http.put(URI_API, purchase, { headers: this.headers });
+  create(purchase: Purchase) {
+    return this.http.post<Purchase>(URI_API, purchase, { headers: this.headers });
   }
 
   getPurchase(id: number) {

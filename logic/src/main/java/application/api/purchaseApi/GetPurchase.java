@@ -17,7 +17,7 @@ public class GetPurchase {
     @Autowired
     private PurchaseConverter purchaseConverter;
 
-    @GetMapping("purchases/{purchase}")
+    @GetMapping("purchases/{purchaseId}")
     public PurchaseDto getPurchase(@PathVariable long purchaseId) {
         return purchaseConverter.fromEntity(purchaseService.get(purchaseId));
     }

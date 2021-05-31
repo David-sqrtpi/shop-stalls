@@ -5,11 +5,11 @@ import { Supplier } from 'src/app/models/Supplier';
 import { HttpSupplierService } from 'src/app/services/http-supplier.service';
 import { HttpProdutService } from 'src/app/services/produt.service';
 import { debounceTime } from 'rxjs/operators';
-import { PurchaseItem } from 'src/app/models/purchase-item';
 import { HttpPurchaseService } from 'src/app/services/http-purchase.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { AddProductComponent } from '../add-product/add-product.component';
+import { PurchaseItem } from 'src/app/models/purchase-item';
 
 @Component({
   selector: 'app-purchase',
@@ -26,7 +26,7 @@ export class PurchaseComponent implements OnInit {
   purchaseForm = this.fb.group({
     id: [],
     supplier: this.fb.group({
-      id: ['', Validators.required]
+      id: [, Validators.required]
     }),
     date: [],
     amountToPay: [0],
@@ -55,8 +55,9 @@ export class PurchaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.httpPurchase.create(this.purchaseForm.value).subscribe(
-      purchase => this.purchaseForm.get('supplier.id').setValue(purchase.id)
+    console.log(this.purchaseForm.value);
+    this.httpPurchase.create({id:null}).subscribe(
+      purchase => this.purchaseForm.get('id').setValue(purchase.id)
     );
 
     this.http.getAll().subscribe(
@@ -85,7 +86,7 @@ export class PurchaseComponent implements OnInit {
   }
 
   addProduct() {
-    if (!this.itemsValue.value
+    if (!this.products.value
       .some(
         element => element.product.id == this.retrievedProduct.id
       ) && this.retrievedProduct
@@ -101,18 +102,19 @@ export class PurchaseComponent implements OnInit {
           purchase: this.purchaseForm.value
         })
       );
-      console.log(this.itemsValue.value);
+      console.log(this.products.value);
       this.table.renderRows();
     }
   }
 
   removeProduct(id: number) {
-    this.itemsValue.value.find(element => element.product.id == id).product.id = -1;
+    this.products.value.find(element => element.product.id == id).product.id = -1;
+    
     this.table.renderRows();
   }
 
   createPurchase() {
-    if (this.purchaseForm.invalid || !this.itemsValue.value.length) {
+    if (this.purchaseForm.invalid || !this.products.value.length) {
       alert('Faltan datos');
       throw new Error("Incomplete data");
     }
@@ -126,7 +128,7 @@ export class PurchaseComponent implements OnInit {
 
     this.httpPurchase.create(this.purchaseForm.value).subscribe(
       purchase => {
-        this.httpPurchase.addPurchaseProducts(this.itemsValue.value, this.purchaseForm.get('id').value).subscribe(
+        this.httpPurchase.addPurchaseProducts(this.products.value, this.purchaseForm.get('id').value).subscribe(
           res => {
             this.router.navigate([`purchases/${this.purchaseForm.get('id').value}`]);
           },
@@ -162,9 +164,5 @@ export class PurchaseComponent implements OnInit {
 
   get products(): FormArray {
     return this.purchaseForm.get('products') as FormArray;
-  }
-
-  get itemsValue() {
-    return this.purchaseForm.get('products');
   }
 }

@@ -4,9 +4,11 @@
     <p>
       <mat-form-field appearance="outline">
         <mat-label>Proveedor</mat-label>
-        <mat-select formControlName='supplier.id'>
-          <mat-option *ngFor='let supplier of suppliers' [value]="supplier.id">{{ supplier.name }}</mat-option>
-        </mat-select>
+        <mat-container formGroupName='supplier'>
+          <mat-select formControlName='id'>
+            <mat-option *ngFor='let supplier of suppliers' [value]="supplier.id">{{ supplier.name }}</mat-option>
+          </mat-select>
+        </mat-container>
         <mat-error>Selecciona un proveedor</mat-error>
       </mat-form-field>
     </p>
@@ -27,8 +29,8 @@
       (click)=openDialog()>Crear?</a></div>
 </div>
 
-<div class="d2" *ngIf='items.length' style="position: absolute;">
-  <mat-table #table [dataSource]="items.controls" class="mat-elevation-z8" style="width: 100%;">
+<div class="d2" *ngIf='products.length' style="position: absolute;">
+  <mat-table #table [dataSource]="products.controls" class="mat-elevation-z8" style="width: 100%;">
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.get('product.name').value}} </mat-cell>
@@ -38,7 +40,7 @@
       <mat-header-cell *matHeaderCellDef> Cantidad </mat-header-cell>
       <mat-cell *matCellDef="let element" [formGroup]="element">
         <mat-form-field>
-          <input matInput placeholder="cantidad" formControlName="quantity" required>
+          <input matInput placeholder="cantidad" formControlName="quantity" type="number">
           <mat-error>Valor inválido</mat-error>
         </mat-form-field>
       </mat-cell>
@@ -48,7 +50,7 @@
       <mat-header-cell *matHeaderCellDef> Precio </mat-header-cell>
       <mat-cell *matCellDef="let element" [formGroup]="element">
         <mat-form-field>
-          <input matInput placeholder="precio" formControlName="price" required>
+          <input matInput placeholder="precio" formControlName="price" type="number">
           <mat-error>Valor inválido</mat-error>
         </mat-form-field>
       </mat-cell>
@@ -66,8 +68,8 @@
       </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let element; columns: displayedColumns"
-      [class.hide]="element.get('product.id').value == -1"></mat-row>
+    <mat-row *matRowDef="let element; columns: displayedColumns" [class.hide]="element.get('product.id').value == -1">
+    </mat-row>
   </mat-table>
   <button mat-raised-button (click)='createPurchase()'>Continuar</button>
   <button mat-raised-button>Salir</button>

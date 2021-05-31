@@ -6,12 +6,10 @@ import { HttpSupplierService } from 'src/app/services/http-supplier.service';
 import { HttpProdutService } from 'src/app/services/produt.service';
 import { debounceTime } from 'rxjs/operators';
 import { PurchaseItem } from 'src/app/models/purchase-item';
-import { Purchase } from 'src/app/models/purchase';
 import { HttpPurchaseService } from 'src/app/services/http-purchase.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { AddProductComponent } from '../add-product/add-product.component';
-import { element } from 'protractor';
 
 @Component({
   selector: 'app-purchase',
@@ -25,19 +23,20 @@ export class PurchaseComponent implements OnInit {
 
   code = new FormControl('', Validators.required);
 
-  form = this.fb.group({
-    items: this.fb.array([]),
-    provider: ['', Validators.required]
+  purchaseForm = this.fb.group({
+    id: [],
+    supplier: this.fb.group({
+      id: ['', Validators.required]
+    }),
+    date: [],
+    amountToPay: [0],
+    products: this.fb.array([])
   });
 
   displayedColumns: string[] = ['name', 'quantity', 'price', 'subtotal', 'x'];
 
-  purchase: Purchase = {
-    products: []
-  };
   suppliers: Supplier[];
   retrievedProduct: Product;
-  purchaseItems: PurchaseItem[] = this.items.value;
 
   constructor(private http: HttpSupplierService,
     private httpProduct: HttpProdutService,
@@ -56,8 +55,8 @@ export class PurchaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.httpPurchase.create(this.purchase).subscribe(
-      purchase => this.purchase = purchase
+    this.httpPurchase.create(this.purchaseForm.value).subscribe(
+      purchase => this.purchaseForm.get('supplier.id').setValue(purchase.id)
     );
 
     this.http.getAll().subscribe(
@@ -86,43 +85,34 @@ export class PurchaseComponent implements OnInit {
   }
 
   addProduct() {
-    if (!this.purchaseItems
+    if (!this.itemsValue.value
       .some(
         element => element.product.id == this.retrievedProduct.id
       ) && this.retrievedProduct
     ) {
-      this.items.push(
+      this.products.push(
         this.fb.group({
           quantity: [1, [Validators.required, Validators.min(1)]],
           price: [1, [Validators.required, Validators.min(1)]],
           product: this.fb.group({
             id: this.retrievedProduct.id,
             name: this.retrievedProduct.name,
-            company: this.fb.group({
-              id: this.retrievedProduct.company.id
-            })
           }),
-          purchase: this.fb.group({
-            id: this.purchase.id,
-            supplier: this.fb.group({
-              id: this.provider.value
-            })
-          })
+          purchase: this.purchaseForm.value
         })
       );
-      this.purchaseItems = this.items.value;
+      console.log(this.itemsValue.value);
       this.table.renderRows();
     }
   }
 
   removeProduct(id: number) {
-    this.purchaseItems.find(element => element.product.id == id).product.id = -1;
-    this.items.setValue(this.purchaseItems);
+    this.itemsValue.value.find(element => element.product.id == id).product.id = -1;
     this.table.renderRows();
   }
 
   createPurchase() {
-    if (this.form.invalid || !this.items.length) {
+    if (this.purchaseForm.invalid || !this.itemsValue.value.length) {
       alert('Faltan datos');
       throw new Error("Incomplete data");
     }
@@ -132,15 +122,13 @@ export class PurchaseComponent implements OnInit {
 
     this.isWaiting = true;
 
-    this.purchase.date = new Date();
-    this.purchase.supplier = {
-      id: this.provider.value
-    }
-    this.httpPurchase.create(this.purchase).subscribe(
+    this.purchaseForm.get('date').setValue(new Date());
+
+    this.httpPurchase.create(this.purchaseForm.value).subscribe(
       purchase => {
-        this.httpPurchase.addPurchaseProducts(this.purchaseItems, this.purchase.id).subscribe(
+        this.httpPurchase.addPurchaseProducts(this.itemsValue.value, this.purchaseForm.get('id').value).subscribe(
           res => {
-            this.router.navigate([`purchases/${this.purchase.id}`]);
+            this.router.navigate([`purchases/${this.purchaseForm.get('id').value}`]);
           },
           err => {
             console.error(err);
@@ -172,11 +160,11 @@ export class PurchaseComponent implements OnInit {
     );
   }
 
-  get items(): FormArray {
-    return this.form.get('items') as FormArray;
+  get products(): FormArray {
+    return this.purchaseForm.get('products') as FormArray;
   }
 
-  get provider() {
-    return this.form.get('provider');
+  get itemsValue() {
+    return this.purchaseForm.get('products');
   }
 }

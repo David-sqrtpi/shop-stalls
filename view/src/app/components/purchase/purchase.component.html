@@ -1,10 +1,10 @@
 <h1>Compra de producto</h1>
 <div class="d1">
-  <form [formGroup]='form'>
+  <form [formGroup]='purchaseForm'>
     <p>
       <mat-form-field appearance="outline">
         <mat-label>Proveedor</mat-label>
-        <mat-select formControlName='provider'>
+        <mat-select formControlName='supplier.id'>
           <mat-option *ngFor='let supplier of suppliers' [value]="supplier.id">{{ supplier.name }}</mat-option>
         </mat-select>
         <mat-error>Selecciona un proveedor</mat-error>

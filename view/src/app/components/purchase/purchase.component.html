@@ -31,7 +31,7 @@
   <mat-table #table [dataSource]="items.controls" class="mat-elevation-z8" style="width: 100%;">
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.get('product.namer').value}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.get('product.name').value}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="quantity">
@@ -61,13 +61,13 @@
 
     <ng-container matColumnDef="x">
       <mat-header-cell *matHeaderCellDef> </mat-header-cell>
-      <mat-cell *matCellDef="let element" (click)="removeProduct(element.get('product.barcode').value)">
+      <mat-cell *matCellDef="let element" (click)="removeProduct(element.get('product.id').value)">
         <mat-icon>delete</mat-icon>
       </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let element; columns: displayedColumns"
-      [class.hide]="element.get('product.barcode').value == -1"></mat-row>
+      [class.hide]="element.get('product.id').value == -1"></mat-row>
   </mat-table>
   <button mat-raised-button (click)='createPurchase()'>Continuar</button>
   <button mat-raised-button>Salir</button>

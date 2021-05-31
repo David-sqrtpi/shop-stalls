@@ -11,6 +11,7 @@ import { HttpPurchaseService } from 'src/app/services/http-purchase.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { AddProductComponent } from '../add-product/add-product.component';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-purchase',
@@ -31,7 +32,9 @@ export class PurchaseComponent implements OnInit {
 
   displayedColumns: string[] = ['name', 'quantity', 'price', 'subtotal', 'x'];
 
-  purchase: Purchase;
+  purchase: Purchase = {
+    products: []
+  };
   suppliers: Supplier[];
   retrievedProduct: Product;
   purchaseItems: PurchaseItem[] = this.items.value;
@@ -53,7 +56,7 @@ export class PurchaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.httpPurchase.create(null).subscribe(
+    this.httpPurchase.create(this.purchase).subscribe(
       purchase => this.purchase = purchase
     );
 
@@ -85,33 +88,35 @@ export class PurchaseComponent implements OnInit {
   addProduct() {
     if (!this.purchaseItems
       .some(
-        element => element.product.barcode == this.retrievedProduct.barcode
+        element => element.product.id == this.retrievedProduct.id
       ) && this.retrievedProduct
     ) {
-      this.items.push(this.fb.group({
-        quantity: [1, [Validators.required, Validators.min(1)]],
-        price: [1, [Validators.required, Validators.min(1)]],
-        product: this.fb.group({
-          barcode: [this.retrievedProduct.barcode],
-          namer: [this.retrievedProduct.name],
-          company: this.fb.group({
-            id: [this.retrievedProduct.company.id]
+      this.items.push(
+        this.fb.group({
+          quantity: [1, [Validators.required, Validators.min(1)]],
+          price: [1, [Validators.required, Validators.min(1)]],
+          product: this.fb.group({
+            id: this.retrievedProduct.id,
+            name: this.retrievedProduct.name,
+            company: this.fb.group({
+              id: this.retrievedProduct.company.id
+            })
+          }),
+          purchase: this.fb.group({
+            id: this.purchase.id,
+            supplier: this.fb.group({
+              id: this.provider.value
+            })
           })
-        }),
-        purchase: this.fb.group({
-          date: [new Date()],
-          supplier: {
-            id: this.provider.value
-          }
         })
-      }));
+      );
       this.purchaseItems = this.items.value;
       this.table.renderRows();
     }
   }
 
-  removeProduct(barcode: string) {
-    this.purchaseItems.find(element => element.product.barcode == barcode).product.barcode = '-1';
+  removeProduct(id: number) {
+    this.purchaseItems.find(element => element.product.id == id).product.id = -1;
     this.items.setValue(this.purchaseItems);
     this.table.renderRows();
   }
@@ -127,16 +132,22 @@ export class PurchaseComponent implements OnInit {
 
     this.isWaiting = true;
 
-
-    this.httpPurchase.addPurchaseProducts(this.purchaseItems, this.purchase.id).subscribe(
-      res => {
-        console.log(res)
-        this.router.navigate([`purchases/${this.purchase.id}`]);
-      },
-      err => {
-        console.error(err);
-        this.isWaiting = false;
-        alert('Ha ocurrido un error');
+    this.purchase.date = new Date();
+    this.purchase.supplier = {
+      id: this.provider.value
+    }
+    this.httpPurchase.create(this.purchase).subscribe(
+      purchase => {
+        this.httpPurchase.addPurchaseProducts(this.purchaseItems, this.purchase.id).subscribe(
+          res => {
+            this.router.navigate([`purchases/${this.purchase.id}`]);
+          },
+          err => {
+            console.error(err);
+            this.isWaiting = false;
+            alert('Ha ocurrido un error');
+          }
+        );
       }
     );
   }
@@ -159,20 +170,6 @@ export class PurchaseComponent implements OnInit {
         }
       }
     );
-  }
-
-  toPurchaseItemArray(): PurchaseItem[] {
-    let purchaseItems: PurchaseItem[];
-    this.purchaseItems = this.items.value;
-    purchaseItems = this.purchaseItems = this.purchaseItems.filter(element => element.product.barcode != '-1');
-    let withPurchase = purchaseItems.map(function (item) {
-      let nItem = item;
-      nItem.purchase = {
-        id: this.provider.value
-      }
-      return nItem;
-    });
-    return withPurchase;
   }
 
   get items(): FormArray {

@@ -15,6 +15,6 @@ public class AddItemsToPurchase {
 
     @PostMapping("purchases/{purchase}")
     public void addItemsToPurchase(@RequestBody List<PurchaseDetail> items) {
-        purchaseDetailService.addAllPurchaseDetail(items);
+        purchaseDetailService.addPurchaseDetails(items);
     }
 }

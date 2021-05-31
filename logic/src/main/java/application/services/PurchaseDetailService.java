@@ -21,23 +21,10 @@ public class PurchaseDetailService {
     @Autowired
     private PurchaseDetailRepository purchaseDetailRepository;
 
-    public void addPurchaseDetail(PurchaseDetail purchaseDetail) {
-
-    }
-
-    public void addAllPurchaseDetail(List<PurchaseDetail> purchaseDetailList) {
-        List<Inventory> inventoryProducts = new ArrayList<>();
-
+    public void addPurchaseDetails(List<PurchaseDetail> purchaseDetailList) {
         for (PurchaseDetail purchaseDetail : purchaseDetailList) {
-            Inventory inventory = new Inventory();
-            Product product = productRepository.findByCompanyIdAndBarcode(purchaseDetail.getProduct().getCompany().getId(),
-                    purchaseDetail.getProduct().getBarcode());
-            purchaseDetail.setProduct(product);
-            if (inventoryRepository.existsByProductId(product.getId())) {
-                inventory = inventoryRepository.findByProductId(product.getId());
-            } else {
-                inventory.setProduct(purchaseDetail.getProduct());
-            }
+            Product product = productRepository.findById(purchaseDetail.getProduct().getId());
+            Inventory inventory = inventoryRepository.findByProductId(product.getId());
 
             long price = purchaseDetail.getPrice();
             inventory.setQuantity(purchaseDetail.getQuantity() + inventory.getQuantity());
@@ -47,9 +34,8 @@ public class PurchaseDetailService {
                 long purchasePrice = inventory.getPurchasePrice();
                 inventory.setPurchasePrice((price + purchasePrice) / 2);
             }
-            inventoryProducts.add(inventory);
+            inventoryRepository.save(inventory);
         }
-        inventoryRepository.saveAll(inventoryProducts);
         purchaseDetailRepository.saveAll(purchaseDetailList);
     }
 }

@@ -1,7 +1,7 @@
 package application.api.purchaseApi;
 
-import application.Repository.PurchaseRepository;
 import application.entity.Purchase;
+import application.services.PurchaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class CreatePurchase {
     @Autowired
-    private PurchaseRepository purchaseRepository;
+    private PurchaseService purchaseService;
 
-    @PostMapping("purchases")
+    @PutMapping("purchases")
     public Purchase createPurchase(@RequestBody Purchase purchase) {
-        return purchaseRepository.save(purchase);
+        return purchaseService.put(purchase);
     }
 }

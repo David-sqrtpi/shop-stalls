@@ -35,7 +35,7 @@ export class PurchaseComponent implements OnInit {
   // purchase: Purchase;
   suppliers: Supplier[];
   retrievedProduct: Product;
-  purchaseItems: PurchaseItem[] = [];
+  purchaseItems: PurchaseItem[] = this.items.value;
 
   constructor(private http: HttpSupplierService,
     private httpProduct: HttpProdutService,
@@ -89,9 +89,6 @@ export class PurchaseComponent implements OnInit {
       this.items.push(this.fb.group({
         quantity: [1, [Validators.required, Validators.min(1)]],
         price: [1, [Validators.required, Validators.min(1)]],
-        purchase: this.fb.group({
-          id: [this.purchase.id]
-        }),
         product: this.fb.group({
           barcode: [this.retrievedProduct.barcode],
           namer: [this.retrievedProduct.name],
@@ -118,20 +115,20 @@ export class PurchaseComponent implements OnInit {
     }
 
     let purchase: Purchase = this.buildPurchase();
-    this.httpPurchase.create(purchase).subscribe();
+    this.httpPurchase.create(purchase).subscribe(
+      purchase => this
+    );
 
     this.code.setValidators(Validators.nullValidator);
     this.code.setValue('');
 
     this.isWaiting = true;
     
-    this.purchaseItems = this.items.value;
-    this.purchaseItems = this.purchaseItems.filter(element => element.product.barcode != '-1');
-    console.log(this.purchaseItems);
-    this.httpPurchaseItem.addPurchaseProducts(this.purchaseItems, this.purchase.id).subscribe(
+    
+    this.httpPurchaseItem.addPurchaseProducts(this.purchaseItems, purchase.id).subscribe(
       res => {
         console.log(res)
-        this.router.navigate([`purchases/${this.purchase.id}`]);
+        this.router.navigate([`purchases/${purchase.id}`]);
       },
       err => {
         console.error(err);
@@ -158,9 +155,9 @@ export class PurchaseComponent implements OnInit {
           }, 350);
         }
       }
-    );
-  }
-
+      );
+    }
+    
   buildPurchase(): Purchase {
     let purchase: Purchase = {
       date: new Date(),
@@ -170,15 +167,25 @@ export class PurchaseComponent implements OnInit {
     }
     return purchase;
   }
-
+  
   toPurchaseItemArray():PurchaseItem[] {
-
+    let purchaseItems:PurchaseItem[];
+    this.purchaseItems = this.items.value;
+    purchaseItems = this.purchaseItems = this.purchaseItems.filter(element => element.product.barcode != '-1');
+    let withPurchase = purchaseItems.map(function(item){
+      let nItem = item;
+      nItem.purchase = {
+        id: this.provider.value
+      }
+      return nItem;
+    });
+    return withPurchase;
   }
-
+  
   get items(): FormArray {
     return this.form.get('items') as FormArray;
   }
-
+  
   get provider() {
     return this.form.get('provider');
   }

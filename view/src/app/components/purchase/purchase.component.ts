@@ -9,7 +9,6 @@ import { PurchaseItem } from 'src/app/models/purchase-item';
 import { Purchase } from 'src/app/models/purchase';
 import { HttpPurchaseService } from 'src/app/services/http-purchase.service';
 import { Router } from '@angular/router';
-import { HttpPurchaseDetailService } from 'src/app/services/http-purchase-detail.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddProductComponent } from '../add-product/add-product.component';
 
@@ -32,7 +31,7 @@ export class PurchaseComponent implements OnInit {
 
   displayedColumns: string[] = ['name', 'quantity', 'price', 'subtotal', 'x'];
 
-  // purchase: Purchase;
+  purchase: Purchase;
   suppliers: Supplier[];
   retrievedProduct: Product;
   purchaseItems: PurchaseItem[] = this.items.value;
@@ -42,7 +41,6 @@ export class PurchaseComponent implements OnInit {
     private fb: FormBuilder,
     private httpPurchase: HttpPurchaseService,
     private router: Router,
-    private httpPurchaseItem: HttpPurchaseDetailService,
     private dialog: MatDialog) {
     this.code.valueChanges
       .pipe(debounceTime(350))
@@ -55,6 +53,10 @@ export class PurchaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.httpPurchase.create(null).subscribe(
+      purchase => this.purchase = purchase
+    );
+
     this.http.getAll().subscribe(
       res => {
         this.suppliers = res;
@@ -95,6 +97,12 @@ export class PurchaseComponent implements OnInit {
           company: this.fb.group({
             id: [this.retrievedProduct.company.id]
           })
+        }),
+        purchase: this.fb.group({
+          date: [new Date()],
+          supplier: {
+            id: this.provider.value
+          }
         })
       }));
       this.purchaseItems = this.items.value;
@@ -114,21 +122,16 @@ export class PurchaseComponent implements OnInit {
       throw new Error("Incomplete data");
     }
 
-    let purchase: Purchase = this.buildPurchase();
-    this.httpPurchase.create(purchase).subscribe(
-      purchase => this
-    );
-
     this.code.setValidators(Validators.nullValidator);
     this.code.setValue('');
 
     this.isWaiting = true;
-    
-    
-    this.httpPurchaseItem.addPurchaseProducts(this.purchaseItems, purchase.id).subscribe(
+
+
+    this.httpPurchase.addPurchaseProducts(this.purchaseItems, this.purchase.id).subscribe(
       res => {
         console.log(res)
-        this.router.navigate([`purchases/${purchase.id}`]);
+        this.router.navigate([`purchases/${this.purchase.id}`]);
       },
       err => {
         console.error(err);
@@ -155,24 +158,14 @@ export class PurchaseComponent implements OnInit {
           }, 350);
         }
       }
-      );
-    }
-    
-  buildPurchase(): Purchase {
-    let purchase: Purchase = {
-      date: new Date(),
-      supplier: {
-        id: this.provider.value
-      }
-    }
-    return purchase;
+    );
   }
-  
-  toPurchaseItemArray():PurchaseItem[] {
-    let purchaseItems:PurchaseItem[];
+
+  toPurchaseItemArray(): PurchaseItem[] {
+    let purchaseItems: PurchaseItem[];
     this.purchaseItems = this.items.value;
     purchaseItems = this.purchaseItems = this.purchaseItems.filter(element => element.product.barcode != '-1');
-    let withPurchase = purchaseItems.map(function(item){
+    let withPurchase = purchaseItems.map(function (item) {
       let nItem = item;
       nItem.purchase = {
         id: this.provider.value
@@ -181,11 +174,11 @@ export class PurchaseComponent implements OnInit {
     });
     return withPurchase;
   }
-  
+
   get items(): FormArray {
     return this.form.get('items') as FormArray;
   }
-  
+
   get provider() {
     return this.form.get('provider');
   }

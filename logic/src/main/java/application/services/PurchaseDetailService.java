@@ -22,6 +22,7 @@ public class PurchaseDetailService {
     private PurchaseDetailRepository purchaseDetailRepository;
 
     public void addPurchaseDetails(List<PurchaseDetail> purchaseDetailList) {
+        long purchaseTotal = 0;
         for (PurchaseDetail purchaseDetail : purchaseDetailList) {
             Product product = productRepository.findById(purchaseDetail.getProduct().getId());
             Inventory inventory = inventoryRepository.findByProductId(product.getId());
@@ -34,8 +35,10 @@ public class PurchaseDetailService {
                 long purchasePrice = inventory.getPurchasePrice();
                 inventory.setPurchasePrice((price + purchasePrice) / 2);
             }
+            purchaseTotal += purchaseDetail.getPrice() * purchaseDetail.getQuantity();
             inventoryRepository.save(inventory);
         }
+        purchaseDetailList.get(0).getPurchase().setAmountToPay(purchaseTotal);
         purchaseDetailRepository.saveAll(purchaseDetailList);
     }
 }

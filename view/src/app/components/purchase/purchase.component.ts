@@ -38,10 +38,10 @@ export class PurchaseComponent implements OnInit {
   suppliers: Supplier[];
   retrievedProduct: Product;
 
-  constructor(private http: HttpSupplierService,
-    private httpProduct: HttpProdutService,
+  constructor(private supplierService: HttpSupplierService,
+    private productService: HttpProdutService,
     private fb: FormBuilder,
-    private httpPurchase: HttpPurchaseService,
+    private purchaseService: HttpPurchaseService,
     private router: Router,
     private dialog: MatDialog) {
     this.code.valueChanges
@@ -56,11 +56,11 @@ export class PurchaseComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.purchaseForm.value);
-    this.httpPurchase.create({id:null}).subscribe(
+    this.purchaseService.create({id:null}).subscribe(
       purchase => this.purchaseForm.get('id').setValue(purchase.id)
     );
 
-    this.http.getAll().subscribe(
+    this.supplierService.getAll().subscribe(
       res => {
         this.suppliers = res;
       },
@@ -72,7 +72,7 @@ export class PurchaseComponent implements OnInit {
 
   getProduct(barcode: string) {
     this.isWaiting = true;
-    this.httpProduct.getProductByBarcode(barcode).subscribe(
+    this.productService.getProductByBarcode(barcode).subscribe(
       res => {
         this.retrievedProduct = res;
         this.isWaiting = false;
@@ -109,7 +109,7 @@ export class PurchaseComponent implements OnInit {
 
   removeProduct(id: number) {
     this.products.value.find(element => element.product.id == id).product.id = -1;
-    
+    this.products.setValue(this.products.value);
     this.table.renderRows();
   }
 
@@ -126,10 +126,12 @@ export class PurchaseComponent implements OnInit {
 
     this.purchaseForm.get('date').setValue(new Date());
 
-    this.httpPurchase.create(this.purchaseForm.value).subscribe(
-      purchase => {
-        this.httpPurchase.addPurchaseProducts(this.products.value, this.purchaseForm.get('id').value).subscribe(
-          res => {
+    let purchaseDetails: PurchaseItem[] = this.products.value.filter(product => product.product.id != -1);
+
+    this.purchaseService.create(this.purchaseForm.value).subscribe(
+      () => {
+        this.purchaseService.addPurchaseProducts(purchaseDetails, this.purchaseForm.get('id').value).subscribe(
+          () => {
             this.router.navigate([`purchases/${this.purchaseForm.get('id').value}`]);
           },
           err => {

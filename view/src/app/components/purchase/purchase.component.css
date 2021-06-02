@@ -13,3 +13,11 @@
 .mat-row.hide {
    display: none;
 }
+
+.content {
+    padding: 16px;
+}
+
+.content > mat-card {
+    width: 200px;
+}

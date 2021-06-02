@@ -40,7 +40,7 @@ public class InvoiceDetailService {
             addServiceDetail(invoiceDetail);
         }
         invoiceDetailRepository.save(invoiceDetail);
-        invoice.setTotal(invoiceDetail.getPrice() + invoice.getTotal());
+        invoice.setTotal(invoiceDetail.getPrice() * invoiceDetail.getQuantity() + invoice.getTotal());
         invoiceRepository.save(invoice);
     }
 

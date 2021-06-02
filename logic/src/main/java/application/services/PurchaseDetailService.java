@@ -5,6 +5,7 @@ import application.Repository.ProductRepository;
 import application.Repository.PurchaseDetailRepository;
 import application.entity.Inventory;
 import application.entity.Product;
+import application.entity.Purchase;
 import application.entity.PurchaseDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,8 @@ public class PurchaseDetailService {
     private ProductRepository productRepository;
     @Autowired
     private PurchaseDetailRepository purchaseDetailRepository;
+    @Autowired
+    private PurchaseService purchaseService;
 
     public void addPurchaseDetails(List<PurchaseDetail> purchaseDetailList) {
         long purchaseTotal = 0;
@@ -38,7 +41,9 @@ public class PurchaseDetailService {
             purchaseTotal += purchaseDetail.getPrice() * purchaseDetail.getQuantity();
             inventoryRepository.save(inventory);
         }
-        purchaseDetailList.get(0).getPurchase().setAmountToPay(purchaseTotal);
+        Purchase purchase = purchaseDetailList.get(0).getPurchase();
+        purchase.setAmountToPay(purchaseTotal);
+        purchaseService.put(purchase);
         purchaseDetailRepository.saveAll(purchaseDetailList);
     }
 }

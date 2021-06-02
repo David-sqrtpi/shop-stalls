@@ -119,7 +119,7 @@ export class InvoiceComponent implements OnInit {
 
     this.invoice.clientName = this.form.get('clientName').value;
     this.invoice.dni = this.form.get('dni').value;
-    this.invoice.date = new Date;
+    this.invoice.date = new Date();
     this.invoiceService.modify(this.invoice).subscribe(
       () => {
         this.invoiceItems = this.items.value;

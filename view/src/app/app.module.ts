@@ -50,6 +50,8 @@ import { InventoryComponent } from './components/inventory/inventory.component';
 import { PurchaseListComponent } from './components/purchase-list/purchase-list.component';
 import { InvoiceListComponent } from './components/invoice-list/invoice-list.component';
 
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -98,7 +100,8 @@ import { InvoiceListComponent } from './components/invoice-list/invoice-list.com
     MatProgressSpinnerModule,
     MatSnackBarModule,
     MatDialogModule,
-    MatCardModule
+    MatCardModule,
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { AddProductComponent } from '../add-product/add-product.component';
 import { PurchaseItem } from 'src/app/models/purchase-item';
+import { HttpInventoryService } from 'src/app/services/http-inventory.service';
 
 @Component({
   selector: 'app-purchase',
@@ -28,7 +29,7 @@ export class PurchaseComponent implements OnInit {
     supplier: this.fb.group({
       id: [, Validators.required]
     }),
-    date: [],
+    date: [new Date()],
     amountToPay: [0],
     products: this.fb.array([])
   });
@@ -43,7 +44,8 @@ export class PurchaseComponent implements OnInit {
     private fb: FormBuilder,
     private purchaseService: HttpPurchaseService,
     private router: Router,
-    private dialog: MatDialog) {
+    private dialog: MatDialog,
+    private inventory: HttpInventoryService) {
     this.code.valueChanges
       .pipe(debounceTime(350))
       .subscribe(
@@ -72,6 +74,9 @@ export class PurchaseComponent implements OnInit {
 
   getProduct(barcode: string) {
     this.isWaiting = true;
+
+    
+
     this.productService.getProductByBarcode(barcode).subscribe(
       res => {
         this.retrievedProduct = res;
@@ -123,8 +128,6 @@ export class PurchaseComponent implements OnInit {
     this.code.setValue('');
 
     this.isWaiting = true;
-
-    this.purchaseForm.get('date').setValue(new Date());
 
     let purchaseDetails: PurchaseItem[] = this.products.value.filter(product => product.product.id != -1);
 

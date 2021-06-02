@@ -1,78 +1,97 @@
-<h1>Compra de producto</h1>
-<div class="d1">
-  <form [formGroup]='purchaseForm'>
-    <p>
-      <mat-form-field appearance="outline">
-        <mat-label>Proveedor</mat-label>
-        <mat-container formGroupName='supplier'>
-          <mat-select formControlName='id'>
-            <mat-option *ngFor='let supplier of suppliers' [value]="supplier.id">{{ supplier.name }}</mat-option>
-          </mat-select>
-        </mat-container>
-        <mat-error>Selecciona un proveedor</mat-error>
-      </mat-form-field>
-    </p>
-  </form>
-  <form (ngSubmit)='addProduct()'>
-    <p>
-      <mat-form-field appearance="outline">
-        <mat-label>Código</mat-label>
-        <input matInput type="number" [formControl]='code'>
-        <mat-error>Campo requerido</mat-error>
-      </mat-form-field>
-    </p>
-    <button mat-raised-button type="submit">Añadir</button>
-  </form>
+<div class="content">
+  <div fxLayout="row wrap">
+    <mat-card class="mat-elevation-z4" fxFlex="40%">
+      <mat-card-header>
+        <mat-card-title>Compra de producto</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup]='purchaseForm'>
+          <p>
+            <mat-form-field appearance="outline">
+              <mat-label>Proveedor</mat-label>
+              <mat-container formGroupName='supplier'>
+                <mat-select formControlName='id'>
+                  <mat-option *ngFor='let supplier of suppliers' [value]="supplier.id">{{ supplier.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-container>
+              <mat-error>Selecciona un proveedor</mat-error>
+            </mat-form-field>
+          </p>
+        </form>
+        <form (ngSubmit)='addProduct()'>
+          <p>
+            <mat-form-field appearance="outline">
+              <mat-label>Código</mat-label>
+              <input matInput type="number" [formControl]='code'>
+              <mat-error>Campo requerido</mat-error>
+            </mat-form-field>
+          </p>
+          <button mat-raised-button type="submit">Añadir</button>
+        </form>
+        <app-product-detail *ngIf="code.value" [id]='barcode'></app-product-detail>
+        
+        <div *ngIf='!retrievedProduct && code.value && !isWaiting'>Este producto no existe. <a [routerLink]=''
+            (click)=openDialog()>Crear?</a></div>
+      </mat-card-content>
+    </mat-card>
 
-  <app-product-detail *ngIf="code.value" [id]='barcode'></app-product-detail>
-  <div *ngIf='!retrievedProduct && code.value && !isWaiting'>Este producto no existe. <a [routerLink]=''
-      (click)=openDialog()>Crear?</a></div>
-</div>
 
-<div class="d2" *ngIf='products.length' style="position: absolute;">
-  <mat-table #table [dataSource]="products.controls" class="mat-elevation-z8" style="width: 100%;">
-    <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.get('product.name').value}} </mat-cell>
-    </ng-container>
+    <mat-card class="mat-elevation-z4" fxFlex="40%">
+      <mat-card-header>
+        <mat-card-title>Vista previa</mat-card-title>
+      </mat-card-header>
+      <mat-card-content *ngIf='products.length'>
 
-    <ng-container matColumnDef="quantity">
-      <mat-header-cell *matHeaderCellDef> Cantidad </mat-header-cell>
-      <mat-cell *matCellDef="let element" [formGroup]="element">
-        <mat-form-field>
-          <input matInput placeholder="cantidad" formControlName="quantity" type="number">
-          <mat-error>Valor inválido</mat-error>
-        </mat-form-field>
-      </mat-cell>
-    </ng-container>
+        <mat-table #table [dataSource]="products.controls" class="mat-eation-z8" style="width: 100%;">
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.get('product.name').value}} </mat-cell>
+          </ng-container>
 
-    <ng-container matColumnDef="price">
-      <mat-header-cell *matHeaderCellDef> Precio </mat-header-cell>
-      <mat-cell *matCellDef="let element" [formGroup]="element">
-        <mat-form-field>
-          <input matInput placeholder="precio" formControlName="price" type="number">
-          <mat-error>Valor inválido</mat-error>
-        </mat-form-field>
-      </mat-cell>
-    </ng-container>
+          <ng-container matColumnDef="quantity">
+            <mat-header-cell *matHeaderCellDef> Cantidad </mat-header-cell>
+            <mat-cell *matCellDef="let element" [formGroup]="element">
+              <mat-form-field>
+                <input matInput placeholder="cantidad" formControlName="quantity" type="number">
+                <mat-error>Valor inválido</mat-error>
+              </mat-form-field>
+            </mat-cell>
+          </ng-container>
 
-    <ng-container matColumnDef="subtotal">
-      <mat-header-cell *matHeaderCellDef> Subtotal </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.get('price').value * element.get('quantity').value}} </mat-cell>
-    </ng-container>
+          <ng-container matColumnDef="price">
+            <mat-header-cell *matHeaderCellDef> Precio </mat-header-cell>
+            <mat-cell *matCellDef="let element" [formGroup]="element">
+              <mat-form-field>
+                <input matInput placeholder="precio" formControlName="price" type="number">
+                <mat-error>Valor inválido</mat-error>
+              </mat-form-field>
+            </mat-cell>
+          </ng-container>
 
-    <ng-container matColumnDef="x">
-      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
-      <mat-cell *matCellDef="let element" (click)="removeProduct(element.get('product.id').value)">
-        <mat-icon>delete</mat-icon>
-      </mat-cell>
-    </ng-container>
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let element; columns: displayedColumns" [class.hide]="element.get('product.id').value == -1">
-    </mat-row>
-  </mat-table>
-  <button mat-raised-button (click)='createPurchase()'>Continuar</button>
-  <button mat-raised-button>Salir</button>
+          <ng-container matColumnDef="subtotal">
+            <mat-header-cell *matHeaderCellDef> Subtotal </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.get('price').value * element.get('quantity').value}}
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="x">
+            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+            <mat-cell *matCellDef="let element" (click)="removeProduct(element.get('product.id').value)">
+              <mat-icon>delete</mat-icon>
+            </mat-cell>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let element; columns: displayedColumns"
+            [class.hide]="element.get('product.id').value == -1">
+          </mat-row>
+        </mat-table>
+      </mat-card-content>
+      <mat-card-actions *ngIf='products.length'>
+        <button mat-raised-button (click)='createPurchase()'>Continuar</button>
+        <button mat-raised-button>Salir</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 </div>
 
 <mat-spinner *ngIf='isWaiting' diameter:50></mat-spinner>

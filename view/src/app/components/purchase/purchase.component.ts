@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddProductComponent } from '../add-product/add-product.component';
 import { PurchaseItem } from 'src/app/models/purchase-item';
 import { HttpInventoryService } from 'src/app/services/http-inventory.service';
+import { Inventory } from 'src/app/models/inventory';
 
 @Component({
   selector: 'app-purchase',
@@ -37,6 +38,8 @@ export class PurchaseComponent implements OnInit {
   displayedColumns: string[] = ['name', 'quantity', 'price', 'subtotal', 'x'];
 
   suppliers: Supplier[];
+
+  retrievedInventory: Inventory;
   retrievedProduct: Product;
 
   constructor(private supplierService: HttpSupplierService,
@@ -50,15 +53,17 @@ export class PurchaseComponent implements OnInit {
       .pipe(debounceTime(350))
       .subscribe(
         value => {
-          this.barcode = value;
-          this.getProduct(value)
+          if (value) {
+            this.barcode = value;
+            this.getProduct(value)
+          }
         }
       );
   }
 
   ngOnInit(): void {
     console.log(this.purchaseForm.value);
-    this.purchaseService.create({id:null}).subscribe(
+    this.purchaseService.create({ id: null }).subscribe(
       purchase => this.purchaseForm.get('id').setValue(purchase.id)
     );
 
@@ -75,19 +80,19 @@ export class PurchaseComponent implements OnInit {
   getProduct(barcode: string) {
     this.isWaiting = true;
 
-    
+    this.inventory.getOne(barcode).subscribe(
+      inventory => {
+        this.retrievedInventory = inventory;
 
-    this.productService.getProductByBarcode(barcode).subscribe(
-      res => {
-        this.retrievedProduct = res;
+        try {
+          this.retrievedProduct = inventory.product;
+        } catch (error) {
+          this.retrievedProduct = null;
+        }
+
         this.isWaiting = false;
-      },
-      err => {
-        console.error(err);
-        this.isWaiting = false;
-        this.retrievedProduct = null;
       }
-    )
+    );
   }
 
   addProduct() {
@@ -99,7 +104,7 @@ export class PurchaseComponent implements OnInit {
       this.products.push(
         this.fb.group({
           quantity: [1, [Validators.required, Validators.min(1)]],
-          price: [1, [Validators.required, Validators.min(1)]],
+          price: [this.retrievedInventory.purchasePrice, [Validators.required, Validators.min(1)]],
           product: this.fb.group({
             id: this.retrievedProduct.id,
             name: this.retrievedProduct.name,

@@ -1,6 +1,6 @@
 <div class="content">
   <div fxLayout="row wrap">
-    <mat-card class="mat-elevation-z4" fxFlex="40%">
+    <mat-card class="mat-elevation-z4" fxFlex="40%" style="max-height: 30%;">
       <mat-card-header>
         <mat-card-title>Compra de producto</mat-card-title>
       </mat-card-header>
@@ -27,10 +27,15 @@
               <mat-error>Campo requerido</mat-error>
             </mat-form-field>
           </p>
-          <button mat-raised-button type="submit">Añadir</button>
+          <button mat-raised-button type="submit" style="display: none;">Añadir</button>
         </form>
-        <app-product-detail *ngIf="code.value" [id]='barcode'></app-product-detail>
-        
+        <mat-container *ngIf="retrievedProduct && code.value">
+          <h2> {{ retrievedProduct.barcode }} </h2>
+          <div style="font-size: 1.875rem; font-weight: 700;">{{ retrievedProduct.name }}</div><br>
+          <h2> Cantidad: {{ retrievedInventory.quantity }} </h2>
+          <button mat-raised-button (click)='addProduct()'>Añadir</button>
+        </mat-container>
+
         <div *ngIf='!retrievedProduct && code.value && !isWaiting'>Este producto no existe. <a [routerLink]=''
             (click)=openDialog()>Crear?</a></div>
       </mat-card-content>
@@ -93,5 +98,6 @@
     </mat-card>
   </div>
 </div>
+
 
 <mat-spinner *ngIf='isWaiting' diameter:50></mat-spinner>

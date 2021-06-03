@@ -9,10 +9,14 @@ export class NavBarComponent implements OnInit {
 
   constructor() { }
 
+  localStorage: string;
+
   ngOnInit(): void {
+    this.localStorage = localStorage.getItem("token");
   }
 
   logOut(): void {
+    location.reload();
     localStorage.clear();
   }
 
